@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import {
   Alert,
+  Image,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -72,10 +73,13 @@ export default function InputScreen({ navigation }: Props) {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-        <Text style={styles.heading}>내 정보로{'\n'}받을 수 있는 혜택 찾기</Text>
-        <Text style={styles.subheading}>
-          입력한 정보는 기기에만 저장되며, 혜택 매칭에만 사용됩니다.
-        </Text>
+        <View style={styles.hero}>
+          <Image source={require('../../assets/icon.png')} style={styles.logo} />
+          <Text style={styles.heading}>내 정보로{'\n'}받을 수 있는 혜택 찾기</Text>
+          <Text style={styles.subheading}>
+            입력한 정보는 기기에만 저장되며, 혜택 매칭에만 사용됩니다.
+          </Text>
+        </View>
 
         <View style={styles.field}>
           <Text style={styles.label}>거주 지역</Text>
@@ -149,17 +153,34 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingBottom: 40,
   },
+  hero: {
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  logo: {
+    width: 84,
+    height: 84,
+    borderRadius: 20,
+    marginTop: 8,
+    marginBottom: 16,
+    shadowColor: '#2F6FED',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+    elevation: 6,
+  },
   heading: {
     fontSize: 26,
     fontWeight: '800',
     color: '#1D2433',
     lineHeight: 34,
-    marginTop: 8,
+    textAlign: 'center',
     marginBottom: 8,
   },
   subheading: {
     fontSize: 14,
     color: '#6B7383',
+    textAlign: 'center',
     marginBottom: 28,
   },
   field: {
