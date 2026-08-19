@@ -7,9 +7,11 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mywelfarefinder.app"
     },
     "android": {
+      "package": "com.mywelfarefinder.app",
       "adaptiveIcon": {
         "backgroundColor": "#2F6FED",
         "foregroundImage": "./assets/android-icon-foreground.png",
