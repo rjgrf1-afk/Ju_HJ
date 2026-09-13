@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "내 복지 찾기",
+    "slug": "my-welfare-finder",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mywelfarefinder.app"
+    },
+    "android": {
+      "package": "com.mywelfarefinder.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#2F6FED",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
