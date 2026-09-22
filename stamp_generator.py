@@ -71,8 +71,8 @@ def generate_seal(name, shape="round", size=600, rotate=False):
 
     if n == 4:
         # 전통 인장 배치: 우측 상->하, 좌측 상->하 순으로 읽는다 (예: 극동전기)
-        offset = half_inner * 0.5
-        font_size = int(S * 0.2)
+        offset = half_inner * 0.47
+        font_size = int(S * 0.27)
         positions = [
             (cx + offset, cy - offset),  # 1번째 글자: 우상
             (cx + offset, cy + offset),  # 2번째 글자: 우하
@@ -82,9 +82,9 @@ def generate_seal(name, shape="round", size=600, rotate=False):
         for ch, (px, py) in zip(chars, positions):
             _draw_char(draw, ch, px, py, font_size, INK_RED)
     else:
-        size_ratio = {1: 0.34, 2: 0.24, 3: 0.185}.get(n, max(0.1, 0.6 / n))
+        size_ratio = {1: 0.42, 2: 0.3, 3: 0.23}.get(n, max(0.12, 0.7 / n))
         font_size = int(S * size_ratio)
-        spacing = font_size * 1.08
+        spacing = font_size * 1.05
         total_h = spacing * (n - 1)
         start_y = cy - total_h / 2
         for i, ch in enumerate(chars):
