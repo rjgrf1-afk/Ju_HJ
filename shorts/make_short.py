@@ -26,6 +26,7 @@ HISTORY = ROOT / "history.json"
 W, H, FPS = 1080, 1920, 30
 SR = 44100
 ROUND_SHOW, ROUND_REVEAL, OUTRO = 5.0, 1.5, 1.6
+CHANNEL = "눈썰미 연구소"
 
 # 쇼츠 UI(우측 버튼, 하단 제목)를 피한 그리드 영역
 GRID_X, GRID_Y, GRID_SIZE = 70, 600, 860
@@ -175,6 +176,7 @@ def background(theme):
 
 def header(base, theme, label):
     d = ImageDraw.Draw(base)
+    draw_text(d, (W // 2, 125), CHANNEL, 40, (255, 255, 255, 200), stroke=0)
     draw_text(d, (W // 2, 230), "다른 하나를 찾아라!", 92, (255, 255, 255))
     draw_text(d, (W // 2, 360), "3단계 성공하면 상위 1%", 58, theme[2], stroke=6)
     d.rounded_rectangle((W // 2 - 210, 455, W // 2 + 210, 545), radius=45, fill=(0, 0, 0, 150))
@@ -227,6 +229,7 @@ def make_outro_frames(bg, theme):
     draw_text(d, (W // 2, 760), "몇 단계까지", 120, (255, 255, 255))
     draw_text(d, (W // 2, 910), "찾았어요?", 120, (255, 255, 255))
     draw_text(d, (W // 2, 1100), "댓글로 알려주세요", 70, theme[2], stroke=6)
+    draw_text(d, (W // 2, 1320), f"{CHANNEL} · 매일 새 문제", 46, (255, 255, 255), stroke=0)
     for _ in range(int(OUTRO * FPS)):
         yield base
 
@@ -274,7 +277,7 @@ def make_metadata(rng, date, rounds):
     desc = "\n".join([
         "5초 안에 다른 하나를 찾아보세요! 단계가 올라갈수록 어려워집니다 🔍",
         "몇 단계까지 찾았는지 댓글로 남겨주세요 👇",
-        "매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 도전하세요!",
+        f"{CHANNEL}에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 도전하세요!",
         "",
         "Find the odd one out in 5 seconds! How far can you get?",
         "",
