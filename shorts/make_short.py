@@ -43,7 +43,8 @@ EASY = ["🍎🍏", "🐶🐱", "⚽🏀", "🍋🍊", "🐻🐼", "🦊🐶", "
         "🌹🌷", "🚗🚙", "🐢🦎", "🍪🥠", "🥑🥝", "🐟🐠", "🌑🌚"]
 MEDIUM = ["🙂🙃", "📕📙", "🔒🔓", "🌲🌳", "🐑🐏", "💛🧡", "😺😸", "⭐🌟",
           "🌕🌝", "🌻🌼", "😴😪", "😬😁"]
-HARD = ["😀😃", "🕐🕑", "😮😯", "🐥🐤", "😐😑"]
+HARD = ["😀😃", "🕐🕑", "😮😯", "🐥🐤", "😐😑", "😚😙", "🙁☹", "😦😧", "😃😄",
+        "🕒🕓", "🌘🌗", "🌖🌗", "😶😐", "😕😟"]
 # 좌우가 비대칭이라 뒤집으면 티가 (조금) 나는 이모지
 MIRROR = ["🐟", "🐢", "🦎", "🚗", "🐥", "🦒", "🐌", "🦕", "🐎", "🦜", "🐧", "🚀"]
 
@@ -308,7 +309,8 @@ def main():
     used = {p for d, ps in history.items() if d != args.date for p in ps}
 
     rounds = build_rounds(rng, used)
-    theme = THEMES[rng.randrange(len(THEMES))]
+    # 날짜 순서대로 돌려서 연속된 이틀이 같은 색이 되지 않게 한다
+    theme = THEMES[datetime.strptime(args.date, "%Y-%m-%d").toordinal() % len(THEMES)]
     bg = background(theme)
 
     out = OUT_DIR / args.date
