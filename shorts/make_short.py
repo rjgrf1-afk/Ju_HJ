@@ -56,13 +56,15 @@ THEMES = [  # (배경 위, 배경 아래, 강조색)
     ((10, 60, 40), (30, 130, 90), (255, 255, 255)),
 ]
 
-TITLES = [
-    "다른 하나 찾기 🔍 3단계 성공하면 상위 1%",
-    "99%가 3단계에서 포기하는 눈썰미 테스트 👀",
-    "5초 안에 다른 하나 찾으면 천재 🧠",
-    "이거 다 찾으면 눈썰미 상위 1% 인정 🏆",
-    "3단계는 진짜 못 찾음... 도전? 🔥",
-]
+HANDLE = "@nunsseulmi_lab"
+# 흔한 "상위 1%" 대신 3단계 문제를 구체적으로 말해 주는 제목
+HOOKS = {
+    "mirror": "{n}개 중 하나만 좌우가 뒤집혀 있어요 {e}",
+    "emoji": "똑같아 보이는 {n}개 중 딱 하나가 달라요 {e}",
+    "color": "{n}칸 중 딱 한 칸만 색이 달라요 🎨",
+}
+TAILS = ["3단계까지 찾을 수 있나요?", "마지막 문제에서 다들 멈춰요", "5초 안에 찾아보세요",
+         "몇 단계까지 보이세요?", "3단계는 진짜 안 보여요"]
 HASHTAGS = ["#shorts", "#눈썰미테스트", "#다른그림찾기", "#퀴즈", "#두뇌게임",
             "#findtheodd", "#brainteaser", "#puzzle"]
 
@@ -233,7 +235,7 @@ def make_outro_frames(bg, theme):
     draw_text(d, (W // 2, 760), "몇 단계까지", 120, (255, 255, 255))
     draw_text(d, (W // 2, 910), "찾았어요?", 120, (255, 255, 255))
     draw_text(d, (W // 2, 1100), "댓글로 알려주세요", 70, theme[2], stroke=6)
-    draw_text(d, (W // 2, 1320), f"{CHANNEL} · 매일 새 문제", 46, (255, 255, 255), stroke=0)
+    draw_text(d, (W // 2, 1320), f"{CHANNEL} {HANDLE}", 46, (255, 255, 255), stroke=0)
     for _ in range(int(OUTRO * FPS)):
         yield base
 
@@ -277,7 +279,9 @@ def make_audio(total, n_rounds, path):
 # ---------- 메타데이터 ----------
 
 def make_metadata(rng, date, rounds):
-    title = rng.choice(TITLES)
+    last = rounds[-1]
+    hook = HOOKS[last["kind"]].format(n=last["n"] ** 2, e=(last["pair"] or "")[:1])
+    title = f"{hook} | {rng.choice(TAILS)}"
     desc = "\n".join([
         "5초 안에 다른 하나를 찾아보세요! 단계가 올라갈수록 어려워집니다 🔍",
         "몇 단계까지 찾았는지 댓글로 남겨주세요 👇",
