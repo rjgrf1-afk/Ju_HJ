@@ -55,12 +55,12 @@ Turn off browser auto-translate. Never put passwords, client secrets or tokens i
   - Maximum quota per minute: 1600
   - Detailed justification:
 
-    One upload per day to my own channel (@nunsseulmi_lab). One videos.insert call costs up to 1,600 units, so 1,600 units per day and per minute is enough. No retries or bulk uploads.
+    One upload per day to my own channel (@nunsseulmi_lab). One videos.insert call costs up to 1,600 units, so 1,600 units per day is enough. No retries or bulk uploads.
 
 - Total quota requested for project #1: No change / default quota (10,000)
 
 ## Section 6: Additional Evidence
-Upload docs/audit/all-evidence.pdf (14 pages, 1.9 MB) in the first file field.
+Upload docs/audit/all-evidence.pdf (16 pages, 1.5 MB) in the first file field.
 If other required file fields block submission, upload the same PDF there.
 The PDF contains: privacy policy screenshot, homepage screenshot, terms of service,
 architecture diagram, user flow diagram, conditional evidence (OAuth flow, upload, analytics)
