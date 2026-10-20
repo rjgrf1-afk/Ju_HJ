@@ -63,7 +63,8 @@ Turn off browser auto-translate. Never put passwords, client secrets or tokens i
 Upload docs/audit/all-evidence.pdf (14 pages, 1.9 MB) in the first file field.
 If other required file fields block submission, upload the same PDF there.
 The PDF contains: privacy policy screenshot, homepage screenshot, terms of service,
-architecture diagram, user flow diagram, and conditional evidence (OAuth flow, upload, analytics).
+architecture diagram, user flow diagram, conditional evidence (OAuth flow, upload, analytics)
+and the complete upload script shorts/upload.py (pages 15-16).
 
 ## Section 7: Attestation and Submit
 Check all attestations, complete reCAPTCHA, Submit.
