@@ -14,6 +14,8 @@ python3 shorts/upload.py --date 2026-10-20   # 18:00 KST 공개 예약 (계정 �
 - `metadata.json`: 제목, 설명, 태그, 정답 위치
 - `preview.png`: 3단계 첫 화면
 
+통계는 `python3 shorts/daily_stats.py`로 모은다. 채널과 영상별 조회수, 좋아요, 댓글, 시청 지속률, 구독자 증감을 `shorts/stats/<날짜>.json`에 쌓는다(앱으로 직접 올린 영상도 포함).
+
 쓴 이모지 쌍은 `history.json`에 기록해 다음 날 겹치지 않게 한다.
 
 ## 업로드 (수동)
