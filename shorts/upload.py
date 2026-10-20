@@ -6,6 +6,7 @@
 사용법:
     python3 shorts/upload.py --date 2026-10-20            # 그날 18:00 KST 공개 예약
     python3 shorts/upload.py --date 2026-10-20 --now      # 바로 공개
+    python3 shorts/upload.py --date 2026-10-20 --private  # 비공개 (예약 공개 없음)
 """
 import argparse
 import json
@@ -34,7 +35,9 @@ def access_token():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=datetime.now(KST).strftime("%Y-%m-%d"))
-    ap.add_argument("--now", action="store_true", help="예약 없이 바로 공개")
+    vis = ap.add_mutually_exclusive_group()
+    vis.add_argument("--now", action="store_true", help="예약 없이 바로 공개")
+    vis.add_argument("--private", action="store_true", help="비공개로만 올림 (예약 공개 없음)")
     args = ap.parse_args()
 
     out = ROOT / "output" / args.date
@@ -48,6 +51,8 @@ def main():
     }
     if args.now:
         status["privacyStatus"] = "public"
+    elif args.private:
+        status["privacyStatus"] = "private"
     else:
         publish = datetime.strptime(args.date, "%Y-%m-%d").replace(hour=PUBLISH_HOUR, tzinfo=KST)
         status["privacyStatus"] = "private"  # publishAt은 private일 때만 동작
@@ -78,7 +83,7 @@ def main():
     up.raise_for_status()
 
     meta["videoId"] = up.json()["id"]
-    meta["publishAt"] = status.get("publishAt", "now")
+    meta["publishAt"] = status.get("publishAt", "private" if args.private else "now")
     (out / "metadata.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
     print(f"업로드 완료: https://youtube.com/shorts/{meta['videoId']} (공개: {meta['publishAt']})")
 
