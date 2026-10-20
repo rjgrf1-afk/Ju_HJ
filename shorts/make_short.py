@@ -167,12 +167,15 @@ def render_grid(r, rng):
 
 # ---------- 프레임 ----------
 
-def background(theme):
-    top, bottom, _ = theme
-    g = np.linspace(0, 1, H)[:, None]
+def background_size(w, h, top, bottom):
+    g = np.linspace(0, 1, h)[:, None]
     arr = (np.array(top) * (1 - g) + np.array(bottom) * g)
-    arr = np.repeat(arr[:, None, :], W, axis=1).astype(np.uint8)
+    arr = np.repeat(arr[:, None, :], w, axis=1).astype(np.uint8)
     return Image.fromarray(arr, "RGB").convert("RGBA")
+
+
+def background(theme):
+    return background_size(W, H, theme[0], theme[1])
 
 
 def header(base, theme, label):
