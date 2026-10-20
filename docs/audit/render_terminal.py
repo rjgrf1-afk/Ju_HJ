@@ -13,6 +13,7 @@ from PIL import Image, ImageDraw, ImageFont
 MONO = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 MONO_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
 WIDE = "/usr/share/fonts/truetype/wqy/wqy-zenhei.ttc"  # 한글은 DejaVu에 없어 2칸 폭으로 대체
+EMOJI = "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"  # 비트맵 글꼴이라 109px로만 그려진다
 SIZE, PAD, LINE = 22, 40, 32
 BG, FG, PROMPT, CAPTION, BAR = "#1e1e1e", "#d4d4d4", "#6a9955", "#ffffff", "#2d2d2d"
 MIN_WIDTH = 1600
@@ -33,6 +34,7 @@ def main():
     mono = ImageFont.truetype(MONO, SIZE)
     bold = ImageFont.truetype(MONO_BOLD, SIZE)
     wide = ImageFont.truetype(WIDE, SIZE)
+    emoji = ImageFont.truetype(EMOJI, 109)
     cell = mono.getlength("M")
 
     lines = Path(args.input).read_text().rstrip("\n").split("\n")
@@ -49,7 +51,13 @@ def main():
     def draw(y, text, fill):
         x = PAD
         for c in text:
-            if is_wide(c):
+            if ord(c) >= 0x1F000:
+                glyph = Image.new("RGBA", (136, 128))
+                ImageDraw.Draw(glyph).text((0, 0), c, font=emoji, embedded_color=True)
+                glyph = glyph.crop(glyph.getbbox()).resize((SIZE + 2, SIZE + 2))
+                img.paste(glyph, (int(x + (2 * cell - SIZE) / 2), y + 3), glyph)
+                x += 2 * cell
+            elif is_wide(c):
                 d.text((x, y), c, font=wide, fill=fill)
                 x += 2 * cell
             else:
