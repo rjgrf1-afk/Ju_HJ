@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-22",
+  "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 5초 안에 찾아보세요 #shorts",
+  "description": "5초 안에 다른 하나를 찾아보세요! 단계가 올라갈수록 어려워집니다 🔍\n몇 단계까지 찾았는지 댓글로 남겨주세요 👇\n눈썰미 연구소에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 도전하세요!\n\nFind the odd one out in 5 seconds! How far can you get?\n\n#shorts #눈썰미테스트 #다른그림찾기 #퀴즈 #두뇌게임 #findtheodd #brainteaser #puzzle",
+  "tags": [
+    "shorts",
+    "눈썰미테스트",
+    "다른그림찾기",
+    "퀴즈",
+    "두뇌게임",
+    "findtheodd",
+    "brainteaser",
+    "puzzle",
+    "눈썰미",
+    "숨은그림찾기",
+    "odd one out"
+  ],
+  "categoryId": "24",
+  "madeForKids": false,
+  "containsSyntheticMedia": false,
+  "rounds": [
+    {
+      "kind": "emoji",
+      "pair": "🚙🚗",
+      "grid": 5,
+      "answer_row": 2,
+      "answer_col": 2
+    },
+    {
+      "kind": "emoji",
+      "pair": "⭐🌟",
+      "grid": 7,
+      "answer_row": 3,
+      "answer_col": 2
+    },
+    {
+      "kind": "color",
+      "pair": null,
+      "grid": 7,
+      "answer_row": 4,
+      "answer_col": 2
+    }
+  ]
+}

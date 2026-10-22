@@ -1,0 +1,66 @@
+{
+ "collectedAt": "2026-10-22T09:32:19+09:00",
+ "channel": {
+  "subscribers": 1,
+  "videos": 2,
+  "views": 0
+ },
+ "daily": [
+  {
+   "day": "2026-10-16",
+   "views": 0,
+   "subscribersGained": 0,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-10-17",
+   "views": 0,
+   "subscribersGained": 0,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-10-18",
+   "views": 0,
+   "subscribersGained": 0,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-10-19",
+   "views": 0,
+   "subscribersGained": 0,
+   "subscribersLost": 0
+  }
+ ],
+ "videos": [
+  {
+   "id": "TcvL9qNbR6M",
+   "title": "다른 하나 찾기 🔍 3단계 성공하면 상위 1% #shorts",
+   "publishedAt": "2026-10-20T02:54:45Z",
+   "privacyStatus": "private",
+   "views": 5,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "mYY0dmerhfQ",
+   "title": "다른 하나 찾기 🔍 3단계 성공하면 상위 1% #shorts",
+   "publishedAt": "2026-10-20T07:53:21Z",
+   "privacyStatus": "public",
+   "views": 387,
+   "likes": 5,
+   "comments": 1,
+   "analytics": null
+  },
+  {
+   "id": "0z3Dw8NWhEg",
+   "title": "똑같아 보이는 64개 중 딱 하나가 달라요 🐥 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-10-21T08:52:43Z",
+   "privacyStatus": "public",
+   "views": 274,
+   "likes": 2,
+   "comments": 0,
+   "analytics": null
+  }
+ ]
+}
