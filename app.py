@@ -2,13 +2,13 @@ import streamlit as st
 import requests
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
-import json, re, random, html, urllib.parse
+import json, re, random, html, urllib.parse, zipfile
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone, timedelta
 from email.utils import parsedate_to_datetime
 
 st.set_page_config(
-    page_title="네이버 블로그 글 생성기",
+    page_title="블로그 · 인스타 글 생성기",
     page_icon="✍️",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -138,23 +138,34 @@ def get_news_context(topic, category):
     return articles
 
 
-def generate_content(category, topic, api_key, articles):
+def build_news_block(articles):
+    if not articles:
+        return "(수집된 뉴스 없음 — 알려진 사실 기반으로 신중하게 작성)"
+    news_block = ""
+    for i, a in enumerate(articles, 1):
+        news_block += f"\n[뉴스 {i}]\n제목: {a['title']}\n"
+        if a['date']:
+            news_block += f"날짜: {a['date']}\n"
+        if a['source']:
+            news_block += f"출처: {a['source']}\n"
+        if a['description']:
+            news_block += f"내용: {a['description']}\n"
+    return news_block
+
+
+def call_gemini(api_key, prompt):
     import google.generativeai as genai
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel('gemini-3.5-flash-lite')
+    response = model.generate_content(prompt, generation_config={"temperature": 0.8})
+    text = response.text.strip()
+    if '```' in text:
+        text = re.sub(r'```(?:json)?', '', text).replace('```', '').strip()
+    return json.loads(text)
 
-    if articles:
-        news_block = ""
-        for i, a in enumerate(articles, 1):
-            news_block += f"\n[뉴스 {i}]\n제목: {a['title']}\n"
-            if a['date']:
-                news_block += f"날짜: {a['date']}\n"
-            if a['source']:
-                news_block += f"출처: {a['source']}\n"
-            if a['description']:
-                news_block += f"내용: {a['description']}\n"
-    else:
-        news_block = "(수집된 뉴스 없음 — 알려진 사실 기반으로 신중하게 작성)"
+
+def generate_content(category, topic, api_key, articles):
+    news_block = build_news_block(articles)
 
     intro_styles = [
         "독자가 가장 궁금해하는 핵심 질문을 던지며 시작",
@@ -209,15 +220,47 @@ JSON 외 텍스트는 절대 포함하지 마세요.
   "tags": "태그1, 태그2, 태그3, 태그4, 태그5, 태그6, 태그7, 태그8, 태그9, 태그10"
 }}"""
 
-    response = model.generate_content(prompt, generation_config={"temperature": 0.8})
-    text = response.text.strip()
-    if '```' in text:
-        text = re.sub(r'```(?:json)?', '', text).replace('```', '').strip()
-    return json.loads(text)
+    return call_gemini(api_key, prompt)
 
 
-def generate_image(category, section_title, base_topic, idx):
-    W, H = 800, 400
+def generate_insta_content(category, topic, api_key, articles):
+    news_block = build_news_block(articles)
+
+    prompt = f"""당신은 팩트 체크를 철저히 하는 인스타그램 카드뉴스 전문 에디터입니다.
+아래 뉴스 기사들을 사실 확인 자료로만 참고하여, 저장·공유를 부르는 카드뉴스와 캡션을 JSON 형식으로만 작성하세요.
+JSON 외 텍스트는 절대 포함하지 마세요.
+
+━━━ 참고 뉴스 (사실 확인용) ━━━
+{news_block}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+카테고리: {category} / 주제: {topic}
+
+[절대 규칙]
+1. 카드 문구는 짧고 강하게 — 한 카드에 핵심 하나만
+2. 뉴스 문장 절대 복사 금지 — 같은 사실도 완전히 새로운 문장으로 재작성
+3. 뉴스에서 확인된 사실(수치·날짜·인명·기관명)만 사용, 없는 내용 추가 금지
+4. 추측·과장 금지 / 불확실한 내용은 "~에 따르면", "~로 알려졌습니다" 표현
+5. 카드(hook, slides, outro)에는 이모지 사용 금지 / 캡션에는 이모지 적절히 사용
+6. 특정 행정구역(구·동·시·군) 사용 금지 — 전국 독자 대상
+
+{{"hook": "표지 문구 12~22자, 숫자·질문·반전 중 하나로 스크롤을 멈추게",
+  "slides": [
+    {{"title": "소제목1 (15자 이내)", "body": "2~3문장, 80~120자"}},
+    {{"title": "소제목2 (15자 이내)", "body": "2~3문장, 80~120자"}},
+    {{"title": "소제목3 (15자 이내)", "body": "2~3문장, 80~120자"}},
+    {{"title": "소제목4 (15자 이내)", "body": "2~3문장, 80~120자"}},
+    {{"title": "소제목5 (15자 이내)", "body": "2~3문장, 80~120자"}}
+  ],
+  "outro": "핵심 한 줄 요약 (30자 이내)",
+  "caption": "인스타 캡션 6~9줄, 첫 줄은 훅, 줄바꿈(\\n) 포함, 마지막 줄은 저장·공유 유도",
+  "hashtags": "태그1, 태그2, ... 총 20개 (대표 키워드 + 연관 키워드 + 카테고리 태그)"
+}}"""
+
+    return call_gemini(api_key, prompt)
+
+
+def draw_background(W, H, category):
     c1, c2, acc = THEMES.get(category, ((28, 28, 58), (58, 58, 98), (148, 148, 255)))
 
     img = Image.new('RGB', (W, H))
@@ -235,6 +278,123 @@ def generate_image(category, section_title, base_topic, idx):
     od.ellipse([W - 180, H - 180, W + 60, H + 60], fill=(*acc, 18))
     od.ellipse([-60, H - 180, 200, H + 60], fill=(*acc, 14))
     img = Image.alpha_composite(img.convert('RGBA'), ov).convert('RGB')
+    return img, acc
+
+
+def wrap_text(draw, text, font, max_width):
+    lines = []
+    for para in text.split("\n"):
+        cur = ""
+        for word in para.split():
+            test = (cur + " " + word).strip()
+            if draw.textlength(test, font=font) > max_width and cur:
+                lines.append(cur)
+                cur = word
+            else:
+                cur = test
+        if cur:
+            lines.append(cur)
+    return lines
+
+
+def draw_badge(draw, x, y, text, font, acc):
+    w = int(draw.textlength(text, font=font)) + 44
+    h = font.size + 26
+    draw.rounded_rectangle([x, y, x + w, y + h], radius=h // 2, fill=acc)
+    draw.text((x + w // 2, y + h // 2), text, font=font,
+              fill=tuple(max(0, c - 60) for c in acc), anchor='mm')
+    return y + h
+
+
+def generate_insta_card(category, kind, title, body, base_topic, page, total):
+    W, H = 1080, 1350
+    img, acc = draw_background(W, H, category)
+    draw = ImageDraw.Draw(img)
+    pad = 80
+    sub_color = tuple(min(255, c + 70) for c in acc)
+
+    draw.rectangle([0, H - 16, W, H], fill=acc)
+    draw.rectangle([0, 0, 12, H], fill=acc)
+
+    font_small = get_font(30)
+    draw.text((W - pad, 90), f"{page:02d} / {total:02d}", font=font_small,
+              fill=sub_color, anchor='rm')
+
+    if kind == "cover":
+        draw_badge(draw, pad, 70, category, get_font(30), acc)
+        font_hook = get_font(96)
+        lines = wrap_text(draw, strip_emoji(title), font_hook, W - pad * 2)[:4]
+        line_h = 96 + 28
+        y = (H - line_h * len(lines)) // 2 - 40
+        for line in lines:
+            draw.text((pad, y), line, font=font_hook, fill='white')
+            y += line_h
+        draw.rectangle([pad, y + 20, pad + 140, y + 30], fill=acc)
+        draw.text((pad, H - 150), strip_emoji(base_topic)[:28], font=get_font(34), fill=sub_color)
+        draw.text((W - pad, H - 150), "밀어서 보기 >", font=get_font(34), fill='white', anchor='ra')
+
+    elif kind == "slide":
+        font_num = get_font(120)
+        draw.text((pad, 170), f"{page - 1:02d}", font=font_num, fill=acc)
+        font_title = get_font(68)
+        y = 340
+        for line in wrap_text(draw, strip_emoji(title), font_title, W - pad * 2)[:3]:
+            draw.text((pad, y), line, font=font_title, fill='white')
+            y += 68 + 22
+        draw.rectangle([pad, y + 20, pad + 100, y + 28], fill=acc)
+        y += 80
+        font_body = get_font(42)
+        for line in wrap_text(draw, strip_emoji(body), font_body, W - pad * 2)[:12]:
+            draw.text((pad, y), line, font=font_body, fill=(235, 235, 245))
+            y += 42 + 26
+
+    else:  # outro
+        draw_badge(draw, pad, 70, "핵심 요약", get_font(30), acc)
+        font_out = get_font(78)
+        lines = wrap_text(draw, strip_emoji(title), font_out, W - pad * 2)[:4]
+        line_h = 78 + 26
+        y = (H - line_h * len(lines)) // 2 - 80
+        for line in lines:
+            draw.text((pad, y), line, font=font_out, fill='white')
+            y += line_h
+        font_cta = get_font(40)
+        draw.text((W // 2, H - 220), "저장  ·  공유  ·  팔로우", font=font_cta,
+                  fill=sub_color, anchor='mm')
+
+    buf = BytesIO()
+    img.save(buf, format='JPEG', quality=92)
+    buf.seek(0)
+    return buf.getvalue()
+
+
+def generate_insta_cards(category, data, base_topic):
+    slides = data.get('slides', [])
+    total = len(slides) + 2
+    cards = [generate_insta_card(category, "cover", data.get('hook', base_topic), "", base_topic, 1, total)]
+    for i, s in enumerate(slides):
+        cards.append(generate_insta_card(category, "slide", s.get('title', ''), s.get('body', ''),
+                                         base_topic, i + 2, total))
+    cards.append(generate_insta_card(category, "outro", data.get('outro', ''), "", base_topic, total, total))
+    return cards
+
+
+def build_insta_caption(data):
+    tags = [t.strip().lstrip('#').replace(' ', '') for t in data.get('hashtags', '').split(',')]
+    hashtags = " ".join(f"#{t}" for t in tags if t)
+    return f"{data.get('caption', '').strip()}\n\n.\n.\n.\n{hashtags}"
+
+
+def make_zip(images, prefix):
+    buf = BytesIO()
+    with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as zf:
+        for i, img_bytes in enumerate(images, 1):
+            zf.writestr(f"{prefix}_{i:02d}.jpg", img_bytes)
+    return buf.getvalue()
+
+
+def generate_image(category, section_title, base_topic, idx):
+    W, H = 800, 400
+    img, acc = draw_background(W, H, category)
     draw = ImageDraw.Draw(img)
 
     draw.rectangle([0, H - 10, W, H], fill=acc)
@@ -296,8 +456,8 @@ def build_copy_text(data):
 
 # ── 메인 UI ─────────────────────────────────────────────────────
 
-st.markdown("## ✍️ 네이버 블로그 글 생성기")
-st.caption("AI 팩트 기반 자동 생성 · 네이버 블로그 최적화")
+st.markdown("## ✍️ 블로그 · 인스타 글 생성기")
+st.caption("AI 팩트 기반 자동 생성 · 네이버 블로그 / 인스타그램 카드뉴스")
 
 with st.expander("🔑 Gemini API 키 설정", expanded='api_key' not in st.session_state):
     api_input = st.text_input("API 키", type="password",
@@ -328,9 +488,42 @@ with col_topic:
         key="topic_input"
     )
 
-gen_btn = st.button("✨  글 생성하기", type="primary", use_container_width=True)
+platform = st.radio("📱 플랫폼", ["📝 네이버 블로그", "📸 인스타그램"],
+                    horizontal=True, key="platform")
+is_insta = platform.endswith("인스타그램")
 
-if gen_btn:
+gen_btn = st.button("✨  카드뉴스 생성하기" if is_insta else "✨  글 생성하기",
+                    type="primary", use_container_width=True)
+
+if gen_btn and is_insta:
+    api_key = st.session_state.get('api_key', '').strip()
+    if not api_key:
+        st.error("API 키를 먼저 입력하고 저장해주세요.")
+        st.stop()
+
+    with st.status("카드뉴스를 만들고 있습니다...", expanded=True) as status:
+        topic = topic_input.strip()
+        if not topic:
+            st.write("🔍 최신 뉴스에서 주제 자동 선택 중...")
+            topic = get_trending_topic(cat)
+
+        st.write(f"📰 '{topic}' 관련 뉴스 수집 중...")
+        articles = get_news_context(topic, cat)
+
+        st.write("📝 카드 문구 · 캡션 작성 중...")
+        try:
+            data = generate_insta_content(cat, topic, api_key, articles)
+        except Exception as e:
+            st.error(f"글 생성 오류: {e}")
+            st.stop()
+
+        st.write("🖼 카드 이미지 생성 중...")
+        st.session_state['insta_data'] = data
+        st.session_state['insta_images'] = generate_insta_cards(cat, data, topic)
+        st.session_state['insta_topic'] = topic
+        status.update(label="✅ 완료!", state="complete")
+
+elif gen_btn:
     api_key = st.session_state.get('api_key', '').strip()
     if not api_key:
         st.error("API 키를 먼저 입력하고 저장해주세요.")
@@ -363,7 +556,33 @@ if gen_btn:
         st.session_state['result_topic'] = topic
         status.update(label="✅ 완료!", state="complete")
 
-if 'result_data' in st.session_state:
+if is_insta and 'insta_data' in st.session_state:
+    data   = st.session_state['insta_data']
+    images = st.session_state['insta_images']
+
+    st.divider()
+    st.markdown(f"# {data.get('hook', '')}")
+    st.caption("1080×1350 (4:5) · 순서대로 캐러셀에 올리세요")
+
+    for row in range(0, len(images), 3):
+        cols = st.columns(3)
+        for col, i in zip(cols, range(row, min(row + 3, len(images)))):
+            with col:
+                st.image(images[i], use_container_width=True)
+                st.download_button(f"카드 {i+1}", data=images[i],
+                                   file_name=f"insta_card_{i+1:02d}.jpg", mime="image/jpeg",
+                                   use_container_width=True, key=f"insta_dl_{i}")
+
+    st.download_button("💾 카드 전체 다운로드 (ZIP)", data=make_zip(images, "insta_card"),
+                       file_name="insta_cards.zip", mime="application/zip",
+                       type="primary", use_container_width=True)
+
+    st.divider()
+    st.markdown("#### 📋 캡션 + 해시태그 복사")
+    st.text_area("아래 텍스트를 전체 선택해서 복사하세요", value=build_insta_caption(data),
+                 height=320, key="insta_copy_area")
+
+elif not is_insta and 'result_data' in st.session_state:
     data   = st.session_state['result_data']
     images = st.session_state['result_images']
     topic  = st.session_state['result_topic']
