@@ -1,32 +1,36 @@
 {
- "collectedAt": "2026-10-23T09:32:07+09:00",
+ "collectedAt": "2026-10-23T14:09:29+09:00",
  "channel": {
   "subscribers": 4,
   "videos": 3,
-  "views": 670
+  "views": 1820
  },
  "daily": [
   {
    "day": "2026-10-17",
    "views": 0,
+   "engagedViews": 0,
    "subscribersGained": 0,
    "subscribersLost": 0
   },
   {
    "day": "2026-10-18",
    "views": 0,
+   "engagedViews": 0,
    "subscribersGained": 0,
    "subscribersLost": 0
   },
   {
    "day": "2026-10-19",
    "views": 0,
+   "engagedViews": 0,
    "subscribersGained": 0,
    "subscribersLost": 0
   },
   {
    "day": "2026-10-20",
    "views": 376,
+   "engagedViews": 114,
    "subscribersGained": 1,
    "subscribersLost": 0
   }
@@ -77,7 +81,7 @@
    "title": "똑같아 보이는 64개 중 딱 하나가 달라요 🐥 | 5초 안에 찾아보세요 #shorts",
    "publishedAt": "2026-10-21T08:52:43Z",
    "privacyStatus": "public",
-   "views": 295,
+   "views": 293,
    "likes": 2,
    "comments": 0,
    "analytics": null
@@ -87,7 +91,7 @@
    "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 5초 안에 찾아보세요 #shorts",
    "publishedAt": "2026-10-22T08:59:39Z",
    "privacyStatus": "public",
-   "views": 1142,
+   "views": 1143,
    "likes": 11,
    "comments": 1,
    "analytics": null

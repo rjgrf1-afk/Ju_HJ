@@ -59,10 +59,10 @@ def main():
     for v in videos:
         v["analytics"] = analytics.get(v["id"])
 
-    # 최근 7일 채널 일별 지표
+    # 최근 7일 채널 일별 지표. engagedViews(넘기지 않고 본 조회)가 수익 창출 기준에 들어가는 조회수다
     daily = get(ANALYTICS, token, {
         "ids": "channel==MINE", "startDate": (today - timedelta(days=6)).isoformat(),
-        "endDate": today.isoformat(), "metrics": "views,subscribersGained,subscribersLost",
+        "endDate": today.isoformat(), "metrics": "views,engagedViews,subscribersGained,subscribersLost",
         "dimensions": "day", "sort": "day",
     })
 
@@ -72,7 +72,7 @@ def main():
         "channel": {"subscribers": int(st.get("subscriberCount", 0)),
                     "videos": int(st.get("videoCount", 0)),
                     "views": int(st.get("viewCount", 0))},
-        "daily": [dict(zip(["day", "views", "subscribersGained", "subscribersLost"], r))
+        "daily": [dict(zip(["day", "views", "engagedViews", "subscribersGained", "subscribersLost"], r))
                   for r in daily.get("rows") or []],
         "videos": sorted(videos, key=lambda v: v["publishedAt"]),
     }
