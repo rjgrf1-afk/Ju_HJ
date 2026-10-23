@@ -26,6 +26,7 @@ HISTORY = ROOT / "history.json"
 W, H, FPS = 1080, 1920, 30
 SR = 44100
 ROUND_SHOW, ROUND_REVEAL, OUTRO = 5.0, 1.5, 1.6
+HOOK = 1.2  # 첫 화면: 3단계 문제를 먼저 보여 줘서 넘기지 않게 붙잡는다
 CHANNEL = "눈썰미 연구소"
 
 # 쇼츠 UI(우측 버튼, 하단 제목)를 피한 그리드 영역
@@ -229,6 +230,23 @@ def make_round_frames(r, grid, ans, bg, theme):
         yield im
 
 
+def make_hook_frames(grid, bg, theme):
+    base = bg.copy()
+    d = ImageDraw.Draw(base)
+    draw_text(d, (W // 2, 125), CHANNEL, 40, (255, 255, 255, 200), stroke=0)
+    draw_text(d, (W // 2, 250), "이거 찾을 수 있어요?", 92, (255, 255, 255))
+    draw_text(d, (W // 2, 380), "마지막 3단계 문제", 58, theme[2], stroke=6)
+    d.rounded_rectangle((W // 2 - 210, 455, W // 2 + 210, 545), radius=45, fill=(0, 0, 0, 150))
+    draw_text(d, (W // 2, 500), "3단계 · 극악", 50, (255, 255, 255), stroke=0)
+    base.alpha_composite(grid, (GRID_X, GRID_Y))
+    for f in range(int(HOOK * FPS)):
+        im = base.copy()
+        d = ImageDraw.Draw(im)
+        pulse = 1 + 0.06 * math.sin(f / FPS * 2 * math.pi * 2)
+        draw_text(d, (W // 2, GRID_Y + GRID_SIZE + 160), "1단계부터 도전!", int(84 * pulse), (255, 230, 60))
+        yield im
+
+
 def make_outro_frames(bg, theme):
     base = bg.copy()
     d = ImageDraw.Draw(base)
@@ -259,7 +277,8 @@ def make_audio(total, n_rounds, path):
     beat = 0.25
     for k in range(int(total / beat)):
         add(tone(notes[k % len(notes)], 0.4, 6, 0.06), k * beat)
-    t0 = 0.0
+    add(tone(523.3, 0.3, 8, 0.3) + tone(784.0, 0.3, 8, 0.2), 0.0)  # 첫 화면 알림음
+    t0 = HOOK
     for _ in range(n_rounds):
         for s in range(int(ROUND_SHOW)):
             hi = s == int(ROUND_SHOW) - 1
@@ -322,7 +341,7 @@ def main():
 
     out = OUT_DIR / args.date
     out.mkdir(parents=True, exist_ok=True)
-    total = len(rounds) * (ROUND_SHOW + ROUND_REVEAL) + OUTRO
+    total = HOOK + len(rounds) * (ROUND_SHOW + ROUND_REVEAL) + OUTRO
     wav = out / "audio.wav"
     make_audio(total, len(rounds), wav)
 
@@ -335,9 +354,13 @@ def main():
         "-c:a", "aac", "-b:a", "128k", "-shortest", "-movflags", "+faststart", str(mp4),
     ], stdin=subprocess.PIPE)
 
+    # 첫 화면에 3단계 그리드가 필요하므로 그리드를 먼저 모두 그린다 (rng 사용 순서는 그대로)
+    grids = [render_grid(r, rng) for r in rounds]
+    for frame in make_hook_frames(grids[-1][0], bg, theme):
+        proc.stdin.write(frame.convert("RGB").tobytes())
+
     preview = None
-    for r in rounds:
-        grid, ans = render_grid(r, rng)
+    for r, (grid, ans) in zip(rounds, grids):
         for k, frame in enumerate(make_round_frames(r, grid, ans, bg, theme)):
             rgb = frame.convert("RGB")
             if preview is None and r is rounds[-1] and k == 0:
