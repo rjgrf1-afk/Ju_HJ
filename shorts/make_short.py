@@ -107,7 +107,9 @@ def draw_text(d, xy, text, size, fill, anchor="mm", stroke=8):
 # ---------- 라운드 구성 ----------
 
 def pick(rng, pool, used):
-    fresh = [p for p in pool if p not in used]
+    # 쌍은 순서를 뒤집어 저장되기도 하므로 순서와 상관없이 비교한다
+    used = {"".join(sorted(u)) for u in used}
+    fresh = [p for p in pool if "".join(sorted(p)) not in used]
     return rng.choice(fresh or pool)
 
 
@@ -297,10 +299,23 @@ def make_audio(total, n_rounds, path):
 
 # ---------- 메타데이터 ----------
 
+def recent_titles(date, days=14):
+    day = datetime.strptime(date, "%Y-%m-%d")
+    titles = set()
+    for k in range(1, days + 1):
+        f = OUT_DIR / (day - timedelta(days=k)).strftime("%Y-%m-%d") / "metadata.json"
+        if f.exists():
+            titles.add(json.loads(f.read_text())["title"])
+    return titles
+
+
 def make_metadata(rng, date, rounds):
     last = rounds[-1]
     hook = HOOKS[last["kind"]].format(n=last["n"] ** 2, e=(last["pair"] or "")[:1])
-    title = f"{hook} | {rng.choice(TAILS)}"
+    # 최근 영상과 제목이 똑같으면 '찍어 낸 영상'처럼 보이므로 겹치지 않는 꼬리말을 고른다
+    seen = recent_titles(date)
+    tails = [t for t in TAILS if f"{hook} | {t} #shorts"[:100] not in seen]
+    title = f"{hook} | {rng.choice(tails or TAILS)}"
     desc = "\n".join([
         "5초 안에 다른 하나를 찾아보세요! 단계가 올라갈수록 어려워집니다 🔍",
         "몇 단계까지 찾았는지 댓글로 남겨주세요 👇",

@@ -1,0 +1,140 @@
+{
+ "collectedAt": "2026-10-25T09:33:37+09:00",
+ "channel": {
+  "subscribers": 5,
+  "videos": 5,
+  "views": 3219
+ },
+ "daily": [
+  {
+   "day": "2026-10-19",
+   "views": 0,
+   "engagedViews": 0,
+   "subscribersGained": 0,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-10-20",
+   "views": 376,
+   "engagedViews": 114,
+   "subscribersGained": 1,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-10-21",
+   "views": 291,
+   "engagedViews": 93,
+   "subscribersGained": 0,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-10-22",
+   "views": 1168,
+   "engagedViews": 538,
+   "subscribersGained": 4,
+   "subscribersLost": 1
+  }
+ ],
+ "videos": [
+  {
+   "id": "TcvL9qNbR6M",
+   "title": "다른 하나 찾기 🔍 3단계 성공하면 상위 1% #shorts",
+   "publishedAt": "2026-10-20T02:54:45Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": {
+    "views": 4,
+    "estimatedMinutesWatched": 0,
+    "averageViewDuration": 17,
+    "averageViewPercentage": 79.55,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "mYY0dmerhfQ",
+   "title": "다른 하나 찾기 🔍 3단계 성공하면 상위 1% #shorts",
+   "publishedAt": "2026-10-20T07:53:21Z",
+   "privacyStatus": "public",
+   "views": 389,
+   "likes": 5,
+   "comments": 1,
+   "analytics": {
+    "views": 392,
+    "estimatedMinutesWatched": 44,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 90.34,
+    "likes": 5,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "0z3Dw8NWhEg",
+   "title": "똑같아 보이는 64개 중 딱 하나가 달라요 🐥 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-10-21T08:52:43Z",
+   "privacyStatus": "public",
+   "views": 295,
+   "likes": 2,
+   "comments": 0,
+   "analytics": {
+    "views": 295,
+    "estimatedMinutesWatched": 34,
+    "averageViewDuration": 20,
+    "averageViewPercentage": 91.08,
+    "likes": 2,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "xCsVs-JuG4w",
+   "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-10-22T08:59:39Z",
+   "privacyStatus": "public",
+   "views": 1314,
+   "likes": 12,
+   "comments": 1,
+   "analytics": {
+    "views": 1144,
+    "estimatedMinutesWatched": 182,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 89.68,
+    "likes": 11,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 4,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Ot3kX2rWpKo",
+   "title": "똑같아 보이는 64개 중 딱 하나가 달라요 😦 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-10-23T09:00:27Z",
+   "privacyStatus": "public",
+   "views": 1288,
+   "likes": 16,
+   "comments": 1,
+   "analytics": null
+  },
+  {
+   "id": "Bn5iMs_Bq-w",
+   "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-10-24T09:00:01Z",
+   "privacyStatus": "public",
+   "views": 8,
+   "likes": 1,
+   "comments": 0,
+   "analytics": null
+  }
+ ]
+}
