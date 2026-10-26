@@ -147,24 +147,58 @@ def pick(rng, pool, used):
     return rng.choice(fresh or pool)
 
 
-def build_rounds(rng, used):
-    a = pick(rng, EASY, used)
-    b = pick(rng, MEDIUM, used)
-    kind = rng.choice(["hard", "mirror", "color"])
+def is_face(pair):
+    return any(0x1F600 <= ord(c) <= 0x1F64F or c in "☹☺" for c in pair or "")
+
+
+def pick_answer(rng, n, past):
+    """최근 영상의 같은 단계와 정답 자리가 겹치지 않게 고른다.
+    past: 같은 단계의 최근 정답 (행, 열, 칸 수) 목록, 어제가 맨 앞."""
+    zone = lambda r, c, k: (r * 3 // k, c * 3 // k)
+    used_zones = {zone(r, c, k) for r, c, k in past[:4]}
+    cells = [(i // n, i % n) for i in range(n * n)]
+    ok = [rc for rc in cells if zone(*rc, n) not in used_zones]
+    if past:  # 어제와 같은 줄·같은 칸 번호도 피한다
+        r0, c0, k0 = past[0]
+        ok = [(r, c) for r, c in ok if r * k0 // n != r0 and c * k0 // n != c0] or ok
+    r, c = rng.choice(ok or cells)
+    return r * n + c
+
+
+def build_rounds(rng, used, recent=()):
+    """recent: 최근 며칠의 metadata (어제가 맨 앞). 3단계 유형, 얼굴 이모지, 정답 자리가 연달아 겹치지 않게 쓴다."""
+    last3 = recent[0]["rounds"][-1] if recent else None
+    last_kind = None if last3 is None else ("hard" if last3["kind"] == "emoji" else last3["kind"])
+    kind = rng.choice([k for k in ["hard", "mirror", "color"] if k != last_kind])
+
+    if kind == "hard":
+        pool = HARD
+        if last3 is not None and is_face(last3.get("pair")):  # 어제 3단계가 얼굴이면 오늘은 시계·달 같은 다른 소재
+            pool = [p for p in HARD if not is_face(p)]
+        third = {"kind": "emoji", "pair": pick(rng, pool, used), "n": 8, "label": "3단계 · 극악"}
+    elif kind == "mirror":
+        third = {"kind": "mirror", "pair": pick(rng, MIRROR, used), "n": 8, "label": "3단계 · 극악"}
+    else:
+        third = {"kind": "color", "pair": None, "n": 7, "label": "3단계 · 극악"}
+
+    taken = set(third["pair"] or "")
+    a = pick(rng, [p for p in EASY if not taken & set(p)] or EASY, used)
+    taken |= set(a)  # 한 영상 안에서 같은 그림(🐻🐼 다음 🐨🐼 같은)이 두 번 나오지 않게
+    medium = [p for p in MEDIUM if not taken & set(p)]
+    if is_face(third["pair"]):  # 한 영상에 얼굴 문제가 두 번 나오지 않게
+        medium = [p for p in medium if not is_face(p)]
+    b = pick(rng, medium or MEDIUM, used)
     rounds = [
         {"kind": "emoji", "pair": a, "n": 5, "label": "1단계 · 쉬움"},
         {"kind": "emoji", "pair": b, "n": 7, "label": "2단계 · 보통"},
+        third,
     ]
-    if kind == "hard":
-        rounds.append({"kind": "emoji", "pair": pick(rng, HARD, used), "n": 8, "label": "3단계 · 극악"})
-    elif kind == "mirror":
-        rounds.append({"kind": "mirror", "pair": pick(rng, MIRROR, used), "n": 8, "label": "3단계 · 극악"})
-    else:
-        rounds.append({"kind": "color", "pair": None, "n": 7, "label": "3단계 · 극악"})
-    for r in rounds:
+    for i, r in enumerate(rounds):
         if rng.random() < 0.5 and r["kind"] == "emoji":
             r["pair"] = r["pair"][::-1] if len(r["pair"]) == 2 else r["pair"]
-        r["answer"] = rng.randrange(r["n"] * r["n"])
+        past = [(m["rounds"][i]["answer_row"] - 1, m["rounds"][i]["answer_col"] - 1, m["rounds"][i]["grid"])
+                for m in recent if len(m["rounds"]) > i]
+        r["answer"] = pick_answer(rng, r["n"], past)
     return rounds
 
 
@@ -334,14 +368,19 @@ def make_audio(total, n_rounds, path):
 
 # ---------- 메타데이터 ----------
 
-def recent_titles(date, days=14):
+def recent_meta(date, days=14):
+    """지난 영상들의 metadata, 어제가 맨 앞."""
     day = datetime.strptime(date, "%Y-%m-%d")
-    titles = set()
+    out = []
     for k in range(1, days + 1):
         f = OUT_DIR / (day - timedelta(days=k)).strftime("%Y-%m-%d") / "metadata.json"
         if f.exists():
-            titles.add(json.loads(f.read_text())["title"])
-    return titles
+            out.append(json.loads(f.read_text()))
+    return out
+
+
+def recent_titles(date, days=14):
+    return {m["title"] for m in recent_meta(date, days)}
 
 
 def make_metadata(rng, date, rounds):
@@ -389,7 +428,7 @@ def main():
     history = json.loads(HISTORY.read_text()) if HISTORY.exists() else {}
     used = {p for d, ps in history.items() if d != args.date for p in ps}
 
-    rounds = build_rounds(rng, used)
+    rounds = build_rounds(rng, used, recent_meta(args.date, days=4))
     # 날짜 순서대로 돌려서 연속된 이틀이 같은 색이 되지 않게 한다
     theme = THEMES[datetime.strptime(args.date, "%Y-%m-%d").toordinal() % len(THEMES)]
     bg = background(theme)
