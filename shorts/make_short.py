@@ -155,15 +155,25 @@ def is_face(pair):
 
 
 def pick_answer(rng, n, past):
-    """최근 영상의 같은 단계와 정답 자리가 겹치지 않게 고른다.
-    past: 같은 단계의 최근 정답 (행, 열, 칸 수) 목록, 어제가 맨 앞."""
-    zone = lambda r, c, k: (r * 3 // k, c * 3 // k)
-    used_zones = {zone(r, c, k) for r, c, k in past[:4]}
+    """최근 영상의 같은 단계와 정답 자리가 겹쳐 보이지 않게 고른다.
+    past: 같은 단계의 최근 정답 (행, 열, 칸 수) 목록, 어제가 맨 앞.
+    칸 수가 달라도(7칸, 8칸) 화면에서 같은 자리로 보이므로 화면 비율(0~1)로 비교한다."""
+    pos = lambda r, c, k: ((r + 0.5) / k, (c + 0.5) / k)
+    prev = [pos(*p) for p in past[:4]]
     cells = [(i // n, i % n) for i in range(n * n)]
-    ok = [rc for rc in cells if zone(*rc, n) not in used_zones]
-    if past:  # 어제와 같은 줄·같은 칸 번호도 피한다
-        r0, c0, k0 = past[0]
-        ok = [(r, c) for r, c in ok if r * k0 // n != r0 and c * k0 // n != c0] or ok
+
+    def far(rc, gap, line):
+        y, x = pos(*rc, n)
+        if any(((y - py) ** 2 + (x - px) ** 2) ** 0.5 < gap for py, px in prev):
+            return False
+        if prev and (abs(y - prev[0][0]) < line or abs(x - prev[0][1]) < line):  # 어제와 같은 줄·같은 세로줄
+            return False
+        return True
+
+    for gap, line in ((0.35, 0.15), (0.25, 0.1), (0.15, 0)):
+        ok = [rc for rc in cells if far(rc, gap, line)]
+        if ok:
+            break
     r, c = rng.choice(ok or cells)
     return r * n + c
 
