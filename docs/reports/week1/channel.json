@@ -1,0 +1,37 @@
+[
+ {
+  "date": "2026-10-20",
+  "subscribers": 0,
+  "publicVideos": 1
+ },
+ {
+  "date": "2026-10-21",
+  "subscribers": 1,
+  "publicVideos": 1
+ },
+ {
+  "date": "2026-10-22",
+  "subscribers": 1,
+  "publicVideos": 2
+ },
+ {
+  "date": "2026-10-23",
+  "subscribers": 4,
+  "publicVideos": 3
+ },
+ {
+  "date": "2026-10-24",
+  "subscribers": 5,
+  "publicVideos": 4
+ },
+ {
+  "date": "2026-10-25",
+  "subscribers": 5,
+  "publicVideos": 5
+ },
+ {
+  "date": "2026-10-26",
+  "subscribers": 6,
+  "publicVideos": 6
+ }
+]

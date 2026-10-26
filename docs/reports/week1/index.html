@@ -1,0 +1,335 @@
+<style>
+#dash-root .wk { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-anthropic-sans); max-width: 72rem; margin-inline: auto; }
+#dash-root .wk-head h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+#dash-root .wk-head p { margin: var(--cds-gap-xs) 0 0; color: var(--color-fg-muted); max-width: 65ch; }
+#dash-root .wk-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); gap: var(--cds-gap-md); }
+#dash-root .wk-tile, #dash-root .wk-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; }
+#dash-root .wk-tile .lbl { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+#dash-root .wk-tile .num { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; margin-top: var(--cds-gap-xs); min-height: 1.4em; }
+#dash-root .wk-tile .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin-top: var(--cds-gap-xs); }
+#dash-root .wk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); gap: var(--cds-gap-md); }
+#dash-root h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+#dash-root .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: var(--cds-gap-xs) 0 var(--cds-gap-md); max-width: 70ch; }
+#dash-root .chart { position: relative; min-height: 260px; }
+#dash-root .tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+#dash-root .tip .d { color: var(--cds-text-secondary); }
+#dash-root .tip i { display: inline-block; width: .6rem; height: .6rem; border-radius: 2px; margin-right: .35rem; vertical-align: middle; }
+#dash-root .tbl { overflow-x: auto; }
+#dash-root table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+#dash-root th { text-align: left; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-weight: var(--cds-font-weight-medium); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+#dash-root td { padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+#dash-root td.n, #dash-root th.n { text-align: right; }
+#dash-root td.t { min-width: 14rem; }
+#dash-root .bar { display: inline-block; height: .5rem; border-radius: 4px; background: var(--cds-chart-muted); vertical-align: middle; margin-left: .4rem; }
+#dash-root .bar.hi { background: var(--cds-chart-status-critical); }
+#dash-root .chip { display: inline-block; font-size: var(--cds-font-size-caption); padding: 0 .45rem; border-radius: 999px; border: 1px solid var(--color-border-line); color: var(--color-fg-muted); white-space: nowrap; }
+#dash-root .chip.on { color: var(--color-ok); border-color: currentColor; }
+#dash-root .goal { display: grid; gap: var(--cds-gap-md); }
+#dash-root .goal-row .top { display: flex; justify-content: space-between; gap: var(--cds-gap-sm); flex-wrap: wrap; font-size: var(--cds-font-size-body); }
+#dash-root .goal-row .top b { font-weight: var(--cds-font-weight-medium); }
+#dash-root .track { height: .6rem; border-radius: 4px; background: var(--cds-chart-grid); margin-top: var(--cds-gap-xs); overflow: hidden; }
+#dash-root .fill { height: 100%; min-width: 3px; border-radius: 4px; }
+#dash-root .dec { display: grid; gap: var(--cds-gap-md); }
+#dash-root .dec-item { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-gap-md); display: grid; gap: var(--cds-gap-xs); }
+#dash-root .dec-item:first-child { border-top: 0; padding-top: 0; }
+#dash-root .dec-item h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+#dash-root .dec-item p { margin: 0; max-width: 70ch; }
+#dash-root .dec-item .crit { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+#dash-root a { color: inherit; }
+#dash-root [data-dash-source-state=empty] { color: transparent; }
+#dash-root [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="wk">
+  <header class="wk-head" id="top">
+    <h1>눈썰미 연구소 1주차 보고서</h1>
+    <p>10월 19일~25일. 영상 내용은 통했고, 남은 과제는 첫 2초와 제목입니다. 2주차에는 제목을 영상마다 다르게 만들고, 10분짜리 긴 영상을 시작합니다.</p>
+  </header>
+
+  <section class="wk-tiles" aria-label="1주차 요약">
+    <div class="wk-tile">
+      <div class="lbl">총 조회수 · 공개 쇼츠 6편</div>
+      <div class="num dash-skeleton" data-source="totals" data-field="views" data-row="0"></div>
+      <div class="sub">10/26 아침 집계</div>
+    </div>
+    <div class="wk-tile">
+      <div class="lbl">구독자</div>
+      <div class="num dash-skeleton" data-source="totals" data-field="subscribers" data-row="0"></div>
+      <div class="sub">채널 개설 첫 주</div>
+    </div>
+    <div class="wk-tile">
+      <div class="lbl">넘기지 않고 본 비율 · 10/20~23</div>
+      <div class="num dash-skeleton" data-source="totals" data-field="engagedPct" data-row="0"></div>
+      <div class="sub">수익 창출 기준에 들어가는 조회</div>
+    </div>
+    <div class="wk-tile">
+      <div class="lbl">평균 시청률 · 집계된 5편</div>
+      <div class="num dash-skeleton" data-source="totals" data-field="avgViewPct" data-row="0"></div>
+      <div class="sub">영상 길이 대비 평균 본 비율</div>
+    </div>
+  </section>
+
+  <div class="wk-grid">
+    <section class="wk-card" id="daily">
+      <h2>하루 조회수와 넘기지 않고 본 조회</h2>
+      <p class="note">유튜브 분석 자료는 2~3일 늦게 채워져 10/23까지만 있습니다. 진한 막대가 첫 몇 초에 넘기지 않고 본 조회입니다.</p>
+      <div class="chart dash-skeleton" id="daily-chart" data-source="daily"></div>
+    </section>
+    <section class="wk-card" id="goals">
+      <h2>수익 창출까지 남은 거리</h2>
+      <p class="note">광고 수익 조건은 구독자 1,000명과 함께, 90일 쇼츠 조회(넘기지 않고 본 조회만) 또는 1년 긴 영상 시청시간 중 하나를 채워야 합니다. 2027년 2월부터 새로 신청하는 채널은 기준이 두 배입니다.</p>
+      <div class="goal" id="goal-list">
+        <div class="goal-row">
+          <div class="top"><b>구독자</b><span><span data-source="goals" data-field="subscribers" data-row="0">—</span> / 1,000명</span></div>
+          <div class="track"><div class="fill" id="g-subs"></div></div>
+        </div>
+        <div class="goal-row">
+          <div class="top"><b>90일 쇼츠 조회 (넘기지 않고 본 조회)</b><span><span data-source="goals" data-field="engaged" data-row="0">—</span> / 2,000만 회</span></div>
+          <div class="track"><div class="fill" id="g-eng"></div></div>
+        </div>
+        <div class="goal-row">
+          <div class="top"><b>1년 긴 영상 시청시간</b><span>긴 영상 없음 · 8,000시간 필요</span></div>
+          <div class="track"><div class="fill" style="width:0"></div></div>
+        </div>
+      </div>
+      <p class="note" style="margin-top: var(--cds-gap-md)">긴 영상은 한 편이 2.5만 회 조회되고 평균 4분씩 보이면 약 1,670시간이 쌓입니다(10/24 연구의 추정). 그래서 이번 주에 긴 영상을 시작합니다.</p>
+    </section>
+  </div>
+
+  <section class="wk-card" id="videos">
+    <h2>영상별 성적</h2>
+    <p class="note">10/23부터 영상 맨 앞 1.2초에 3단계 문제를 먼저 보여 줍니다(첫 화면 미리보기). 10/24 영상만 첫날 시험 단계에서 멈췄습니다. 10/25는 저녁 7시 34분에 올라가 시청률이 아직 집계되지 않았습니다.</p>
+    <div class="tbl">
+      <table data-source="videos" data-row-key="date">
+        <thead><tr>
+          <th data-field="date">날짜</th>
+          <th data-field="title">제목</th>
+          <th class="n" data-field="views">조회수</th>
+          <th class="n" data-field="likes">좋아요</th>
+          <th class="n" data-field="comments">댓글</th>
+          <th class="n" data-field="avgViewPct">평균 시청률</th>
+          <th data-field="round3">3단계</th>
+          <th data-field="hook">미리보기</th>
+        </tr></thead>
+        <tbody id="video-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wk-card" id="decisions">
+    <h2>2주차에 바꾸는 것</h2>
+    <p class="note">한 주에 큰 변화는 1~2개만 합니다. 무엇이 효과를 냈는지 알 수 있어야 하기 때문입니다.</p>
+    <div class="dec" id="dec-list" data-source="plan"></div>
+  </section>
+
+  <section class="wk-card" id="topics">
+    <h2>요즘 뜨는 주제 후보</h2>
+    <p class="note">지금 채널과 비슷하면서 색다른 형식입니다. 4일간의 오후 연구와 이번 주 조사에서 골랐습니다. 쉬운 것부터 한 주에 하나씩 넣어 봅니다.</p>
+    <div class="tbl">
+      <table data-source="plan" data-row-key="item">
+        <thead><tr>
+          <th data-field="item">주제</th>
+          <th data-field="detail">어떤 영상인지</th>
+          <th data-field="ease">만들기</th>
+          <th data-field="effect">기대 효과</th>
+          <th data-field="source">참고</th>
+        </tr></thead>
+        <tbody id="topic-rows"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="wk-card" id="tools">
+    <h2>무료 생성형 도구</h2>
+    <p class="note">이번 주에는 연결이 필요한 도구가 없습니다. 그림이 필요한 형식을 시작할 때 아래 도구 연결을 부탁드리겠습니다.</p>
+    <div class="tbl">
+      <table data-source="plan" data-row-key="item">
+        <thead><tr>
+          <th data-field="item">도구</th>
+          <th data-field="detail">어디에 쓰나</th>
+          <th data-field="ease">무료 한도 · 연결</th>
+          <th data-field="effect">약관 · 시기</th>
+          <th data-field="source">참고</th>
+        </tr></thead>
+        <tbody id="tool-rows"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<script>
+dash.calc('totals', {
+  title: '1주차 합계',
+  description: '공개 쇼츠 조회수 합, 마지막 날 구독자, 넘기지 않고 본 비율, 집계된 영상의 평균 시청률 평균.',
+  inputs: ['videos', 'daily', 'channel'],
+  fn: (videos, daily, channel) => {
+    const views = videos.reduce((s, v) => s + Number(v.views), 0);
+    const tv = daily.reduce((s, d) => s + Number(d.views), 0);
+    const te = daily.reduce((s, d) => s + Number(d.engagedViews), 0);
+    const pct = videos.filter(v => v.avgViewPct != null).map(v => Number(v.avgViewPct));
+    const last = channel[channel.length - 1];
+    return [{ views, subscribers: Number(last.subscribers), engagedPct: te / tv, avgViewPct: pct.reduce((a, b) => a + b, 0) / pct.length / 100 }];
+  }
+});
+dash.calc('goals', {
+  title: '수익 창출 조건 진행률',
+  description: '구독자(목표 1,000명)와 넘기지 않고 본 쇼츠 조회 합(2027년 2월 이후 기준 90일 2,000만 회)의 진행률.',
+  inputs: ['channel', 'daily'],
+  fn: (channel, daily) => {
+    const subscribers = Number(channel[channel.length - 1].subscribers);
+    const engaged = daily.reduce((s, d) => s + Number(d.engagedViews), 0);
+    return [{ subscribers, engaged, subsShare: subscribers / 1000, engagedShare: engaged / 20000000 }];
+  }
+});
+
+(() => {
+  const fmt = d3.format(',');
+  const pct = d3.format('.1%');
+  const root = document.getElementById('dash-root');
+  const failLine = (el) => {
+    el.textContent = '';
+    const w = document.createElement('div');
+    w.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:inherit;height:100%;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)';
+    const dot = document.createElement('span');
+    dot.style.cssText = 'width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)';
+    w.append(dot, document.createTextNode('Failed to load'));
+    el.append(w);
+  };
+
+  function tiles() {
+    const t = dash.data('totals');
+    const set = (field, f) => {
+      const el = root.querySelector(`.wk-tile [data-field="${field}"]`);
+      if (t.status !== 'ok' || !t.data.length) { el.textContent = '—'; return; }
+      el.classList.remove('dash-skeleton');
+      el.textContent = f(t.data[0][field]);
+    };
+    set('views', fmt); set('subscribers', v => fmt(v) + '명'); set('engagedPct', pct); set('avgViewPct', pct);
+  }
+
+  function goals() {
+    const g = dash.data('goals');
+    const ok = g.status === 'ok' && g.data.length;
+    root.querySelector('[data-source="goals"][data-field="subscribers"]').textContent = ok ? fmt(g.data[0].subscribers) : '—';
+    root.querySelector('[data-source="goals"][data-field="engaged"]').textContent = ok ? fmt(g.data[0].engaged) : '—';
+    const w = (s) => Math.max(0.3, Math.min(100, s * 100)) + '%';
+    const subs = root.querySelector('#g-subs'), eng = root.querySelector('#g-eng');
+    subs.style.width = ok ? w(g.data[0].subsShare) : '0'; subs.style.background = dash.colors[0];
+    eng.style.width = ok ? w(g.data[0].engagedShare) : '0'; eng.style.background = dash.colors[0];
+  }
+
+  function chart() {
+    const box = root.querySelector('#daily-chart');
+    const d = dash.data('daily');
+    if (d.status === 'error') { box.classList.remove('dash-skeleton'); failLine(box); return; }
+    if (d.status !== 'ok') { box.innerHTML = ''; box.classList.add('dash-skeleton'); return; }
+    box.classList.remove('dash-skeleton');
+    box.innerHTML = '';
+    const rows = d.data.map(r => ({ day: r.day, date: new Date(r.day + 'T00:00:00Z'), views: Number(r.views), engaged: Number(r.engagedViews), pct: Number(r.engagedPct) }));
+    const W = box.clientWidth || 600, H = 260;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', '하루 조회수 막대 그래프');
+    const y = d3.scaleLinear([0, d3.max(rows, r => r.views) * 1.15], [H - 28, 12]).nice();
+    const yTicks = y.ticks(4);
+    const probe = svg.append('text').attr('font-size', 11).text(fmt(d3.max(yTicks)));
+    const left = probe.node().getComputedTextLength() + 10; probe.remove();
+    const x = d3.scaleBand(rows.map(r => r.day), [left, W - 8]).padding(0.35);
+    svg.append('g').selectAll('line').data(yTicks).join('line')
+      .attr('x1', left).attr('x2', W - 8).attr('y1', v => y(v)).attr('y2', v => y(v))
+      .attr('stroke', 'var(--cds-chart-grid)').attr('stroke-width', 1);
+    svg.append('g').selectAll('text').data(yTicks).join('text')
+      .attr('x', left - 6).attr('y', v => y(v)).attr('dy', '0.32em').attr('text-anchor', 'end')
+      .attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(fmt);
+    const bw = Math.min(32, x.bandwidth());
+    const off = (x.bandwidth() - bw) / 2;
+    const g = svg.append('g');
+    g.selectAll('rect.all').data(rows).join('rect').attr('class', 'all')
+      .attr('x', r => x(r.day) + off).attr('width', bw).attr('y', r => y(r.views)).attr('height', r => y(0) - y(r.views))
+      .attr('rx', 4).attr('fill', 'var(--cds-chart-muted)');
+    g.selectAll('rect.eng').data(rows).join('rect').attr('class', 'eng')
+      .attr('x', r => x(r.day) + off).attr('width', bw).attr('y', r => y(r.engaged)).attr('height', r => y(0) - y(r.engaged))
+      .attr('rx', 4).attr('fill', dash.colors[0]);
+    svg.append('g').selectAll('text').data(rows).join('text')
+      .attr('x', r => x(r.day) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle')
+      .attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(r => d3.utcFormat('%-m/%-d')(r.date));
+    const hookDay = rows.find(r => r.day === '2026-10-23');
+    if (hookDay) {
+      const hx = x(hookDay.day) - x.step() * x.paddingInner() / 2;
+      svg.append('line').attr('x1', hx).attr('x2', hx).attr('y1', 12).attr('y2', H - 28)
+        .attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '4 3');
+      svg.append('text').attr('x', hx + 4).attr('y', 20).attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text('미리보기 시작');
+    }
+    const tip = d3.select(box).append('div').attr('class', 'tip').style('opacity', 0);
+    g.selectAll('rect').on('pointerenter', function (ev, r) {
+      d3.select(this.parentNode).selectAll('rect').attr('opacity', o => o.day === r.day ? 1 : 0.45);
+      tip.html('');
+      tip.append('div').attr('class', 'd').text(d3.utcFormat('%-m월 %-d일')(r.date));
+      const l1 = tip.append('div'); l1.append('i').style('background', 'var(--cds-chart-muted)'); l1.append('span').text('전체 조회 ' + fmt(r.views));
+      const l2 = tip.append('div'); l2.append('i').style('background', dash.colors[0]); l2.append('span').text(`넘기지 않고 봄 ${fmt(r.engaged)} (${pct(r.pct)})`);
+      const bx = x(r.day) + x.bandwidth() / 2;
+      const tw = tip.node().offsetWidth;
+      const scale = box.clientWidth / W;
+      tip.style('left', Math.max(0, Math.min(box.clientWidth - tw, bx * scale - tw / 2)) + 'px')
+         .style('top', Math.max(0, y(r.views) * scale - tip.node().offsetHeight - 8) + 'px').style('opacity', 1);
+    }).on('pointerleave', function () {
+      d3.select(this.parentNode).selectAll('rect').attr('opacity', 1);
+      tip.style('opacity', 0);
+    });
+  }
+
+  function videos() {
+    const tb = root.querySelector('#video-rows');
+    const v = dash.data('videos');
+    tb.innerHTML = '';
+    if (v.status !== 'ok') return;
+    const max = d3.max(v.data, r => Number(r.views));
+    v.data.forEach(r => {
+      const tr = document.createElement('tr');
+      const td = (text, cls) => { const c = document.createElement('td'); if (cls) c.className = cls; c.textContent = text; tr.append(c); return c; };
+      td(r.date);
+      td(r.title, 't');
+      const vc = td(fmt(Number(r.views)), 'n');
+      const bar = document.createElement('span');
+      bar.className = 'bar' + (Number(r.views) < 100 ? ' hi' : '');
+      bar.style.width = Math.max(3, Number(r.views) / max * 64) + 'px';
+      vc.append(bar);
+      td(fmt(Number(r.likes)), 'n');
+      td(fmt(Number(r.comments)), 'n');
+      td(r.avgViewPct == null ? '집계 중' : (Number(r.avgViewPct) / 100).toLocaleString('ko', { style: 'percent', maximumFractionDigits: 1 }), 'n');
+      td(r.round3);
+      const hc = td('');
+      const chip = document.createElement('span'); chip.className = 'chip' + (r.hook === '있음' ? ' on' : ''); chip.textContent = r.hook; hc.append(chip);
+      tb.append(tr);
+    });
+  }
+
+  function plan() {
+    const p = dash.data('plan');
+    const dec = root.querySelector('#dec-list');
+    const topics = root.querySelector('#topic-rows');
+    const tools = root.querySelector('#tool-rows');
+    dec.innerHTML = ''; topics.innerHTML = ''; tools.innerHTML = '';
+    if (p.status !== 'ok') return;
+    p.data.filter(r => r.section === '결정').forEach(r => {
+      const item = document.createElement('div'); item.className = 'dec-item'; item.dataset.key = r.item;
+      const h = document.createElement('h3'); h.textContent = r.item;
+      const d = document.createElement('p'); d.textContent = r.detail;
+      item.append(h, d);
+      if (r.ease || r.effect) { const c = document.createElement('div'); c.className = 'crit'; c.textContent = [r.ease, r.effect].filter(Boolean).join(' · '); item.append(c); }
+      dec.append(item);
+    });
+    const fill = (tb, section) => p.data.filter(r => r.section === section).forEach(r => {
+      const tr = document.createElement('tr');
+      ['item', 'detail', 'ease', 'effect'].forEach(k => { const c = document.createElement('td'); c.textContent = r[k]; tr.append(c); });
+      const sc = document.createElement('td');
+      if (r.sourceUrl) { const a = document.createElement('a'); a.href = r.sourceUrl; a.target = '_blank'; a.rel = 'noopener'; a.textContent = r.source; sc.append(a); }
+      else sc.textContent = r.source;
+      tr.append(sc);
+      tb.append(tr);
+    });
+    fill(topics, '주제');
+    fill(tools, '도구');
+  }
+
+  dash.onData(() => { tiles(); goals(); chart(); videos(); plan(); });
+})();
+</script>

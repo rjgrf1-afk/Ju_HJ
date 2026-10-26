@@ -1,0 +1,34 @@
+[
+ {
+  "day": "2026-10-20",
+  "views": 367,
+  "engagedViews": 110,
+  "engagedPct": 0.2997,
+  "subsGained": 1,
+  "subsLost": 0
+ },
+ {
+  "day": "2026-10-21",
+  "views": 291,
+  "engagedViews": 93,
+  "engagedPct": 0.3196,
+  "subsGained": 0,
+  "subsLost": 0
+ },
+ {
+  "day": "2026-10-22",
+  "views": 1168,
+  "engagedViews": 538,
+  "engagedPct": 0.4606,
+  "subsGained": 4,
+  "subsLost": 1
+ },
+ {
+  "day": "2026-10-23",
+  "views": 1235,
+  "engagedViews": 440,
+  "engagedPct": 0.3563,
+  "subsGained": 2,
+  "subsLost": 1
+ }
+]
