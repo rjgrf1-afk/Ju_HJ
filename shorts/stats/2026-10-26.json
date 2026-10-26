@@ -1,5 +1,5 @@
 {
- "collectedAt": "2026-10-26T09:53:45+09:00",
+ "collectedAt": "2026-10-26T17:49:00+09:00",
  "channel": {
   "subscribers": 6,
   "videos": 6,
@@ -151,10 +151,59 @@
    "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 몇 단계까지 보이세요? #shorts",
    "publishedAt": "2026-10-25T10:34:47Z",
    "privacyStatus": "public",
-   "views": 1125,
+   "views": 1127,
    "likes": 8,
    "comments": 1,
    "analytics": null
+  },
+  {
+   "id": "lVLq0OK_JPk",
+   "title": "【다른 하나 찾기】 스피커 아이콘 64개 중 딱 하나가 달라요 👀 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-10-26T05:41:22Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  }
+ ],
+ "countries28d": [
+  {
+   "country": "KR",
+   "views": 2950,
+   "engagedViews": 1141
+  }
+ ],
+ "audience28d": [
+  {
+   "ageGroup": "age25-34",
+   "gender": "female",
+   "viewerPercentage": 4.8
+  },
+  {
+   "ageGroup": "age25-34",
+   "gender": "male",
+   "viewerPercentage": 8.6
+  },
+  {
+   "ageGroup": "age35-44",
+   "gender": "female",
+   "viewerPercentage": 24
+  },
+  {
+   "ageGroup": "age35-44",
+   "gender": "male",
+   "viewerPercentage": 29.6
+  },
+  {
+   "ageGroup": "age45-54",
+   "gender": "female",
+   "viewerPercentage": 5.8
+  },
+  {
+   "ageGroup": "age45-54",
+   "gender": "male",
+   "viewerPercentage": 27.2
   }
  ]
 }

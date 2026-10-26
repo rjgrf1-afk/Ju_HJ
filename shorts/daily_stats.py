@@ -66,6 +66,17 @@ def main():
         "dimensions": "day", "sort": "day",
     })
 
+    # 어느 나라, 어느 연령대가 보는지 (최근 28일). 해외 시청자 비중을 늘리는 것이 목표 중 하나다
+    since = (today - timedelta(days=27)).isoformat()
+    countries = get(ANALYTICS, token, {
+        "ids": "channel==MINE", "startDate": since, "endDate": today.isoformat(),
+        "metrics": "views,engagedViews", "dimensions": "country", "sort": "-views", "maxResults": 25,
+    })
+    ages = get(ANALYTICS, token, {
+        "ids": "channel==MINE", "startDate": since, "endDate": today.isoformat(),
+        "metrics": "viewerPercentage", "dimensions": "ageGroup,gender",
+    })
+
     st = ch["statistics"]
     out = {
         "collectedAt": datetime.now(KST).isoformat(timespec="seconds"),
@@ -75,6 +86,8 @@ def main():
         "daily": [dict(zip(["day", "views", "engagedViews", "subscribersGained", "subscribersLost"], r))
                   for r in daily.get("rows") or []],
         "videos": sorted(videos, key=lambda v: v["publishedAt"]),
+        "countries28d": [dict(zip(["country", "views", "engagedViews"], r)) for r in countries.get("rows") or []],
+        "audience28d": [dict(zip(["ageGroup", "gender", "viewerPercentage"], r)) for r in ages.get("rows") or []],
     }
     path = ROOT / "stats" / f"{today}.json"
     path.parent.mkdir(exist_ok=True)
@@ -86,6 +99,8 @@ def main():
         a = v["analytics"] or {}
         print(f"- {v['publishedAt'][:10]} {v['privacyStatus']:8} 조회 {v['views']:>6} 좋아요 {v['likes']:>4} "
               f"댓글 {v['comments']:>3} 평균시청률 {a.get('averageViewPercentage', '-')}%  {v['id']}")
+    total = sum(r["views"] for r in out["countries28d"]) or 1
+    print("나라별 (28일): " + ", ".join(f"{r['country']} {r['views'] / total:.0%}" for r in out["countries28d"][:5]))
     print(f"저장: {path.relative_to(ROOT.parent)}")
 
 
