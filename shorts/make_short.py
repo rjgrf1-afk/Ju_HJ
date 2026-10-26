@@ -200,13 +200,19 @@ def build_rounds(rng, used, recent=(), style="noto"):
     taken = set(third["pair"] or "")
     a = pick(rng, [p for p in styled(EASY) if not taken & set(p)] or styled(EASY), used)
     taken |= set(a)  # 한 영상 안에서 같은 그림(🐻🐼 다음 🐨🐼 같은)이 두 번 나오지 않게
-    medium = [p for p in styled(MEDIUM) if not taken & set(p)]
-    if is_face(third["pair"]):  # 한 영상에 얼굴 문제가 두 번 나오지 않게
-        medium = [p for p in medium if not is_face(p)]
-    b = pick(rng, medium or styled(MEDIUM), used)
+    # 2단계는 이틀에 한 번꼴로 '그림체 다른 하나 찾기': 같은 그림인데 하나만 다른 그림체(평면/3D)로 그린다
+    last2 = recent[0]["rounds"][1] if recent and len(recent[0]["rounds"]) > 1 else None
+    if (last2 is None or last2["kind"] != "art") and rng.random() < 0.5:
+        art = [c for c in FLUENT if c not in taken and not is_face(c)]
+        second = {"kind": "art", "pair": pick(rng, art, used), "n": 7, "label": "2단계 · 보통"}
+    else:
+        medium = [p for p in styled(MEDIUM) if not taken & set(p)]
+        if is_face(third["pair"]):  # 한 영상에 얼굴 문제가 두 번 나오지 않게
+            medium = [p for p in medium if not is_face(p)]
+        second = {"kind": "emoji", "pair": pick(rng, medium or styled(MEDIUM), used), "n": 7, "label": "2단계 · 보통"}
     rounds = [
         {"kind": "emoji", "pair": a, "n": 5, "label": "1단계 · 쉬움"},
-        {"kind": "emoji", "pair": b, "n": 7, "label": "2단계 · 보통"},
+        second,
         third,
     ]
     for i, r in enumerate(rounds):
@@ -247,6 +253,9 @@ def render_grid(r, rng):
                                 fill=odd if is_odd else base)
         elif r["kind"] == "mirror":
             im.alpha_composite(emoji_img(r["pair"], size, mirror=is_odd, style=r["style"]), (x, y))
+        elif r["kind"] == "art":
+            other = "noto" if r["style"] == "fluent" else "fluent"
+            im.alpha_composite(emoji_img(r["pair"], size, style=other if is_odd else r["style"]), (x, y))
         elif r["kind"] == "icon":
             a, b = r["pair"].split("|")
             im.alpha_composite(icon_img(b if is_odd else a, size), (x, y))
