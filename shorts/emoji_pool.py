@@ -110,3 +110,27 @@ NAMES = {
     "🪓": "도끼", "🔫": "물총", "🪚": "톱", "🐓": "수탉", "🦃": "칠면조", "🦚": "공작",
     "🦭": "물개", "🐋": "고래", "🦥": "나무늘보", "🐦": "새",
 }
+
+# 3단계 '아이콘 찾기'(구글 Material Symbols, Apache 2.0): (많이 깔리는 아이콘, 다른 하나)
+ICON_PAIRS = [
+    ("lock", "lock_open"), ("notifications", "notifications_off"), ("signal_cellular_alt_2_bar", "signal_cellular_alt"), ("volume_down", "volume_up"), ("star", "star_half"),
+    ("favorite", "heart_broken"), ("home", "house"), ("rocket", "rocket_launch"), ("coffee", "local_cafe"),
+    ("bedtime", "nights_stay"), ("mail", "drafts"), ("folder", "folder_open"), ("visibility", "visibility_off"),
+    ("mic", "mic_off"), ("videocam", "videocam_off"), ("bookmark", "bookmark_added"),
+    ("shopping_cart", "add_shopping_cart"), ("person", "person_add"), ("cloud", "cloud_done"),
+    ("sentiment_satisfied", "sentiment_neutral"), ("sentiment_very_satisfied", "sentiment_satisfied"),
+    ("music_note", "music_off"), ("alarm", "alarm_on"), ("timer", "timer_off"), ("brightness_5", "brightness_6"),
+    ("hourglass_empty", "hourglass_full"), ("print", "print_disabled"), ("key", "key_off"), ("schedule", "history"),
+    ("umbrella", "beach_access"), ("local_florist", "filter_vintage"), ("eco", "spa"), ("north_east", "north_west"),
+    ("wifi", "wifi_2_bar"), ("light_mode", "wb_sunny"),
+]
+ICON_NAMES = {
+    "lock": "자물쇠", "notifications": "종", "battery_5_bar": "배터리", "battery_4_bar": "배터리",
+    "signal_cellular_alt_2_bar": "신호 막대", "volume_down": "스피커", "star": "별", "favorite": "하트",
+    "home": "집", "rocket": "로켓", "coffee": "커피잔", "bedtime": "달", "mail": "편지", "folder": "폴더",
+    "visibility": "눈", "mic": "마이크", "videocam": "캠코더", "bookmark": "책갈피", "shopping_cart": "장바구니",
+    "person": "사람", "cloud": "구름", "sentiment_satisfied": "웃는 얼굴", "sentiment_very_satisfied": "웃는 얼굴",
+    "music_note": "음표", "alarm": "알람시계", "timer": "타이머", "brightness_5": "해", "hourglass_empty": "모래시계",
+    "print": "프린터", "key": "열쇠", "schedule": "시계", "umbrella": "우산", "local_florist": "꽃", "eco": "잎",
+    "north_east": "화살표", "wifi": "와이파이", "flag": "깃발", "light_mode": "해",
+}

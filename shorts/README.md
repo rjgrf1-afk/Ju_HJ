@@ -27,4 +27,6 @@ API 심사 전까지는 `short.mp4`를 받아 유튜브 앱에서 올리고, 제
 
 ## 라이선스
 - 이모지: Noto Color Emoji (SIL OFL 1.1)
+- 3D 그림: Microsoft Fluent Emoji 3D (MIT, `assets/fluent/LICENSE`). 홀수 날(날짜 서수 기준)에 쓴다
+- 아이콘: Google Material Symbols Rounded (Apache 2.0, `assets/material/LICENSE`). 3단계 '아이콘 찾기'에 쓴다
 - 효과음과 배경음은 코드로 합성한다

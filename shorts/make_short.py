@@ -19,7 +19,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
-from emoji_pool import EASY, HARD, MEDIUM, MIRROR, NAMES
+from emoji_pool import EASY, HARD, ICON_NAMES, ICON_PAIRS, MEDIUM, MIRROR, NAMES
 
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "output"
@@ -61,6 +61,7 @@ HOOKS = {
     "mirror": "{name} {n}개 중 하나만 좌우가 뒤집혀 있어요 {e}",
     "emoji": "{name} {n}개 중 딱 하나가 달라요 {e}",
     "color": "{name} {n}칸 중 딱 한 칸만 색이 달라요 🎨",
+    "icon": "{name} 아이콘 {n}개 중 딱 하나가 달라요 👀",
 }
 TAILS = ["3단계까지 찾을 수 있나요?", "마지막 문제에서 다들 멈춰요", "5초 안에 찾아보세요",
          "몇 단계까지 보이세요?", "3단계는 진짜 안 보여요"]
@@ -80,13 +81,51 @@ def ko_font(size):
 _emoji_font = ImageFont.truetype(EMOJI_FONT, 109)
 _emoji_cache = {}
 
+# 날마다 그림 스타일을 바꿔 다른 채널과 같은 화면이 되지 않게 한다.
+# noto: Noto Color Emoji(SIL OFL), fluent: Microsoft Fluent Emoji 3D(MIT, assets/fluent)
+FLUENT_DIR = ROOT / "assets" / "fluent"
+FLUENT = json.loads((FLUENT_DIR / "index.json").read_text())
+FLUENT_TOO_SIMILAR = set(json.loads((FLUENT_DIR / "too_similar.json").read_text()))
+# 3단계 '아이콘 찾기': Google Material Symbols(Apache 2.0, assets/material)
+ICON_FONT = ImageFont.truetype(str(ROOT / "assets" / "material" / "MaterialSymbolsRounded.ttf"), 236)
+ICON_FONT.set_variation_by_axes([0, 0, 48, 600])  # 채우기 없음, 기본 그레이드, 큰 글자용 광학 크기, 굵기 600
+ICON_CODES = dict(line.split() for line in (ROOT / "assets" / "material" / "MaterialSymbolsRounded.codepoints").read_text().splitlines())
+ICON_COLOR = (38, 40, 64)
 
-def emoji_img(ch, size, mirror=False):
-    key = (ch, size, mirror)
+
+def style_for(date):
+    return "fluent" if datetime.strptime(date, "%Y-%m-%d").toordinal() % 2 else "noto"
+
+
+def has_style(pair, style):
+    if style != "fluent":
+        return True
+    return all(c in FLUENT for c in pair) and pair not in FLUENT_TOO_SIMILAR
+
+
+def icon_img(name, size):
+    key = ("icon", name, size)
     if key not in _emoji_cache:
-        im = Image.new("RGBA", (136, 128), (0, 0, 0, 0))
-        ImageDraw.Draw(im).text((0, 0), ch, font=_emoji_font, embedded_color=True)
-        im = im.crop(im.getbbox()).resize((size, size), Image.LANCZOS)
+        # 아이콘마다 여백을 잘라 내면 '막대 2개'와 '막대 3개'의 크기가 달라지므로, 모든 아이콘을 같은 틀에 그린다
+        im = Image.new("RGBA", (240, 240), (0, 0, 0, 0))
+        ImageDraw.Draw(im).text((120, 120), chr(int(ICON_CODES[name], 16)), font=ICON_FONT, fill=ICON_COLOR, anchor="mm")
+        _emoji_cache[key] = im.resize((size, size), Image.LANCZOS)
+    return _emoji_cache[key]
+
+
+def emoji_img(ch, size, mirror=False, style="noto"):
+    key = (ch, size, mirror, style)
+    if key not in _emoji_cache:
+        if style == "fluent" and ch in FLUENT:
+            im = Image.open(FLUENT_DIR / "3d" / FLUENT[ch]).convert("RGBA")
+            im.thumbnail((size, size), Image.LANCZOS)
+            box = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+            box.alpha_composite(im, ((size - im.width) // 2, (size - im.height) // 2))
+            im = box
+        else:
+            im = Image.new("RGBA", (136, 128), (0, 0, 0, 0))
+            ImageDraw.Draw(im).text((0, 0), ch, font=_emoji_font, embedded_color=True)
+            im = im.crop(im.getbbox()).resize((size, size), Image.LANCZOS)
         if mirror:
             im = ImageOps.mirror(im)
         _emoji_cache[key] = im
@@ -129,35 +168,39 @@ def pick_answer(rng, n, past):
     return r * n + c
 
 
-def build_rounds(rng, used, recent=()):
+def build_rounds(rng, used, recent=(), style="noto"):
     """recent: 최근 며칠의 metadata (어제가 맨 앞). 3단계 유형, 얼굴 이모지, 정답 자리가 연달아 겹치지 않게 쓴다."""
     last3 = recent[0]["rounds"][-1] if recent else None
     last_kind = None if last3 is None else ("hard" if last3["kind"] == "emoji" else last3["kind"])
-    kind = rng.choice([k for k in ["hard", "mirror", "color"] if k != last_kind])
+    kind = rng.choice([k for k in ["hard", "mirror", "color", "icon"] if k != last_kind])
+    styled = lambda pool: [p for p in pool if has_style(p, style)]
 
     if kind == "hard":
-        pool = HARD
+        pool = styled(HARD)
         if last3 is not None and is_face(last3.get("pair")):  # 어제 3단계가 얼굴이면 오늘은 시계·달 같은 다른 소재
-            pool = [p for p in HARD if not is_face(p)]
+            pool = [p for p in pool if not is_face(p)]
         third = {"kind": "emoji", "pair": pick(rng, pool, used), "n": 8, "label": "3단계 · 극악"}
     elif kind == "mirror":
-        third = {"kind": "mirror", "pair": pick(rng, MIRROR, used), "n": 8, "label": "3단계 · 극악"}
+        third = {"kind": "mirror", "pair": pick(rng, styled(MIRROR), used), "n": 8, "label": "3단계 · 극악"}
+    elif kind == "icon":
+        third = {"kind": "icon", "pair": pick(rng, ["|".join(p) for p in ICON_PAIRS], used), "n": 8, "label": "3단계 · 극악"}
     else:
         third = {"kind": "color", "pair": None, "n": 7, "label": "3단계 · 극악"}
 
     taken = set(third["pair"] or "")
-    a = pick(rng, [p for p in EASY if not taken & set(p)] or EASY, used)
+    a = pick(rng, [p for p in styled(EASY) if not taken & set(p)] or styled(EASY), used)
     taken |= set(a)  # 한 영상 안에서 같은 그림(🐻🐼 다음 🐨🐼 같은)이 두 번 나오지 않게
-    medium = [p for p in MEDIUM if not taken & set(p)]
+    medium = [p for p in styled(MEDIUM) if not taken & set(p)]
     if is_face(third["pair"]):  # 한 영상에 얼굴 문제가 두 번 나오지 않게
         medium = [p for p in medium if not is_face(p)]
-    b = pick(rng, medium or MEDIUM, used)
+    b = pick(rng, medium or styled(MEDIUM), used)
     rounds = [
         {"kind": "emoji", "pair": a, "n": 5, "label": "1단계 · 쉬움"},
         {"kind": "emoji", "pair": b, "n": 7, "label": "2단계 · 보통"},
         third,
     ]
     for i, r in enumerate(rounds):
+        r["style"] = style
         if rng.random() < 0.5 and r["kind"] == "emoji":
             r["pair"] = r["pair"][::-1] if len(r["pair"]) == 2 else r["pair"]
         past = [(m["rounds"][i]["answer_row"] - 1, m["rounds"][i]["answer_col"] - 1, m["rounds"][i]["grid"])
@@ -193,10 +236,13 @@ def render_grid(r, rng):
             d.rounded_rectangle((x, y, x + size, y + size), radius=size // 5,
                                 fill=odd if is_odd else base)
         elif r["kind"] == "mirror":
-            im.alpha_composite(emoji_img(r["pair"], size, mirror=is_odd), (x, y))
+            im.alpha_composite(emoji_img(r["pair"], size, mirror=is_odd, style=r["style"]), (x, y))
+        elif r["kind"] == "icon":
+            a, b = r["pair"].split("|")
+            im.alpha_composite(icon_img(b if is_odd else a, size), (x, y))
         else:
             ch = r["pair"][1] if is_odd else r["pair"][0]
-            im.alpha_composite(emoji_img(ch, size), (x, y))
+            im.alpha_composite(emoji_img(ch, size, style=r["style"]), (x, y))
 
     cx = GRID_X + (r["answer"] % n + 0.5) * cell
     cy = GRID_Y + (r["answer"] // n + 0.5) * cell
@@ -351,10 +397,12 @@ def make_metadata(rng, date, rounds):
     last = rounds[-1]
     if last["kind"] == "color":
         name = next(c for limit, c in COLOR_NAMES if last["hue"] < limit)
+    elif last["kind"] == "icon":
+        name = ICON_NAMES.get(last["pair"].split("|")[0], "그림")
     else:
         name = NAMES.get(last["pair"][0], "그림")
-    hook = "【다른 하나 찾기】 " + HOOKS[last["kind"]].format(
-        name=name, n=last["n"] ** 2, e=(last["pair"] or "")[:1])
+    hook = "【다른 하나 찾기】 " + HOOKS[last["kind"]].strip().format(
+        name=name, n=last["n"] ** 2, e="" if last["kind"] == "icon" else (last["pair"] or "")[:1])
     # 최근 영상과 제목이 똑같으면 '찍어 낸 영상'처럼 보이므로 겹치지 않는 꼬리말을 고른다
     seen = recent_titles(date)
     tails = [t for t in TAILS if f"{hook} | {t} #shorts"[:100] not in seen]
@@ -376,6 +424,7 @@ def make_metadata(rng, date, rounds):
         "categoryId": "24",  # Entertainment
         "madeForKids": False,
         "containsSyntheticMedia": False,  # 실사처럼 보이는 합성물이 아니라 표시 대상 아님
+        "style": rounds[0]["style"],
         "rounds": [{"kind": r["kind"], "pair": r["pair"], "grid": r["n"],
                     "answer_row": r["answer"] // r["n"] + 1, "answer_col": r["answer"] % r["n"] + 1}
                    for r in rounds],
@@ -392,7 +441,7 @@ def main():
     history = json.loads(HISTORY.read_text()) if HISTORY.exists() else {}
     used = {p for d, ps in history.items() if d != args.date for p in ps}
 
-    rounds = build_rounds(rng, used, recent_meta(args.date, days=4))
+    rounds = build_rounds(rng, used, recent_meta(args.date, days=4), style_for(args.date))
     # 날짜 순서대로 돌려서 연속된 이틀이 같은 색이 되지 않게 한다
     theme = THEMES[datetime.strptime(args.date, "%Y-%m-%d").toordinal() % len(THEMES)]
     bg = background(theme)
