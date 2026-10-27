@@ -1,4 +1,4 @@
-"""'다른 하나 찾기 30문제' 가로 긴 영상(약 10분)을 만든다.
+"""'다른 하나 찾기 극악 30문제' 가로 긴 영상(약 10분)을 만든다.
 
 쇼츠는 수익 창출 시청시간에 들어가지 않으므로, 긴 영상으로 시청시간을 쌓는다(experiments.md 실험 3).
 TV로 보는 중장년 시청자를 생각해 가로 화면, 큰 글씨, 문제마다 넉넉한 시간을 준다.
@@ -33,11 +33,14 @@ PER_LEVEL = 10
 GRID_X, GRID_Y = 960, 110  # 그리드 왼쪽 위 (크기는 make_short.GRID_SIZE = 860)
 PANEL_X = 480  # 왼쪽 정보 칸의 가운데
 
+# 쉬운 문제로 시작하면 지루해 이탈하므로(채널 주인 의견 10/27) 30문제 모두 극악으로 내고,
+# 뒤로 갈수록 칸 수를 늘려 끝까지 긴장감을 유지한다
 LEVELS = [  # (이름, 칸 수, 배경 테마 번호)
-    ("1단계 · 쉬움", 5, 4),
-    ("2단계 · 보통", 7, 1),
-    ("3단계 · 어려움", 8, 0),
+    ("극악 1 · 64칸", 8, 4),
+    ("극악 2 · 81칸", 9, 1),
+    ("극악 3 · 100칸", 10, 0),
 ]
+KINDS = ["hard", "icon", "mirror", "art", "color"]  # 문제마다 유형을 돌린다
 
 
 def norm(p):
@@ -57,28 +60,23 @@ def build_questions(rng, used):
         return p
 
     qs = []
+    art_pool = [c for c in ms.FLUENT if not ms.is_face(c)]
     for level, (label, n, _) in enumerate(LEVELS):
         for i in range(PER_LEVEL):
-            style = "fluent" if (level * PER_LEVEL + i) % 2 else "noto"
-            if level == 0:
-                q = {"kind": "emoji", "pair": take(EASY, style), "n": n}
-            elif level == 1:
-                if i % 3 == 2:
-                    q = {"kind": "art", "pair": take([c for c in ms.FLUENT if not ms.is_face(c)], style), "n": n}
-                else:
-                    q = {"kind": "emoji", "pair": take(MEDIUM, style), "n": n}
+            k = level * PER_LEVEL + i
+            style = "fluent" if k % 2 else "noto"
+            kind = KINDS[(k + level) % len(KINDS)]  # 단계가 바뀌어도 같은 순서로 반복되지 않게 한 칸씩 민다
+            if kind == "hard":
+                q = {"kind": "emoji", "pair": take(HARD, style)}
+            elif kind == "icon":
+                q = {"kind": "icon", "pair": take(["|".join(p) for p in ICON_PAIRS], style)}
+            elif kind == "mirror":
+                q = {"kind": "mirror", "pair": take(MIRROR, style)}
+            elif kind == "art":
+                q = {"kind": "art", "pair": take(art_pool, style)}
             else:
-                kind = ["hard", "icon", "mirror", "color", "hard"][i % 5]
-                if kind == "hard":
-                    q = {"kind": "emoji", "pair": take(HARD, style), "n": n}
-                elif kind == "icon":
-                    q = {"kind": "icon", "pair": take(["|".join(p) for p in ICON_PAIRS], style), "n": n}
-                elif kind == "mirror":
-                    q = {"kind": "mirror", "pair": take(MIRROR, style), "n": n}
-                else:
-                    q = {"kind": "color", "pair": None, "n": 7}
-            q["style"] = style
-            q["level"] = level
+                q = {"kind": "color", "pair": None}
+            q.update(n=n, style=style, level=level)
             if q["kind"] == "emoji" and rng.random() < 0.5:
                 q["pair"] = q["pair"][::-1]
             qs.append(q)
@@ -162,14 +160,14 @@ def card_frames(level, lines, seconds):
 
 def intro_frames():
     return card_frames(0, [
-        ("다른 하나 찾기 30문제", 110, (255, 255, 255)),
-        ("쉬움 10 · 보통 10 · 어려움 10", 60, accent(0)),
-        ("끝까지 다 찾으면 두뇌나이 20대!", 64, (255, 255, 255)),
+        ("다른 하나 찾기 극악 30문제", 104, (255, 255, 255)),
+        ("64칸 → 81칸 → 100칸, 갈수록 어려워져요", 60, accent(0)),
+        ("끝까지 다 찾으면 상위 1% 눈썰미!", 64, (255, 255, 255)),
     ], INTRO)
 
 
 def level_frames(level):
-    tips = ["한 문제에 15초씩 드려요", "그림체가 다른 하나도 섞여 있어요", "아이콘·색깔·좌우 반전까지 나와요"]
+    tips = ["한 문제에 15초씩 드려요", "이제 81개 중 하나예요", "마지막! 100개 중 하나를 찾아보세요"]
     return card_frames(level, [
         (LEVELS[level][0] + " 시작!", 110, (255, 255, 255)),
         (tips[level], 56, accent(level)),
@@ -220,9 +218,9 @@ def stamp(sec):
 
 
 def make_metadata(date, number, questions, chapters):
-    title = f"【다른 하나 찾기/치매예방】 30문제 다 찾으면 두뇌나이 20대! | 눈썰미 연구소 #{number}"
+    title = f"【다른 하나 찾기/치매예방】 극악 30문제, 다 찾으면 상위 1% 눈썰미! | 눈썰미 연구소 #{number}"
     lines = [
-        "숨어 있는 '다른 하나'를 찾아보세요! 쉬움 10문제, 보통 10문제, 어려움 10문제로 한 문제에 15초씩 드려요.",
+        "숨어 있는 '다른 하나'를 찾아보세요! 30문제 모두 극악, 64칸에서 시작해 81칸, 100칸으로 갈수록 어려워집니다. 한 문제에 15초씩 드려요.",
         "그림 모양, 그림체(평면/3D), 아이콘, 색깔, 좌우 반전까지 매 문제가 다릅니다.",
         "몇 문제 찾으셨는지 댓글로 남겨 주세요 👇",
         "",
@@ -230,7 +228,7 @@ def make_metadata(date, number, questions, chapters):
         "",
         f"{ms.CHANNEL}에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 두뇌 운동하세요!",
         "",
-        "Find the odd one out! 30 puzzles from easy to hard. How many can you find?",
+        "Find the odd one out! 30 extreme puzzles, from 64 to 100 tiles. How many can you find?",
         "",
         "#다른그림찾기 #틀린그림찾기 #치매예방 #두뇌운동 #집중력 #눈썰미테스트 #spotthedifference #findtheoddoneout",
     ]
@@ -257,9 +255,9 @@ def make_thumbnail(path, grid, level):
     im.alpha_composite(g, (680, 80))
     d = ImageDraw.Draw(im)
     ms.draw_text(d, (340, 190), "다른 하나", 110, (255, 255, 255))
-    ms.draw_text(d, (340, 320), "30문제", 120, accent(level))
+    ms.draw_text(d, (340, 320), "극악 30문제", 104, accent(level))
     ms.draw_text(d, (340, 470), "다 찾으면", 72, (255, 255, 255))
-    ms.draw_text(d, (340, 570), "두뇌나이 20대!", 72, (255, 230, 60))
+    ms.draw_text(d, (340, 570), "상위 1% 눈썰미!", 72, (255, 230, 60))
     im.convert("RGB").save(path, quality=92)
 
 
