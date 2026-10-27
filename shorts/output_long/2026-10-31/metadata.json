@@ -1,0 +1,265 @@
+{
+  "date": "2026-10-31",
+  "number": 1,
+  "title": "【다른 하나 찾기/치매예방】 30문제 다 찾으면 두뇌나이 20대! | 눈썰미 연구소 #1",
+  "description": "숨어 있는 '다른 하나'를 찾아보세요! 쉬움 10문제, 보통 10문제, 어려움 10문제로 한 문제에 15초씩 드려요.\n그림 모양, 그림체(평면/3D), 아이콘, 색깔, 좌우 반전까지 매 문제가 다릅니다.\n몇 문제 찾으셨는지 댓글로 남겨 주세요 👇\n\n0:00 시작\n0:08 1단계 · 쉬움\n3:11 2단계 · 보통\n6:14 3단계 · 어려움\n9:17 마무리\n\n눈썰미 연구소에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 두뇌 운동하세요!\n\nFind the odd one out! 30 puzzles from easy to hard. How many can you find?\n\n#다른그림찾기 #틀린그림찾기 #치매예방 #두뇌운동 #집중력 #눈썰미테스트 #spotthedifference #findtheoddoneout",
+  "tags": [
+    "다른그림찾기",
+    "틀린그림찾기",
+    "치매예방",
+    "두뇌운동",
+    "집중력",
+    "눈썰미",
+    "눈썰미테스트",
+    "다른 하나 찾기",
+    "spot the difference",
+    "find the odd one out",
+    "brain test",
+    "puzzle"
+  ],
+  "categoryId": "24",
+  "madeForKids": false,
+  "containsSyntheticMedia": false,
+  "questions": [
+    {
+      "kind": "emoji",
+      "pair": "🚒🚑",
+      "style": "noto",
+      "grid": 5,
+      "answer_row": 4,
+      "answer_col": 3
+    },
+    {
+      "kind": "emoji",
+      "pair": "🍄🌰",
+      "style": "fluent",
+      "grid": 5,
+      "answer_row": 1,
+      "answer_col": 5
+    },
+    {
+      "kind": "emoji",
+      "pair": "🥔🍠",
+      "style": "noto",
+      "grid": 5,
+      "answer_row": 2,
+      "answer_col": 1
+    },
+    {
+      "kind": "emoji",
+      "pair": "🌹🌷",
+      "style": "fluent",
+      "grid": 5,
+      "answer_row": 1,
+      "answer_col": 3
+    },
+    {
+      "kind": "emoji",
+      "pair": "🍇🫐",
+      "style": "noto",
+      "grid": 5,
+      "answer_row": 4,
+      "answer_col": 5
+    },
+    {
+      "kind": "emoji",
+      "pair": "🐉🐍",
+      "style": "fluent",
+      "grid": 5,
+      "answer_row": 5,
+      "answer_col": 3
+    },
+    {
+      "kind": "emoji",
+      "pair": "🔦💡",
+      "style": "noto",
+      "grid": 5,
+      "answer_row": 2,
+      "answer_col": 5
+    },
+    {
+      "kind": "emoji",
+      "pair": "🥖🥐",
+      "style": "fluent",
+      "grid": 5,
+      "answer_row": 3,
+      "answer_col": 2
+    },
+    {
+      "kind": "emoji",
+      "pair": "🎈🎀",
+      "style": "noto",
+      "grid": 5,
+      "answer_row": 1,
+      "answer_col": 1
+    },
+    {
+      "kind": "emoji",
+      "pair": "🐛🦋",
+      "style": "fluent",
+      "grid": 5,
+      "answer_row": 4,
+      "answer_col": 5
+    },
+    {
+      "kind": "emoji",
+      "pair": "😪😴",
+      "style": "noto",
+      "grid": 7,
+      "answer_row": 1,
+      "answer_col": 4
+    },
+    {
+      "kind": "emoji",
+      "pair": "🟥🟧",
+      "style": "fluent",
+      "grid": 7,
+      "answer_row": 6,
+      "answer_col": 1
+    },
+    {
+      "kind": "art",
+      "pair": "🕠",
+      "style": "noto",
+      "grid": 7,
+      "answer_row": 3,
+      "answer_col": 6
+    },
+    {
+      "kind": "emoji",
+      "pair": "🐤🐣",
+      "style": "fluent",
+      "grid": 7,
+      "answer_row": 1,
+      "answer_col": 1
+    },
+    {
+      "kind": "emoji",
+      "pair": "🌳🌲",
+      "style": "noto",
+      "grid": 7,
+      "answer_row": 6,
+      "answer_col": 4
+    },
+    {
+      "kind": "art",
+      "pair": "💙",
+      "style": "fluent",
+      "grid": 7,
+      "answer_row": 3,
+      "answer_col": 1
+    },
+    {
+      "kind": "emoji",
+      "pair": "🐹🐭",
+      "style": "noto",
+      "grid": 7,
+      "answer_row": 6,
+      "answer_col": 7
+    },
+    {
+      "kind": "emoji",
+      "pair": "📘📗",
+      "style": "fluent",
+      "grid": 7,
+      "answer_row": 3,
+      "answer_col": 4
+    },
+    {
+      "kind": "art",
+      "pair": "🎻",
+      "style": "noto",
+      "grid": 7,
+      "answer_row": 6,
+      "answer_col": 1
+    },
+    {
+      "kind": "emoji",
+      "pair": "💛🧡",
+      "style": "fluent",
+      "grid": 7,
+      "answer_row": 1,
+      "answer_col": 6
+    },
+    {
+      "kind": "emoji",
+      "pair": "😟😕",
+      "style": "noto",
+      "grid": 8,
+      "answer_row": 7,
+      "answer_col": 4
+    },
+    {
+      "kind": "icon",
+      "pair": "signal_cellular_alt_2_bar|signal_cellular_alt",
+      "style": "fluent",
+      "grid": 8,
+      "answer_row": 5,
+      "answer_col": 8
+    },
+    {
+      "kind": "mirror",
+      "pair": "🦘",
+      "style": "noto",
+      "grid": 8,
+      "answer_row": 3,
+      "answer_col": 1
+    },
+    {
+      "kind": "color",
+      "pair": null,
+      "style": "fluent",
+      "grid": 7,
+      "answer_row": 7,
+      "answer_col": 6
+    },
+    {
+      "kind": "emoji",
+      "pair": "😹😸",
+      "style": "noto",
+      "grid": 8,
+      "answer_row": 6,
+      "answer_col": 1
+    },
+    {
+      "kind": "emoji",
+      "pair": "😖😣",
+      "style": "fluent",
+      "grid": 8,
+      "answer_row": 1,
+      "answer_col": 6
+    },
+    {
+      "kind": "icon",
+      "pair": "brightness_5|brightness_6",
+      "style": "noto",
+      "grid": 8,
+      "answer_row": 3,
+      "answer_col": 4
+    },
+    {
+      "kind": "mirror",
+      "pair": "🛵",
+      "style": "fluent",
+      "grid": 8,
+      "answer_row": 1,
+      "answer_col": 2
+    },
+    {
+      "kind": "color",
+      "pair": null,
+      "style": "noto",
+      "grid": 7,
+      "answer_row": 3,
+      "answer_col": 7
+    },
+    {
+      "kind": "emoji",
+      "pair": "🥈🥉",
+      "style": "fluent",
+      "grid": 8,
+      "answer_row": 6,
+      "answer_col": 3
+    }
+  ]
+}
