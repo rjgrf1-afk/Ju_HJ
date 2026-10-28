@@ -634,6 +634,13 @@ def main():
 
     meta = make_metadata(rng, args.date, rounds)
     (out / "metadata.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
+    # 손 업로드 기간에 스튜디오에 붙여 넣기 쉬운 형태
+    lines = [f"{args.date[5:].replace('-', '/')} 쇼츠 · 언어별 제목과 설명",
+             "업로드를 마친 뒤 스튜디오 왼쪽 '자막' → 이 영상 → 언어 추가 → 그 줄의 '제목 및 설명' 칸 '추가'"
+             "(옆 '자막' 칸 말고) → 붙여 넣고 '게시'", ""]
+    for lang, loc in meta["localizations"].items():
+        lines += [f"■ {LOCALES[lang]['label']} ({lang})", "[제목]", loc["title"], "[설명]", loc["description"], ""]
+    (out / "translations.txt").write_text("\n".join(lines))
     history[args.date] = [r["pair"] for r in rounds if r["pair"]]
     HISTORY.write_text(json.dumps(dict(sorted(history.items())), ensure_ascii=False, indent=1))
     print(f"완료: {mp4} ({total:.1f}초)  제목: {meta['title']}")
