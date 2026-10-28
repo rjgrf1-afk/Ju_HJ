@@ -586,7 +586,15 @@ def main():
     ap = argparse.ArgumentParser()
     kst_today = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d")
     ap.add_argument("--date", default=kst_today)
+    ap.add_argument("--force", action="store_true", help="이미 올린 날짜도 다시 만든다 (올린 영상은 그대로)")
     args = ap.parse_args()
+
+    # 올린 기록(videoId)을 덮어쓰면 자동 업로드가 같은 날 영상을 또 올린다
+    old_meta = OUT_DIR / args.date / "metadata.json"
+    uploaded = {k: v for k, v in json.loads(old_meta.read_text()).items()
+                if k in ("videoId", "publishAt", "uploadedBy")} if old_meta.exists() else {}
+    if uploaded.get("videoId") and not args.force:
+        raise SystemExit(f"{args.date} 영상은 이미 올렸습니다 ({uploaded['videoId']}). 다시 만들려면 --force")
 
     rng = random.Random(f"nunsseulmi-{args.date}")
     history = json.loads(HISTORY.read_text()) if HISTORY.exists() else {}
@@ -614,7 +622,9 @@ def main():
 
     # 첫 화면에 3단계 그리드가 필요하므로 그리드를 먼저 모두 그린다 (rng 사용 순서는 그대로)
     grids = [render_grid(r, rng) for r in rounds]
-    for frame in make_hook_frames(grids[-1][0], bg, theme):
+    for k, frame in enumerate(make_hook_frames(grids[-1][0], bg, theme)):
+        if k == 0:  # 표지: 유튜브가 정답 장면을 표지로 고르지 않게 첫 화면을 따로 저장한다
+            frame.convert("RGB").save(out / "cover.jpg", quality=90)
         proc.stdin.write(frame.convert("RGB").tobytes())
 
     preview = None
@@ -632,7 +642,7 @@ def main():
     wav.unlink()
     preview.save(out / "preview.png")
 
-    meta = make_metadata(rng, args.date, rounds)
+    meta = make_metadata(rng, args.date, rounds) | uploaded
     (out / "metadata.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
     # 손 업로드 기간에 스튜디오에 붙여 넣기 쉬운 형태
     lines = [f"{args.date[5:].replace('-', '/')} 쇼츠 · 언어별 제목과 설명",

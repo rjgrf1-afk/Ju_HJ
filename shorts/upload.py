@@ -7,6 +7,7 @@
     python3 shorts/upload.py --date 2026-10-20            # 그날 18:00 KST 공개 예약
     python3 shorts/upload.py --date 2026-10-20 --now      # 바로 공개
     python3 shorts/upload.py --date 2026-10-20 --private  # 비공개 (예약 공개 없음)
+    python3 shorts/upload.py --long --date 2026-11-06     # 긴 영상 (output_long/<날짜>), 그날 18:00 공개 예약
 """
 import argparse
 import json
@@ -35,15 +36,18 @@ def access_token():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=datetime.now(KST).strftime("%Y-%m-%d"))
+    ap.add_argument("--long", action="store_true", help="주간 긴 영상 (output_long/<날짜>/long.mp4)")
     vis = ap.add_mutually_exclusive_group()
     vis.add_argument("--now", action="store_true", help="예약 없이 바로 공개")
     vis.add_argument("--private", action="store_true", help="비공개로만 올림 (예약 공개 없음)")
     args = ap.parse_args()
 
-    out = ROOT / "output" / args.date
+    out = ROOT / ("output_long" if args.long else "output") / args.date
+    video_file, cover = ("long.mp4", "thumbnail.jpg") if args.long else ("short.mp4", "cover.jpg")
+    link = "https://youtu.be/" if args.long else "https://youtube.com/shorts/"
     meta = json.loads((out / "metadata.json").read_text())
     if meta.get("videoId"):
-        raise SystemExit(f"이미 업로드됨: https://youtube.com/shorts/{meta['videoId']}")
+        raise SystemExit(f"이미 업로드됨: {link}{meta['videoId']}")
 
     status = {
         "selfDeclaredMadeForKids": meta["madeForKids"],
@@ -65,6 +69,7 @@ def main():
             "tags": meta["tags"],
             "categoryId": meta["categoryId"],
             "defaultLanguage": "ko",
+            "defaultAudioLanguage": "ko",
         },
         "status": status,
     }
@@ -73,7 +78,7 @@ def main():
     if meta.get("localizations"):
         body["localizations"] = meta["localizations"]
         parts += ",localizations"
-    video = (out / "short.mp4").read_bytes()
+    video = (out / video_file).read_bytes()
     headers = {"Authorization": f"Bearer {access_token()}"}
 
     init = requests.post(
@@ -89,8 +94,25 @@ def main():
 
     meta["videoId"] = up.json()["id"]
     meta["publishAt"] = status.get("publishAt", "private" if args.private else "now")
+    meta["uploadedBy"] = "api"
     (out / "metadata.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
-    print(f"업로드 완료: https://youtube.com/shorts/{meta['videoId']} (공개: {meta['publishAt']})")
+    print(f"업로드 완료: {link}{meta['videoId']} (공개: {meta['publishAt']})")
+
+    # 표지: 쇼츠는 유튜브가 아무 장면(정답 장면일 수도 있음)을 고르므로 첫 화면을 직접 지정해 본다.
+    # 채널에 맞춤 미리보기 이미지 권한이 없거나 쇼츠에서 막히면 실패해도 업로드는 그대로 둔다
+    if (out / cover).exists():
+        t = requests.post("https://www.googleapis.com/upload/youtube/v3/thumbnails/set",
+                          params={"videoId": meta["videoId"]},
+                          headers={**headers, "Content-Type": "image/jpeg"},
+                          data=(out / cover).read_bytes(), timeout=120)
+        print("표지 지정: " + ("완료" if t.ok else f"실패 ({t.status_code}: {t.json().get('error', {}).get('message', '')})"))
+
+    # 올라간 상태 확인 (예약 시간이 그대로인지, 처리 중 거부되지 않았는지)
+    r = requests.get("https://www.googleapis.com/youtube/v3/videos",
+                     params={"part": "status", "id": meta["videoId"]}, headers=headers, timeout=30)
+    st = (r.json().get("items") or [{}])[0].get("status", {})
+    print(f"상태: {st.get('privacyStatus')} · 예약 {st.get('publishAt')} · 처리 {st.get('uploadStatus')}"
+          + (f" · 거부 사유 {st.get('rejectionReason')}" if st.get("rejectionReason") else ""))
 
 
 if __name__ == "__main__":
