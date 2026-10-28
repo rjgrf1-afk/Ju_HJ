@@ -68,12 +68,17 @@ def main():
         },
         "status": status,
     }
+    # 언어별 제목·설명 (youtube.upload 권한으로 함께 넣을 수 있다)
+    parts = "snippet,status"
+    if meta.get("localizations"):
+        body["localizations"] = meta["localizations"]
+        parts += ",localizations"
     video = (out / "short.mp4").read_bytes()
     headers = {"Authorization": f"Bearer {access_token()}"}
 
     init = requests.post(
         "https://www.googleapis.com/upload/youtube/v3/videos",
-        params={"uploadType": "resumable", "part": "snippet,status"},
+        params={"uploadType": "resumable", "part": parts},
         headers={**headers, "X-Upload-Content-Type": "video/mp4",
                  "X-Upload-Content-Length": str(len(video))},
         json=body, timeout=60)

@@ -1,0 +1,239 @@
+{
+ "collectedAt": "2026-10-28T09:36:42+09:00",
+ "channel": {
+  "subscribers": 9,
+  "videos": 8,
+  "views": 5656
+ },
+ "daily": [
+  {
+   "day": "2026-10-22",
+   "views": 1157,
+   "engagedViews": 533,
+   "subscribersGained": 4,
+   "subscribersLost": 1
+  },
+  {
+   "day": "2026-10-23",
+   "views": 1235,
+   "engagedViews": 440,
+   "subscribersGained": 2,
+   "subscribersLost": 1
+  },
+  {
+   "day": "2026-10-24",
+   "views": 284,
+   "engagedViews": 95,
+   "subscribersGained": 0,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-10-25",
+   "views": 1135,
+   "engagedViews": 306,
+   "subscribersGained": 1,
+   "subscribersLost": 0
+  }
+ ],
+ "videos": [
+  {
+   "id": "TcvL9qNbR6M",
+   "title": "다른 하나 찾기 🔍 3단계 성공하면 상위 1% #shorts",
+   "publishedAt": "2026-10-20T02:54:45Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "mYY0dmerhfQ",
+   "title": "다른 하나 찾기 🔍 3단계 성공하면 상위 1% #shorts",
+   "publishedAt": "2026-10-20T07:53:21Z",
+   "privacyStatus": "public",
+   "views": 391,
+   "likes": 5,
+   "comments": 1,
+   "analytics": {
+    "views": 392,
+    "estimatedMinutesWatched": 44,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 90.08,
+    "likes": 5,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "0z3Dw8NWhEg",
+   "title": "똑같아 보이는 64개 중 딱 하나가 달라요 🐥 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-10-21T08:52:43Z",
+   "privacyStatus": "public",
+   "views": 297,
+   "likes": 2,
+   "comments": 0,
+   "analytics": {
+    "views": 297,
+    "estimatedMinutesWatched": 34,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 90.39,
+    "likes": 2,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "xCsVs-JuG4w",
+   "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-10-22T08:59:39Z",
+   "privacyStatus": "public",
+   "views": 1317,
+   "likes": 12,
+   "comments": 1,
+   "analytics": {
+    "views": 1321,
+    "estimatedMinutesWatched": 202,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 89.81,
+    "likes": 12,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 4,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Ot3kX2rWpKo",
+   "title": "똑같아 보이는 64개 중 딱 하나가 달라요 😦 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-10-23T09:00:27Z",
+   "privacyStatus": "public",
+   "views": 1299,
+   "likes": 16,
+   "comments": 1,
+   "analytics": {
+    "views": 1320,
+    "estimatedMinutesWatched": 193,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 98.64,
+    "likes": 16,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Bn5iMs_Bq-w",
+   "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-10-24T09:00:01Z",
+   "privacyStatus": "public",
+   "views": 13,
+   "likes": 1,
+   "comments": 0,
+   "analytics": {
+    "views": 15,
+    "estimatedMinutesWatched": 3,
+    "averageViewDuration": 20,
+    "averageViewPercentage": 87.88,
+    "likes": 1,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "48xGIvpgl5A",
+   "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 몇 단계까지 보이세요? #shorts",
+   "publishedAt": "2026-10-25T10:34:47Z",
+   "privacyStatus": "public",
+   "views": 1215,
+   "likes": 8,
+   "comments": 1,
+   "analytics": {
+    "views": 1124,
+    "estimatedMinutesWatched": 118,
+    "averageViewDuration": 20,
+    "averageViewPercentage": 90.45,
+    "likes": 8,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "lVLq0OK_JPk",
+   "title": "【다른 하나 찾기】 스피커 아이콘 64개 중 딱 하나가 달라요 👀 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-10-26T09:00:37Z",
+   "privacyStatus": "public",
+   "views": 1150,
+   "likes": 8,
+   "comments": 2,
+   "analytics": null
+  },
+  {
+   "id": "C5shz3qYGX8",
+   "title": "【다른 하나 찾기/치매예방】 극악 30문제, 다 찾으면 상위 1% 눈썰미! | 눈썰미 연구소 #1",
+   "publishedAt": "2026-10-27T01:29:20Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "fTsuLoCF5GM",
+   "title": "【다른 하나 찾기】 시계 64개 중 딱 하나가 달라요 🕕 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-10-27T09:00:02Z",
+   "privacyStatus": "public",
+   "views": 1211,
+   "likes": 10,
+   "comments": 1,
+   "analytics": null
+  }
+ ],
+ "countries28d": [
+  {
+   "country": "KR",
+   "views": 4340,
+   "engagedViews": 1530
+  }
+ ],
+ "audience28d": [
+  {
+   "ageGroup": "age25-34",
+   "gender": "female",
+   "viewerPercentage": 3.3
+  },
+  {
+   "ageGroup": "age25-34",
+   "gender": "male",
+   "viewerPercentage": 5.8
+  },
+  {
+   "ageGroup": "age35-44",
+   "gender": "female",
+   "viewerPercentage": 22.9
+  },
+  {
+   "ageGroup": "age35-44",
+   "gender": "male",
+   "viewerPercentage": 31.1
+  },
+  {
+   "ageGroup": "age45-54",
+   "gender": "female",
+   "viewerPercentage": 8.2
+  },
+  {
+   "ageGroup": "age45-54",
+   "gender": "male",
+   "viewerPercentage": 28.7
+  }
+ ]
+}

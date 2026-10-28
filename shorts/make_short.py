@@ -67,6 +67,94 @@ TAILS = ["3단계까지 찾을 수 있나요?", "마지막 문제에서 다들 �
          "몇 단계까지 보이세요?", "3단계는 진짜 안 보여요"]
 HASHTAGS = ["#shorts", "#눈썰미테스트", "#다른그림찾기", "#퀴즈", "#두뇌게임",
             "#findtheodd", "#brainteaser", "#puzzle"]
+# 해외 시청자는 자기 나라 말로 된 제목을 본다 (해외 상위 퍼즐 채널은 20개 언어 안팎으로 단다)
+# 소재 이름 대신 이모지를 넣어서 어느 나라에서나 같은 뜻이 되게 한다
+LOCALES = {
+    "en": {
+        "label": "영어",
+        "prefix": "Find the Odd One Out:",
+        "hooks": {"emoji": "only 1 of these {n} {e} is different 👀",
+                  "mirror": "only 1 of these {n} {e} is flipped ↔️",
+                  "color": "only 1 of these {n} squares is a different color 🎨",
+                  "icon": "only 1 of these {n} icons is different 👀"},
+        "tails": ["Can you beat level 3?", "Most people get stuck at level 3",
+                  "Find it in 5 seconds", "How far can you get?"],
+        "desc": ["Find the odd one out in 5 seconds! It gets harder every level 🔍",
+                 "Comment how far you got 👇",
+                 "A new eye test every day. Subscribe and play daily!"],
+        "tags": ["#oddoneout", "#findthedifference", "#brainteaser", "#puzzle"],
+    },
+    "ja": {
+        "label": "일본어",
+        "prefix": "【仲間はずれ探し】",
+        "hooks": {"emoji": "{n}個の{e}の中に1つだけ違うものが！👀",
+                  "mirror": "{n}個の{e}の中に1つだけ左右反転が！↔️",
+                  "color": "{n}マスの中に1マスだけ色が違う！🎨",
+                  "icon": "{n}個のアイコンの中に1つだけ違うものが！👀"},
+        "tails": ["レベル3まで見つけられる？", "最後の問題でみんな止まる",
+                  "5秒で見つけられる？", "何レベルまで行ける？"],
+        "desc": ["5秒で仲間はずれを見つけよう！レベルが上がるほど難しくなります 🔍",
+                 "何レベルまで見つけられたかコメントしてね 👇",
+                 "毎日新しい問題を公開中。チャンネル登録して毎日挑戦しよう！"],
+        "tags": ["#間違い探し", "#仲間はずれ", "#脳トレ", "#クイズ"],
+    },
+    "es": {
+        "label": "스페인어",
+        "prefix": "Encuentra el diferente:",
+        "hooks": {"emoji": "solo 1 de estos {n} {e} es distinto 👀",
+                  "mirror": "solo 1 de estos {n} {e} está invertido ↔️",
+                  "color": "solo 1 de estas {n} casillas tiene otro color 🎨",
+                  "icon": "solo 1 de estos {n} íconos es distinto 👀"},
+        "tails": ["¿Llegas al nivel 3?", "Casi nadie pasa el nivel 3",
+                  "Encuéntralo en 5 segundos", "¿Hasta qué nivel llegas?"],
+        "desc": ["¡Encuentra el diferente en 5 segundos! Cada nivel es más difícil 🔍",
+                 "Comenta hasta qué nivel llegaste 👇",
+                 "Un nuevo reto visual cada día. ¡Suscríbete y juega a diario!"],
+        "tags": ["#encuentraladiferencia", "#acertijos", "#retovisual", "#juegomental"],
+    },
+    "pt-BR": {
+        "label": "포르투갈어(브라질)",
+        "prefix": "Ache o diferente:",
+        "hooks": {"emoji": "só 1 destes {n} {e} é diferente 👀",
+                  "mirror": "só 1 destes {n} {e} está espelhado ↔️",
+                  "color": "só 1 destes {n} quadrados tem outra cor 🎨",
+                  "icon": "só 1 destes {n} ícones é diferente 👀"},
+        "tails": ["Você chega ao nível 3?", "Quase todo mundo trava no nível 3",
+                  "Ache em 5 segundos", "Até que nível você vai?"],
+        "desc": ["Ache o diferente em 5 segundos! Cada nível fica mais difícil 🔍",
+                 "Comente até que nível você chegou 👇",
+                 "Um novo teste de visão todo dia. Inscreva-se e jogue diariamente!"],
+        "tags": ["#acheodiferente", "#desafio", "#quiz", "#enigma"],
+    },
+    "hi": {
+        "label": "힌디어",
+        "prefix": "अलग वाला ढूंढो:",
+        "hooks": {"emoji": "इन {n} {e} में से सिर्फ 1 अलग है 👀",
+                  "mirror": "इन {n} {e} में से सिर्फ 1 उल्टा है ↔️",
+                  "color": "इन {n} खानों में से सिर्फ 1 का रंग अलग है 🎨",
+                  "icon": "इन {n} आइकन में से सिर्फ 1 अलग है 👀"},
+        "tails": ["क्या आप लेवल 3 तक पहुंच पाएंगे?", "ज़्यादातर लोग लेवल 3 पर अटक जाते हैं",
+                  "5 सेकंड में ढूंढो", "आप कितने लेवल तक जा सकते हैं?"],
+        "desc": ["5 सेकंड में अलग वाला ढूंढो! हर लेवल पहले से मुश्किल है 🔍",
+                 "कमेंट में बताओ आप किस लेवल तक पहुंचे 👇",
+                 "हर दिन एक नया आई टेस्ट। सब्सक्राइब करो और रोज़ खेलो!"],
+        "tags": ["#पहेली", "#दिमागीखेल", "#puzzle", "#oddoneout"],
+    },
+    "id": {
+        "label": "인도네시아어",
+        "prefix": "Cari yang beda:",
+        "hooks": {"emoji": "hanya 1 dari {n} {e} ini yang berbeda 👀",
+                  "mirror": "hanya 1 dari {n} {e} ini yang terbalik ↔️",
+                  "color": "hanya 1 dari {n} kotak ini yang warnanya beda 🎨",
+                  "icon": "hanya 1 dari {n} ikon ini yang berbeda 👀"},
+        "tails": ["Bisa sampai level 3?", "Kebanyakan orang gagal di level 3",
+                  "Temukan dalam 5 detik", "Kamu bisa sampai level berapa?"],
+        "desc": ["Cari yang beda dalam 5 detik! Tiap level makin sulit 🔍",
+                 "Tulis di komentar kamu sampai level berapa 👇",
+                 "Tes mata baru setiap hari. Subscribe dan main tiap hari!"],
+        "tags": ["#cariyangbeda", "#tebakgambar", "#asahotak", "#tesmata"],
+    },
+}
 
 
 def ko_font(size):
@@ -150,6 +238,22 @@ def pick(rng, pool, used):
     return rng.choice(fresh or pool)
 
 
+def emoji_chars(pair):
+    """쌍에 들어 있는 그림 글자 (모양을 바꾸는 보이지 않는 글자는 뺀다)."""
+    return {c for c in pair or "" if c not in "\ufe0f\u200d"}
+
+
+def category(pair):
+    """동물·음식·물건 정도로만 나눈다. 같은 단계에 이틀 연속 동물이 나오지 않게 쓴다."""
+    for c in emoji_chars(pair):
+        o = ord(c)
+        if 0x1F400 <= o <= 0x1F43F or 0x1F980 <= o <= 0x1F9AE or 0x1FAB0 <= o <= 0x1FABF or o == 0x1F577:
+            return "animal"
+        if 0x1F345 <= o <= 0x1F37F or 0x1F950 <= o <= 0x1F96F or 0x1F9C0 <= o <= 0x1F9CB or 0x1FAD0 <= o <= 0x1FADB:
+            return "food"
+    return "thing"
+
+
 def is_face(pair):
     return any(0x1F600 <= ord(c) <= 0x1F64F or c in "☹☺" for c in pair or "")
 
@@ -184,31 +288,40 @@ def build_rounds(rng, used, recent=(), style="noto"):
     last_kind = None if last3 is None else ("hard" if last3["kind"] == "emoji" else last3["kind"])
     kind = rng.choice([k for k in ["hard", "mirror", "color", "icon"] if k != last_kind])
     styled = lambda pool: [p for p in pool if has_style(p, style)]
+    # 최근 며칠 영상에 나온 그림은 빼서 '어제 본 판다가 또 나오네' 같은 느낌이 들지 않게 한다
+    seen = {c for m in recent for r in m["rounds"] if r["kind"] != "icon" for c in emoji_chars(r["pair"])}
+    unseen = lambda pool: [p for p in pool if not seen & emoji_chars(p)] or pool
 
     if kind == "hard":
         pool = styled(HARD)
         if last3 is not None and is_face(last3.get("pair")):  # 어제 3단계가 얼굴이면 오늘은 시계·달 같은 다른 소재
             pool = [p for p in pool if not is_face(p)]
-        third = {"kind": "emoji", "pair": pick(rng, pool, used), "n": 8, "label": "3단계 · 극악"}
+        third = {"kind": "emoji", "pair": pick(rng, unseen(pool), used), "n": 8, "label": "3단계 · 극악"}
     elif kind == "mirror":
-        third = {"kind": "mirror", "pair": pick(rng, styled(MIRROR), used), "n": 8, "label": "3단계 · 극악"}
+        third = {"kind": "mirror", "pair": pick(rng, unseen(styled(MIRROR)), used), "n": 8, "label": "3단계 · 극악"}
     elif kind == "icon":
         third = {"kind": "icon", "pair": pick(rng, ["|".join(p) for p in ICON_PAIRS], used), "n": 8, "label": "3단계 · 극악"}
     else:
         third = {"kind": "color", "pair": None, "n": 7, "label": "3단계 · 극악"}
 
-    taken = set(third["pair"] or "")
-    a = pick(rng, [p for p in styled(EASY) if not taken & set(p)] or styled(EASY), used)
-    taken |= set(a)  # 한 영상 안에서 같은 그림(🐻🐼 다음 🐨🐼 같은)이 두 번 나오지 않게
+    taken = (emoji_chars(third["pair"]) if kind != "icon" else set()) | seen
+    last1 = recent[0]["rounds"][0] if recent else None
+    easy = [p for p in styled(EASY) if not taken & emoji_chars(p)] or styled(EASY)
+    if last1 is not None:
+        easy = [p for p in easy if category(p) != category(last1["pair"])] or easy
+    a = pick(rng, easy, used)
+    taken |= emoji_chars(a)  # 한 영상 안에서 같은 그림(🐻🐼 다음 🐨🐼 같은)이 두 번 나오지 않게
     # 2단계는 이틀에 한 번꼴로 '그림체 다른 하나 찾기': 같은 그림인데 하나만 다른 그림체(평면/3D)로 그린다
     last2 = recent[0]["rounds"][1] if recent and len(recent[0]["rounds"]) > 1 else None
     if (last2 is None or last2["kind"] != "art") and rng.random() < 0.5:
         art = [c for c in FLUENT if c not in taken and not is_face(c)]
         second = {"kind": "art", "pair": pick(rng, art, used), "n": 7, "label": "2단계 · 보통"}
     else:
-        medium = [p for p in styled(MEDIUM) if not taken & set(p)]
+        medium = [p for p in styled(MEDIUM) if not taken & emoji_chars(p)]
         if is_face(third["pair"]):  # 한 영상에 얼굴 문제가 두 번 나오지 않게
             medium = [p for p in medium if not is_face(p)]
+        if last2 is not None:
+            medium = [p for p in medium if category(p) != category(last2["pair"])] or medium
         second = {"kind": "emoji", "pair": pick(rng, medium or styled(MEDIUM), used), "n": 7, "label": "2단계 · 보통"}
     rounds = [
         {"kind": "emoji", "pair": a, "n": 5, "label": "1단계 · 쉬움"},
@@ -412,6 +525,10 @@ def recent_titles(date, days=14):
     return {m["title"] for m in recent_meta(date, days)}
 
 
+def utf16_len(s):
+    return len(s.encode("utf-16-le")) // 2
+
+
 def make_metadata(rng, date, rounds):
     last = rounds[-1]
     if last["kind"] == "color":
@@ -435,10 +552,25 @@ def make_metadata(rng, date, rounds):
         "",
         " ".join(HASHTAGS),
     ])
+    e = (last["pair"] or "")[:1] if last["kind"] in ("emoji", "mirror") else ""
+    tail_i = rng.randrange(4)  # 언어마다 같은 꼬리말을 써서 뜻을 맞춘다
+    localizations = {}
+    for lang, L in LOCALES.items():
+        hook_l = L["hooks"][last["kind"]].format(n=last["n"] ** 2, e=e)
+        # 유튜브는 이모지를 두 글자로 셀 수 있어서 여유 있게 90자 안으로 맞춘다
+        tails = [L["tails"][tail_i]] + sorted(L["tails"], key=len)
+        title_l = next((t for t in (f"{L['prefix']} {hook_l} | {tail} #shorts" for tail in tails)
+                        if utf16_len(t) <= 90), f"{L['prefix']} {hook_l} #shorts")
+        localizations[lang] = {
+            "title": title_l,
+            "description": "\n".join(L["desc"] + ["", " ".join(["#shorts"] + L["tags"])]),
+        }
     return {
         "date": date,
         "title": f"{title} #shorts"[:100],
         "description": desc,
+        "defaultLanguage": "ko",
+        "localizations": localizations,
         "tags": [h.lstrip("#") for h in HASHTAGS] + ["눈썰미", "숨은그림찾기", "odd one out"],
         "categoryId": "24",  # Entertainment
         "madeForKids": False,
