@@ -159,10 +159,11 @@ def make_metadata(rng, date, r):
     for lang, L in S.LOCALES.items():
         T = ONE_TEXT[lang]
         hook = L["hooks"][kind].format(n=r["n"] ** 2, e=e)
-        options = [f"{L['prefix']} {hook} | {t} #shorts" for t in [T["tails"][tail_i]] + T["tails"]]
+        pre = S.loc_prefix(L, kind)
+        options = [f"{pre} {hook} | {t} #shorts" for t in [T["tails"][tail_i]] + T["tails"]]
         localizations[lang] = {
-            "title": next((t for t in options if S.utf16_len(t) <= 90), f"{L['prefix']} {hook} #shorts"),
-            "description": "\n".join(T["desc"] + ["", " ".join(["#shorts"] + L["tags"])]),
+            "title": next((t for t in options if S.utf16_len(t) <= 90), f"{pre} {hook} #shorts"),
+            "description": "\n".join(T["desc"] + ["", " ".join(S.loc_tags(L, kind))]),
         }
     return {
         "date": date,

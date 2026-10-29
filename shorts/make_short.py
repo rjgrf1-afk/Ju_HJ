@@ -65,14 +65,18 @@ HOOKS = {
 }
 TAILS = ["3단계까지 찾을 수 있나요?", "마지막 문제에서 다들 멈춰요", "5초 안에 찾아보세요",
          "몇 단계까지 보이세요?", "3단계는 진짜 안 보여요"]
-HASHTAGS = ["#shorts", "#눈썰미테스트", "#다른그림찾기", "#퀴즈", "#두뇌게임",
-            "#findtheodd", "#brainteaser", "#puzzle"]
+# 각 나라 상위 영상이 실제로 쓰는 해시태그 (research/2026-10-29.md). 한국 상위 채널은 일본어·영어 태그를 섞어 쓴다
+HASHTAGS = ["#shorts", "#다른그림찾기", "#틀린그림찾기", "#치매예방", "#눈썰미테스트", "#두뇌게임",
+            "#oddoneout", "#間違い探し", "#brainteaser"]
 # 해외 시청자는 자기 나라 말로 된 제목을 본다 (해외 상위 퍼즐 채널은 20개 언어 안팎으로 단다)
 # 소재 이름 대신 이모지를 넣어서 어느 나라에서나 같은 뜻이 되게 한다
 LOCALES = {
     "en": {
         "label": "영어",
         "prefix": "Find the Odd One Out:",
+        # 'find the odd emoji'가 우리 형식과 같은 영어 검색어 중 수요가 가장 크다 (research/2026-10-29.md)
+        "prefixes": {"emoji": "Find the Odd Emoji:", "mirror": "Find the Odd Emoji:"},
+        "emoji_tags": ["#emoji"],
         "hooks": {"emoji": "only 1 of these {n} {e} is different 👀",
                   "mirror": "only 1 of these {n} {e} is flipped ↔️",
                   "color": "only 1 of these {n} squares is a different color 🎨",
@@ -83,7 +87,7 @@ LOCALES = {
         "desc": ["Find the odd one out in 5 seconds! It gets harder every level 🔍",
                  "Comment how far you got 👇",
                  "A new eye test every day. Subscribe and play daily!"],
-        "tags": ["#oddoneout", "#findthedifference", "#brainteaser", "#puzzle"],
+        "tags": ["#oddoneout", "#challenge", "#brainteaser", "#puzzle"],
     },
     "ja": {
         "label": "일본어",
@@ -98,7 +102,7 @@ LOCALES = {
         "desc": ["5秒で仲間はずれを見つけよう！レベルが上がるほど難しくなります 🔍",
                  "何レベルまで見つけられたかコメントしてね 👇",
                  "毎日新しい問題を公開中。チャンネル登録して毎日挑戦しよう！"],
-        "tags": ["#間違い探し", "#仲間はずれ", "#脳トレ", "#クイズ"],
+        "tags": ["#間違い探し", "#脳トレ", "#認知症予防", "#観察力", "#まちがいさがし", "#仲間はずれ"],
     },
     "es": {
         "label": "스페인어",
@@ -549,6 +553,15 @@ def recent_titles(date, days=14):
     return {m["title"] for m in recent_meta(date, days)}
 
 
+def loc_prefix(L, kind):
+    return L.get("prefixes", {}).get(kind, L["prefix"])
+
+
+def loc_tags(L, kind):
+    """설명란 해시태그. 이모지 문제일 때만 #emoji 같은 태그를 앞에 붙인다 (숫자·색깔 문제에 붙이면 엉뚱한 태그가 된다)."""
+    return ["#shorts"] + (L.get("emoji_tags", []) if kind in ("emoji", "mirror", "art") else []) + L["tags"]
+
+
 def utf16_len(s):
     return len(s.encode("utf-16-le")) // 2
 
@@ -583,11 +596,12 @@ def make_metadata(rng, date, rounds):
         hook_l = L["hooks"][last["kind"]].format(n=last["n"] ** 2, e=e)
         # 유튜브는 이모지를 두 글자로 셀 수 있어서 여유 있게 90자 안으로 맞춘다
         tails = [L["tails"][tail_i]] + sorted(L["tails"], key=len)
-        title_l = next((t for t in (f"{L['prefix']} {hook_l} | {tail} #shorts" for tail in tails)
-                        if utf16_len(t) <= 90), f"{L['prefix']} {hook_l} #shorts")
+        pre = loc_prefix(L, last["kind"])
+        title_l = next((t for t in (f"{pre} {hook_l} | {tail} #shorts" for tail in tails)
+                        if utf16_len(t) <= 90), f"{pre} {hook_l} #shorts")
         localizations[lang] = {
             "title": title_l,
-            "description": "\n".join(L["desc"] + ["", " ".join(["#shorts"] + L["tags"])]),
+            "description": "\n".join(L["desc"] + ["", " ".join(loc_tags(L, last["kind"]))]),
         }
     return {
         "date": date,
