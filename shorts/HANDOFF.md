@@ -42,7 +42,7 @@
 - 10/29 저녁 쇼츠 `L2YljQHJNig`는 첫 자동 업로드다. 18:00 공개 전환을 확인해야 한다.
 - 자세한 기록: `shorts/experiments.md`, `shorts/research/*.md`, `shorts/README.md`.
 
-## 새 세션이 처음 할 일 (10/29 16:45 세 번째 세션에서 1·2 완료, 3은 18:11 확인 예정)
+## 새 세션이 처음 할 일 (10/29 세 번째 세션에서 1~4 모두 완료)
 1. 토큰 확인: `upload.access_token()`으로 받은 토큰의 권한 목록에 4개(youtube.upload, youtube.readonly, yt-analytics.readonly, youtube.force-ssl)가 있는지 tokeninfo로 확인한다. 값은 출력하지 않는다.
 2. 이미 올린 두 영상의 해시태그를 새 규칙으로 고친다. **영상은 다시 만들지 않는다.** `make_short`/`make_one --force`로 다시 만들면 그 사이 쌓인 기록 때문에 다른 문제가 뽑혀 올린 영상과 어긋날 수 있다.
    - `python3 shorts/update_meta.py --one --date 2026-10-30 --refresh` (낮 숫자 문제 1v7kRMDCNLk)
