@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-30",
+  "format": "one",
+  "title": "【다른 하나 찾기】 18 사이에 다른 숫자 하나 🔢 | 못 찾으면 다시 보기 🔁 #shorts",
+  "description": "8초 안에 다른 하나를 찾아보세요! 🔍\n한 번에 찾았는지 댓글로 남겨주세요 👇\n눈썰미 연구소에서 매일 낮 12시 한 문제, 저녁 6시 3단계 문제가 올라옵니다. 구독하고 매일 도전하세요!\n\nFind the odd one out in 8 seconds!\n\n#shorts #눈썰미테스트 #다른그림찾기 #퀴즈 #두뇌게임 #findtheodd #brainteaser #puzzle",
+  "defaultLanguage": "ko",
+  "localizations": {
+    "en": {
+      "title": "Find the Odd One Out: only 1 of these 64 numbers is different 🔢 #shorts",
+      "description": "Find the odd one out in 8 seconds! 🔍\nDid you get it on the first try? Comment below 👇\nNew puzzles every day. Subscribe and play daily!\n\n#shorts #oddoneout #findthedifference #brainteaser #puzzle"
+    },
+    "ja": {
+      "title": "【仲間はずれ探し】 64個の数字の中に1つだけ違うものが！🔢 | 一発で見つけたら天才 #shorts",
+      "description": "8秒で仲間はずれを見つけよう！🔍\n一発で見つけられたかコメントしてね 👇\n毎日新しい問題を公開中。チャンネル登録して毎日挑戦しよう！\n\n#shorts #間違い探し #仲間はずれ #脳トレ #クイズ"
+    },
+    "es": {
+      "title": "Encuentra el diferente: solo 1 de estos 64 números es distinto 🔢 #shorts",
+      "description": "¡Encuentra el diferente en 8 segundos! 🔍\n¿Lo encontraste a la primera? Comenta 👇\nUn nuevo reto visual cada día. ¡Suscríbete y juega a diario!\n\n#shorts #encuentraladiferencia #acertijos #retovisual #juegomental"
+    },
+    "pt-BR": {
+      "title": "Ache o diferente: só 1 destes 64 números é diferente 🔢 | Você acha de primeira? #shorts",
+      "description": "Ache o diferente em 8 segundos! 🔍\nAchou de primeira? Comente 👇\nUm novo teste de visão todo dia. Inscreva-se e jogue diariamente!\n\n#shorts #acheodiferente #desafio #quiz #enigma"
+    },
+    "hi": {
+      "title": "अलग वाला ढूंढो: इन 64 नंबरों में से सिर्फ 1 अलग है 🔢 | 8 सेकंड में ढूंढो #shorts",
+      "description": "8 सेकंड में अलग वाला ढूंढो! 🔍\nक्या आपने पहली बार में ढूंढ लिया? कमेंट करें 👇\nहर दिन एक नया आई टेस्ट। सब्सक्राइब करो और रोज़ खेलो!\n\n#shorts #पहेली #दिमागीखेल #puzzle #oddoneout"
+    },
+    "id": {
+      "title": "Cari yang beda: hanya 1 dari 64 angka ini yang berbeda 🔢 | Bisa langsung ketemu? #shorts",
+      "description": "Cari yang beda dalam 8 detik! 🔍\nLangsung ketemu? Tulis di komentar 👇\nTes mata baru setiap hari. Subscribe dan main tiap hari!\n\n#shorts #cariyangbeda #tebakgambar #asahotak #tesmata"
+    }
+  },
+  "tags": [
+    "shorts",
+    "눈썰미테스트",
+    "다른그림찾기",
+    "퀴즈",
+    "두뇌게임",
+    "findtheodd",
+    "brainteaser",
+    "puzzle",
+    "눈썰미",
+    "숨은그림찾기",
+    "odd one out",
+    "find the odd one out"
+  ],
+  "categoryId": "24",
+  "madeForKids": false,
+  "containsSyntheticMedia": false,
+  "style": "noto",
+  "rounds": [
+    {
+      "kind": "number",
+      "pair": "18|81",
+      "grid": 8,
+      "answer_row": 5,
+      "answer_col": 4
+    }
+  ],
+  "videoId": "1v7kRMDCNLk",
+  "publishAt": "2026-10-30T03:00:00Z",
+  "uploadedBy": "api"
+}

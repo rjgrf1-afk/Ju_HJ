@@ -8,6 +8,7 @@
     python3 shorts/upload.py --date 2026-10-20 --now      # 바로 공개
     python3 shorts/upload.py --date 2026-10-20 --private  # 비공개 (예약 공개 없음)
     python3 shorts/upload.py --long --date 2026-11-06     # 긴 영상 (output_long/<날짜>), 그날 18:00 공개 예약
+    python3 shorts/upload.py --one --date 2026-10-30      # 낮 한 문제 쇼츠 (output_one/<날짜>), 그날 12:00 공개 예약
 """
 import argparse
 import json
@@ -20,6 +21,7 @@ import requests
 ROOT = Path(__file__).resolve().parent
 KST = timezone(timedelta(hours=9))
 PUBLISH_HOUR = 18
+ONE_HOUR = 12  # 낮 한 문제 쇼츠 (점심시간)
 
 
 def access_token():
@@ -36,13 +38,15 @@ def access_token():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=datetime.now(KST).strftime("%Y-%m-%d"))
-    ap.add_argument("--long", action="store_true", help="주간 긴 영상 (output_long/<날짜>/long.mp4)")
+    kind = ap.add_mutually_exclusive_group()
+    kind.add_argument("--long", action="store_true", help="주간 긴 영상 (output_long/<날짜>/long.mp4)")
+    kind.add_argument("--one", action="store_true", help="낮 12시 한 문제 쇼츠 (output_one/<날짜>/short.mp4)")
     vis = ap.add_mutually_exclusive_group()
     vis.add_argument("--now", action="store_true", help="예약 없이 바로 공개")
     vis.add_argument("--private", action="store_true", help="비공개로만 올림 (예약 공개 없음)")
     args = ap.parse_args()
 
-    out = ROOT / ("output_long" if args.long else "output") / args.date
+    out = ROOT / ("output_long" if args.long else "output_one" if args.one else "output") / args.date
     video_file, cover = ("long.mp4", "thumbnail.jpg") if args.long else ("short.mp4", "cover.jpg")
     link = "https://youtu.be/" if args.long else "https://youtube.com/shorts/"
     meta = json.loads((out / "metadata.json").read_text())
@@ -58,7 +62,8 @@ def main():
     elif args.private:
         status["privacyStatus"] = "private"
     else:
-        publish = datetime.strptime(args.date, "%Y-%m-%d").replace(hour=PUBLISH_HOUR, tzinfo=KST)
+        publish = datetime.strptime(args.date, "%Y-%m-%d").replace(hour=ONE_HOUR if args.one else PUBLISH_HOUR,
+                                                                   tzinfo=KST)
         status["privacyStatus"] = "private"  # publishAt은 private일 때만 동작
         status["publishAt"] = publish.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 

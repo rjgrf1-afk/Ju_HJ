@@ -76,7 +76,8 @@ LOCALES = {
         "hooks": {"emoji": "only 1 of these {n} {e} is different 👀",
                   "mirror": "only 1 of these {n} {e} is flipped ↔️",
                   "color": "only 1 of these {n} squares is a different color 🎨",
-                  "icon": "only 1 of these {n} icons is different 👀"},
+                  "icon": "only 1 of these {n} icons is different 👀",
+                  "number": "only 1 of these {n} numbers is different 🔢"},
         "tails": ["Can you beat level 3?", "Most people get stuck at level 3",
                   "Find it in 5 seconds", "How far can you get?"],
         "desc": ["Find the odd one out in 5 seconds! It gets harder every level 🔍",
@@ -90,7 +91,8 @@ LOCALES = {
         "hooks": {"emoji": "{n}個の{e}の中に1つだけ違うものが！👀",
                   "mirror": "{n}個の{e}の中に1つだけ左右反転が！↔️",
                   "color": "{n}マスの中に1マスだけ色が違う！🎨",
-                  "icon": "{n}個のアイコンの中に1つだけ違うものが！👀"},
+                  "icon": "{n}個のアイコンの中に1つだけ違うものが！👀",
+                  "number": "{n}個の数字の中に1つだけ違うものが！🔢"},
         "tails": ["レベル3まで見つけられる？", "最後の問題でみんな止まる",
                   "5秒で見つけられる？", "何レベルまで行ける？"],
         "desc": ["5秒で仲間はずれを見つけよう！レベルが上がるほど難しくなります 🔍",
@@ -104,7 +106,8 @@ LOCALES = {
         "hooks": {"emoji": "solo 1 de estos {n} {e} es distinto 👀",
                   "mirror": "solo 1 de estos {n} {e} está invertido ↔️",
                   "color": "solo 1 de estas {n} casillas tiene otro color 🎨",
-                  "icon": "solo 1 de estos {n} íconos es distinto 👀"},
+                  "icon": "solo 1 de estos {n} íconos es distinto 👀",
+                  "number": "solo 1 de estos {n} números es distinto 🔢"},
         "tails": ["¿Llegas al nivel 3?", "Casi nadie pasa el nivel 3",
                   "Encuéntralo en 5 segundos", "¿Hasta qué nivel llegas?"],
         "desc": ["¡Encuentra el diferente en 5 segundos! Cada nivel es más difícil 🔍",
@@ -118,7 +121,8 @@ LOCALES = {
         "hooks": {"emoji": "só 1 destes {n} {e} é diferente 👀",
                   "mirror": "só 1 destes {n} {e} está espelhado ↔️",
                   "color": "só 1 destes {n} quadrados tem outra cor 🎨",
-                  "icon": "só 1 destes {n} ícones é diferente 👀"},
+                  "icon": "só 1 destes {n} ícones é diferente 👀",
+                  "number": "só 1 destes {n} números é diferente 🔢"},
         "tails": ["Você chega ao nível 3?", "Quase todo mundo trava no nível 3",
                   "Ache em 5 segundos", "Até que nível você vai?"],
         "desc": ["Ache o diferente em 5 segundos! Cada nível fica mais difícil 🔍",
@@ -132,7 +136,8 @@ LOCALES = {
         "hooks": {"emoji": "इन {n} {e} में से सिर्फ 1 अलग है 👀",
                   "mirror": "इन {n} {e} में से सिर्फ 1 उल्टा है ↔️",
                   "color": "इन {n} खानों में से सिर्फ 1 का रंग अलग है 🎨",
-                  "icon": "इन {n} आइकन में से सिर्फ 1 अलग है 👀"},
+                  "icon": "इन {n} आइकन में से सिर्फ 1 अलग है 👀",
+                  "number": "इन {n} नंबरों में से सिर्फ 1 अलग है 🔢"},
         "tails": ["क्या आप लेवल 3 तक पहुंच पाएंगे?", "ज़्यादातर लोग लेवल 3 पर अटक जाते हैं",
                   "5 सेकंड में ढूंढो", "आप कितने लेवल तक जा सकते हैं?"],
         "desc": ["5 सेकंड में अलग वाला ढूंढो! हर लेवल पहले से मुश्किल है 🔍",
@@ -146,7 +151,8 @@ LOCALES = {
         "hooks": {"emoji": "hanya 1 dari {n} {e} ini yang berbeda 👀",
                   "mirror": "hanya 1 dari {n} {e} ini yang terbalik ↔️",
                   "color": "hanya 1 dari {n} kotak ini yang warnanya beda 🎨",
-                  "icon": "hanya 1 dari {n} ikon ini yang berbeda 👀"},
+                  "icon": "hanya 1 dari {n} ikon ini yang berbeda 👀",
+                  "number": "hanya 1 dari {n} angka ini yang berbeda 🔢"},
         "tails": ["Bisa sampai level 3?", "Kebanyakan orang gagal di level 3",
                   "Temukan dalam 5 detik", "Kamu bisa sampai level berapa?"],
         "desc": ["Cari yang beda dalam 5 detik! Tiap level makin sulit 🔍",
@@ -179,6 +185,7 @@ ICON_FONT = ImageFont.truetype(str(ROOT / "assets" / "material" / "MaterialSymbo
 ICON_FONT.set_variation_by_axes([0, 0, 48, 600])  # 채우기 없음, 기본 그레이드, 큰 글자용 광학 크기, 굵기 600
 ICON_CODES = dict(line.split() for line in (ROOT / "assets" / "material" / "MaterialSymbolsRounded.codepoints").read_text().splitlines())
 ICON_COLOR = (38, 40, 64)
+NUMBER_FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
 
 def style_for(date):
@@ -197,6 +204,17 @@ def icon_img(name, size):
         # 아이콘마다 여백을 잘라 내면 '막대 2개'와 '막대 3개'의 크기가 달라지므로, 모든 아이콘을 같은 틀에 그린다
         im = Image.new("RGBA", (240, 240), (0, 0, 0, 0))
         ImageDraw.Draw(im).text((120, 120), chr(int(ICON_CODES[name], 16)), font=ICON_FONT, fill=ICON_COLOR, anchor="mm")
+        _emoji_cache[key] = im.resize((size, size), Image.LANCZOS)
+    return _emoji_cache[key]
+
+
+def number_img(text, size):
+    key = ("number", text, size)
+    if key not in _emoji_cache:
+        # 아이콘처럼 같은 틀에 그려서 두 자리, 세 자리 숫자가 각각 같은 크기로 보이게 한다
+        im = Image.new("RGBA", (240, 240), (0, 0, 0, 0))
+        font = ImageFont.truetype(NUMBER_FONT, 165 if len(text) <= 2 else 112)
+        ImageDraw.Draw(im).text((120, 124), text, font=font, fill=ICON_COLOR, anchor="mm")
         _emoji_cache[key] = im.resize((size, size), Image.LANCZOS)
     return _emoji_cache[key]
 
@@ -282,14 +300,17 @@ def pick_answer(rng, n, past):
     return r * n + c
 
 
-def build_rounds(rng, used, recent=(), style="noto"):
-    """recent: 최근 며칠의 metadata (어제가 맨 앞). 3단계 유형, 얼굴 이모지, 정답 자리가 연달아 겹치지 않게 쓴다."""
+def build_rounds(rng, used, recent=(), style="noto", sibling=None):
+    """recent: 최근 며칠의 metadata (어제가 맨 앞). 3단계 유형, 얼굴 이모지, 정답 자리가 연달아 겹치지 않게 쓴다.
+    sibling: 같은 날 낮 12시 한 문제 쇼츠의 metadata. 그 문제와 유형·그림이 겹치지 않게 한다."""
     last3 = recent[0]["rounds"][-1] if recent else None
-    last_kind = None if last3 is None else ("hard" if last3["kind"] == "emoji" else last3["kind"])
-    kind = rng.choice([k for k in ["hard", "mirror", "color", "icon"] if k != last_kind])
+    norm = lambda k: "hard" if k == "emoji" else k
+    avoid = {norm(m["rounds"][-1]["kind"]) for m in [recent[0] if recent else None, sibling] if m}
+    kind = rng.choice([k for k in ["hard", "mirror", "color", "icon"] if k not in avoid])
     styled = lambda pool: [p for p in pool if has_style(p, style)]
     # 최근 며칠 영상에 나온 그림은 빼서 '어제 본 판다가 또 나오네' 같은 느낌이 들지 않게 한다
-    seen = {c for m in recent for r in m["rounds"] if r["kind"] != "icon" for c in emoji_chars(r["pair"])}
+    seen = {c for m in [*recent, *([sibling] if sibling else [])] for r in m["rounds"]
+            if r["kind"] not in ("icon", "number") for c in emoji_chars(r["pair"])}
     unseen = lambda pool: [p for p in pool if not seen & emoji_chars(p)] or pool
 
     if kind == "hard":
@@ -372,6 +393,9 @@ def render_grid(r, rng):
         elif r["kind"] == "icon":
             a, b = r["pair"].split("|")
             im.alpha_composite(icon_img(b if is_odd else a, size), (x, y))
+        elif r["kind"] == "number":
+            a, b = r["pair"].split("|")
+            im.alpha_composite(number_img(b if is_odd else a, size), (x, y))
         else:
             ch = r["pair"][1] if is_odd else r["pair"][0]
             im.alpha_composite(emoji_img(ch, size, style=r["style"]), (x, y))
@@ -403,24 +427,24 @@ def header(base, theme, label):
     draw_text(d, (W // 2, 500), label, 50, (255, 255, 255), stroke=0)
 
 
-def make_round_frames(r, grid, ans, bg, theme):
+def make_round_frames(r, grid, ans, bg, theme, show=ROUND_SHOW, reveal_t=ROUND_REVEAL, head=None):
     base = bg.copy()
-    header(base, theme, r["label"])
+    (head or header)(base, theme, r["label"])
     base.alpha_composite(grid, (GRID_X, GRID_Y))
 
-    show_n = int(ROUND_SHOW * FPS)
+    show_n = int(show * FPS)
     bar_y = GRID_Y + GRID_SIZE + 70
     for f in range(show_n):
         t = f / FPS
         im = base.copy()
         d = ImageDraw.Draw(im)
-        frac = 1 - t / ROUND_SHOW
+        frac = 1 - t / show
         d.rounded_rectangle((GRID_X, bar_y, GRID_X + GRID_SIZE, bar_y + 36), radius=18, fill=(0, 0, 0, 120))
         if frac > 0:
             col = theme[2] if frac > 0.3 else (255, 70, 70)
             d.rounded_rectangle((GRID_X, bar_y, GRID_X + max(36, int(GRID_SIZE * frac)), bar_y + 36),
                                 radius=18, fill=col)
-        sec = math.ceil(ROUND_SHOW - t)
+        sec = math.ceil(show - t)
         pop = 1 + 0.25 * max(0, 1 - (t % 1) * 4)  # 초가 바뀔 때 숫자가 툭 튀어나옴
         draw_text(d, (W // 2, bar_y + 150), str(sec), int(110 * pop), (255, 255, 255))
         yield im
@@ -433,7 +457,7 @@ def make_round_frames(r, grid, ans, bg, theme):
     sd.rectangle((GRID_X, GRID_Y, GRID_X + GRID_SIZE, GRID_Y + GRID_SIZE), fill=(0, 0, 0, 140))
     sd.ellipse((cx - rad, cy - rad, cx + rad, cy + rad), fill=(0, 0, 0, 0))
     reveal.alpha_composite(shade)
-    for f in range(int(ROUND_REVEAL * FPS)):
+    for f in range(int(reveal_t * FPS)):
         im = reveal.copy()
         d = ImageDraw.Draw(im)
         grow = min(1, f / 6)
@@ -600,7 +624,9 @@ def main():
     history = json.loads(HISTORY.read_text()) if HISTORY.exists() else {}
     used = {p for d, ps in history.items() if d != args.date for p in ps}
 
-    rounds = build_rounds(rng, used, recent_meta(args.date, days=4), style_for(args.date))
+    sib = ROOT / "output_one" / args.date / "metadata.json"
+    sibling = json.loads(sib.read_text()) if sib.exists() else None
+    rounds = build_rounds(rng, used, recent_meta(args.date, days=4), style_for(args.date), sibling)
     # 날짜 순서대로 돌려서 연속된 이틀이 같은 색이 되지 않게 한다
     theme = THEMES[datetime.strptime(args.date, "%Y-%m-%d").toordinal() % len(THEMES)]
     bg = background(theme)
