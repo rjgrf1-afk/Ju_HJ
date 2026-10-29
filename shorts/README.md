@@ -22,7 +22,7 @@ python3 shorts/upload.py --date 2026-10-20   # 18:00 KST 공개 예약 (계정 �
 API 심사 전까지는 `short.mp4`를 받아 유튜브 앱에서 올리고, 제목과 설명은 `metadata.json`에서 복사한다.
 
 ## 계정 연결 (자동 업로드)
-환경 변수 `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`을 설정한다(`youtube.upload` 권한).
+환경 변수 `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN`을 설정한다(`youtube.upload`, `youtube.readonly`, `yt-analytics.readonly`, 10/29부터 `youtube.force-ssl` 권한). 바꾼 값은 새 세션부터 적용된다.
 심사받지 않은 API 프로젝트로 올린 영상은 비공개로 잠기므로 YouTube API 감사를 신청해야 공개 업로드가 된다.
 
 ## 라이선스
