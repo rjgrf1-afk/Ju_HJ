@@ -29,6 +29,7 @@ W, H, FPS = 1080, 1920, 30
 SR = 44100
 ROUND_SHOW, ROUND_REVEAL, OUTRO = 5.0, 1.5, 1.6
 HOOK = 1.2  # 첫 화면: 3단계 문제를 먼저 보여 줘서 넘기지 않게 붙잡는다
+BONUS_SHOW, BONUS_REVEAL = 3.0, 1.5  # 3단계 뒤 3초 보너스 퀴즈 (10/31부터, quiz_pool.py)
 CHANNEL = "눈썰미 연구소"
 
 # 쇼츠 UI(우측 버튼, 하단 제목)를 피한 그리드 영역
@@ -488,6 +489,71 @@ def make_hook_frames(grid, bg, theme):
         yield im
 
 
+def pick_quiz(date):
+    """최근 60일 저녁 쇼츠에 나온 문제는 피한다. 날짜 시드라 다시 만들어도 같은 문제."""
+    from quiz_pool import QUIZ
+    seen = {tuple(m["bonus"]) for m in recent_meta(date, days=60) if m.get("bonus")}
+    pool = [q for q in QUIZ if tuple(q) not in seen] or QUIZ
+    return list(random.Random(f"quiz-{date}").choice(pool))
+
+
+def fit_text(text, size, width):
+    while size > 40 and ko_font(size).getlength(text) > width:
+        size -= 4
+    return size
+
+
+def make_bonus_frames(quiz, bg, theme):
+    top, expr, answer = quiz
+    base = bg.copy()
+    d = ImageDraw.Draw(base)
+    draw_text(d, (W // 2, 125), CHANNEL, 40, (255, 255, 255, 200), stroke=0)
+    draw_text(d, (W // 2, 230), "보너스 퀴즈!", 92, (255, 255, 255))
+    draw_text(d, (W // 2, 360), "3초 안에 맞혀 보세요", 58, theme[2], stroke=6)
+    d.rounded_rectangle((W // 2 - 210, 455, W // 2 + 210, 545), radius=45, fill=(0, 0, 0, 150))
+    draw_text(d, (W // 2, 500), "BONUS QUIZ", 50, (255, 255, 255), stroke=0)
+    d.rounded_rectangle((GRID_X, GRID_Y, GRID_X + GRID_SIZE, GRID_Y + GRID_SIZE), radius=40, fill=(245, 245, 250))
+    ink = (38, 40, 64)
+    mid = GRID_Y + GRID_SIZE // 2
+    if top:
+        ts = fit_text(top, 72, GRID_SIZE - 80)
+        d.text((W // 2, mid - 120), top, font=ko_font(ts), fill=ink, anchor="mm", stroke_width=ts // 30, stroke_fill=ink)
+    ey = mid + (60 if top else 0)
+    size = fit_text(expr.replace("?", answer), 150, GRID_SIZE - 80)
+
+    def card(shown, color):
+        im = base.copy()
+        dd = ImageDraw.Draw(im)
+        left, _, right = expr.partition("?")
+        font = ko_font(size)
+        x = W // 2 - font.getlength(left + shown + right) / 2
+        for part, col in ((left, ink), (shown, color), (right, ink)):
+            dd.text((x, ey), part, font=font, fill=col, anchor="lm", stroke_width=size // 45, stroke_fill=col)
+            x += font.getlength(part)
+        return im
+
+    asking = card("?", (230, 60, 60))
+    bar_y = GRID_Y + GRID_SIZE + 70
+    for f in range(int(BONUS_SHOW * FPS)):
+        t = f / FPS
+        im = asking.copy()
+        d = ImageDraw.Draw(im)
+        frac = 1 - t / BONUS_SHOW
+        d.rounded_rectangle((GRID_X, bar_y, GRID_X + GRID_SIZE, bar_y + 36), radius=18, fill=(0, 0, 0, 120))
+        if frac > 0:
+            col = theme[2] if frac > 0.3 else (255, 70, 70)
+            d.rounded_rectangle((GRID_X, bar_y, GRID_X + max(36, int(GRID_SIZE * frac)), bar_y + 36),
+                                radius=18, fill=col)
+        pop = 1 + 0.25 * max(0, 1 - (t % 1) * 4)
+        draw_text(d, (W // 2, bar_y + 150), str(math.ceil(BONUS_SHOW - t)), int(110 * pop), (255, 255, 255))
+        yield im
+    shown = card(answer, (220, 40, 40))
+    d = ImageDraw.Draw(shown)
+    draw_text(d, (W // 2, bar_y + 150), "정답!", 110, (255, 230, 60))
+    for _ in range(int(BONUS_REVEAL * FPS)):
+        yield shown
+
+
 def make_outro_frames(bg, theme):
     base = bg.copy()
     d = ImageDraw.Draw(base)
@@ -506,7 +572,7 @@ def tone(freq, dur, decay, vol):
     return vol * np.sin(2 * np.pi * freq * t) * np.exp(-t * decay)
 
 
-def make_audio(total, n_rounds, path):
+def make_audio(total, n_rounds, path, bonus=False):
     a = np.zeros(int(SR * total) + SR)
 
     def add(sig, at):
@@ -527,6 +593,11 @@ def make_audio(total, n_rounds, path):
         ding = tone(880, 0.8, 5, 0.35) + tone(1320, 0.8, 6, 0.2)
         add(ding, t0 + ROUND_SHOW)
         t0 += ROUND_SHOW + ROUND_REVEAL
+    if bonus:
+        for s in range(int(BONUS_SHOW)):
+            add(tone(1500 if s == int(BONUS_SHOW) - 1 else 1000, 0.08, 40, 0.35), t0 + s)
+        add(tone(880, 0.8, 5, 0.35) + tone(1320, 0.8, 6, 0.2), t0 + BONUS_SHOW)
+        t0 += BONUS_SHOW + BONUS_REVEAL
     add(tone(660, 0.5, 4, 0.3) + tone(990, 0.5, 4, 0.2), t0)
     a = np.clip(a, -1, 1)
     with wave.open(str(path), "wb") as w:
@@ -647,9 +718,10 @@ def main():
 
     out = OUT_DIR / args.date
     out.mkdir(parents=True, exist_ok=True)
-    total = HOOK + len(rounds) * (ROUND_SHOW + ROUND_REVEAL) + OUTRO
+    quiz = pick_quiz(args.date)
+    total = HOOK + len(rounds) * (ROUND_SHOW + ROUND_REVEAL) + BONUS_SHOW + BONUS_REVEAL + OUTRO
     wav = out / "audio.wav"
-    make_audio(total, len(rounds), wav)
+    make_audio(total, len(rounds), wav, bonus=True)
 
     mp4 = out / "short.mp4"
     proc = subprocess.Popen([
@@ -674,6 +746,8 @@ def main():
             if preview is None and r is rounds[-1] and k == 0:
                 preview = rgb
             proc.stdin.write(rgb.tobytes())
+    for frame in make_bonus_frames(quiz, bg, theme):
+        proc.stdin.write(frame.convert("RGB").tobytes())
     for frame in make_outro_frames(bg, theme):
         proc.stdin.write(frame.convert("RGB").tobytes())
     proc.stdin.close()
@@ -682,7 +756,7 @@ def main():
     wav.unlink()
     preview.save(out / "preview.png")
 
-    meta = make_metadata(rng, args.date, rounds) | uploaded
+    meta = make_metadata(rng, args.date, rounds) | {"bonus": quiz} | uploaded
     (out / "metadata.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
     # 손 업로드 기간에 스튜디오에 붙여 넣기 쉬운 형태
     lines = [f"{args.date[5:].replace('-', '/')} 쇼츠 · 언어별 제목과 설명",
