@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-31",
+  "title": "【다른 하나 찾기】 폴더 아이콘 64개 중 딱 하나가 달라요 👀 | 5초 안에 찾아보세요 #shorts",
+  "description": "5초 안에 다른 하나를 찾아보세요! 단계가 올라갈수록 어려워집니다 🔍\n몇 단계까지 찾았는지 댓글로 남겨주세요 👇\n눈썰미 연구소에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 도전하세요!\n\nFind the odd one out in 5 seconds! How far can you get?\n\n#shorts #다른그림찾기 #틀린그림찾기 #치매예방 #눈썰미테스트 #두뇌게임 #oddoneout #間違い探し #brainteaser",
+  "defaultLanguage": "ko",
+  "localizations": {
+    "en": {
+      "title": "Find the Odd One Out: only 1 of these 64 icons is different 👀 #shorts",
+      "description": "Find the odd one out in 5 seconds! It gets harder every level 🔍\nComment how far you got 👇\nA new eye test every day. Subscribe and play daily!\n\n#shorts #oddoneout #challenge #brainteaser #puzzle"
+    },
+    "ja": {
+      "title": "【仲間はずれ探し】 64個のアイコンの中に1つだけ違うものが！👀 | 何レベルまで行ける？ #shorts",
+      "description": "5秒で仲間はずれを見つけよう！レベルが上がるほど難しくなります 🔍\n何レベルまで見つけられたかコメントしてね 👇\n毎日新しい問題を公開中。チャンネル登録して毎日挑戦しよう！\n\n#shorts #間違い探し #脳トレ #認知症予防 #観察力 #まちがいさがし #仲間はずれ"
+    },
+    "es": {
+      "title": "Encuentra el diferente: solo 1 de estos 64 íconos es distinto 👀 #shorts",
+      "description": "¡Encuentra el diferente en 5 segundos! Cada nivel es más difícil 🔍\nComenta hasta qué nivel llegaste 👇\nUn nuevo reto visual cada día. ¡Suscríbete y juega a diario!\n\n#shorts #encuentraladiferencia #acertijos #retovisual #juegomental"
+    },
+    "pt-BR": {
+      "title": "Ache o diferente: só 1 destes 64 ícones é diferente 👀 | Até que nível você vai? #shorts",
+      "description": "Ache o diferente em 5 segundos! Cada nível fica mais difícil 🔍\nComente até que nível você chegou 👇\nUm novo teste de visão todo dia. Inscreva-se e jogue diariamente!\n\n#shorts #acheodiferente #desafio #quiz #enigma"
+    },
+    "hi": {
+      "title": "अलग वाला ढूंढो: इन 64 आइकन में से सिर्फ 1 अलग है 👀 | 5 सेकंड में ढूंढो #shorts",
+      "description": "5 सेकंड में अलग वाला ढूंढो! हर लेवल पहले से मुश्किल है 🔍\nकमेंट में बताओ आप किस लेवल तक पहुंचे 👇\nहर दिन एक नया आई टेस्ट। सब्सक्राइब करो और रोज़ खेलो!\n\n#shorts #पहेली #दिमागीखेल #puzzle #oddoneout"
+    },
+    "id": {
+      "title": "Cari yang beda: hanya 1 dari 64 ikon ini yang berbeda 👀 | Bisa sampai level 3? #shorts",
+      "description": "Cari yang beda dalam 5 detik! Tiap level makin sulit 🔍\nTulis di komentar kamu sampai level berapa 👇\nTes mata baru setiap hari. Subscribe dan main tiap hari!\n\n#shorts #cariyangbeda #tebakgambar #asahotak #tesmata"
+    }
+  },
+  "tags": [
+    "shorts",
+    "다른그림찾기",
+    "틀린그림찾기",
+    "치매예방",
+    "눈썰미테스트",
+    "두뇌게임",
+    "oddoneout",
+    "間違い探し",
+    "brainteaser",
+    "눈썰미",
+    "숨은그림찾기",
+    "odd one out"
+  ],
+  "categoryId": "24",
+  "madeForKids": false,
+  "containsSyntheticMedia": false,
+  "style": "noto",
+  "rounds": [
+    {
+      "kind": "emoji",
+      "pair": "🐛🦋",
+      "grid": 5,
+      "answer_row": 3,
+      "answer_col": 4
+    },
+    {
+      "kind": "emoji",
+      "pair": "💧💦",
+      "grid": 7,
+      "answer_row": 7,
+      "answer_col": 6
+    },
+    {
+      "kind": "icon",
+      "pair": "folder|folder_open",
+      "grid": 8,
+      "answer_row": 1,
+      "answer_col": 5
+    }
+  ],
+  "bonus": [
+    "100만은 0이",
+    "? 개",
+    "6"
+  ],
+  "videoId": "TK5-dR4rd34",
+  "publishAt": "2026-10-31T09:00:00Z",
+  "uploadedBy": "api"
+}
