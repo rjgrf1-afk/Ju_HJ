@@ -33,7 +33,8 @@ BONUS_SHOW, BONUS_REVEAL = 3.0, 1.5  # 3단계 뒤 3초 보너스 퀴즈 (10/31�
 CHANNEL = "눈썰미 연구소"
 
 # 쇼츠 UI(우측 버튼, 하단 제목)를 피한 그리드 영역
-GRID_X, GRID_Y, GRID_SIZE = 70, 600, 860
+GRID_SIZE = 860
+GRID_X, GRID_Y = (W - GRID_SIZE) // 2, 600  # 11/1: 70이라 화면 왼쪽으로 40px 치우쳐 있던 것을 가운데로
 
 EMOJI_FONT = "/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf"
 KO_FONTS = [
@@ -514,19 +515,19 @@ def make_bonus_frames(quiz, bg, theme):
     draw_text(d, (W // 2, 500), "BONUS QUIZ", 50, (255, 255, 255), stroke=0)
     d.rounded_rectangle((GRID_X, GRID_Y, GRID_X + GRID_SIZE, GRID_Y + GRID_SIZE), radius=40, fill=(245, 245, 250))
     ink = (38, 40, 64)
-    mid = GRID_Y + GRID_SIZE // 2
+    mid, cx = GRID_Y + GRID_SIZE // 2, GRID_X + GRID_SIZE // 2
     if top:
         ts = fit_text(top, 72, GRID_SIZE - 80)
-        d.text((W // 2, mid - 120), top, font=ko_font(ts), fill=ink, anchor="mm", stroke_width=ts // 30, stroke_fill=ink)
+        d.text((cx, mid - 120), top, font=ko_font(ts), fill=ink, anchor="mm", stroke_width=ts // 30, stroke_fill=ink)
     ey = mid + (60 if top else 0)
-    size = fit_text(expr.replace("?", answer), 150, GRID_SIZE - 80)
+    size = fit_text(expr.replace("?", answer), 150, GRID_SIZE - 140)
 
     def card(shown, color):
         im = base.copy()
         dd = ImageDraw.Draw(im)
         left, _, right = expr.partition("?")
         font = ko_font(size)
-        x = W // 2 - font.getlength(left + shown + right) / 2
+        x = cx - font.getlength(left + shown + right) / 2
         for part, col in ((left, ink), (shown, color), (right, ink)):
             dd.text((x, ey), part, font=font, fill=col, anchor="lm", stroke_width=size // 45, stroke_fill=col)
             x += font.getlength(part)
