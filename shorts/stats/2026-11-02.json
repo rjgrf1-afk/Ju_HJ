@@ -1,5 +1,5 @@
 {
- "collectedAt": "2026-11-02T09:33:04+09:00",
+ "collectedAt": "2026-11-02T09:53:25+09:00",
  "channel": {
   "subscribers": 20,
   "videos": 17,
@@ -261,7 +261,7 @@
    "title": "【다른 하나 찾기】 개 64개 중 하나만 좌우가 뒤집혀 있어요 🐕 | 3단계는 진짜 안 보여요 #shorts",
    "publishedAt": "2026-10-30T09:00:25Z",
    "privacyStatus": "public",
-   "views": 1392,
+   "views": 1393,
    "likes": 6,
    "comments": 0,
    "analytics": {
@@ -331,7 +331,7 @@
    "title": "【다른 하나 찾기】 로켓 64개 중 하나만 뒤집혀 있어요 🚀 | 못 찾으면 다시 보기 🔁 #shorts",
    "publishedAt": "2026-11-01T03:00:33Z",
    "privacyStatus": "public",
-   "views": 1205,
+   "views": 1207,
    "likes": 3,
    "comments": 0,
    "analytics": null
@@ -350,6 +350,16 @@
    "id": "DcgZtRmLzoM",
    "title": "【다른 하나 찾기】 알람시계 아이콘 64개 중 딱 하나가 달라요 👀 | 8초 안에 찾으면 상위 1% #shorts",
    "publishedAt": "2026-11-02T00:32:47Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "mXVcBcGMecA",
+   "title": "【다른 하나 찾기】 보라 49칸 중 딱 한 칸만 색이 달라요 🎨 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-11-02T00:32:53Z",
    "privacyStatus": "private",
    "views": 0,
    "likes": 0,

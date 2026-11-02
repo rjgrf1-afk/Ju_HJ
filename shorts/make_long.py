@@ -1,4 +1,4 @@
-"""'다른 하나 찾기 극악 30문제' 가로 긴 영상(약 10분)을 만든다.
+"""'다른 하나 찾기 쉬움부터 극악까지 40문제' 가로 긴 영상(약 10분)을 만든다.
 
 쇼츠는 수익 창출 시청시간에 들어가지 않으므로, 긴 영상으로 시청시간을 쌓는다(experiments.md 실험 3).
 TV로 보는 중장년 시청자를 생각해 가로 화면, 큰 글씨, 문제마다 넉넉한 시간을 준다.
@@ -27,20 +27,21 @@ OUT_DIR = ROOT / "output_long"
 HISTORY = ROOT / "history_long.json"
 
 W, H, FPS = 1920, 1080, 24
-SHOW, REVEAL = 15.0, 3.0  # 문제당 15초 + 정답 3초
+REVEAL = 3.0  # 정답 3초 (문제 시간은 단계마다 LEVELS에)
 INTRO, LEVEL_CARD, OUTRO = 8.0, 3.0, 12.0
 PER_LEVEL = 10
 GRID_X, GRID_Y = 960, 110  # 그리드 왼쪽 위 (크기는 make_short.GRID_SIZE = 860)
 PANEL_X = 480  # 왼쪽 정보 칸의 가운데
 
-# 쉬운 문제로 시작하면 지루해 이탈하므로(채널 주인 의견 10/27) 30문제 모두 극악으로 내고,
-# 뒤로 갈수록 칸 수를 늘려 끝까지 긴장감을 유지한다
-LEVELS = [  # (이름, 칸 수, 배경 테마 번호)
-    ("극악 1 · 64칸", 8, 4),
-    ("극악 2 · 81칸", 9, 1),
-    ("극악 3 · 100칸", 10, 0),
+# 11/2 주간 결정: 30문제 모두 극악(10/27) → 쉬움부터 극악까지 40문제로 바꾼다.
+# 비슷한 긴 영상 상위 25편 중 전부 극악인 영상은 없었고, 거의 다 쉬움 → 극악 순서였다(research/2026-10-30.md 5절).
+# 앞이 쉬워야 '나도 되네' 하고 남고, 뒤로 갈수록 어려워져야 끝까지 본다. 쉬운 단계는 시간도 짧게 준다.
+LEVELS = [  # (이름, 칸 수, 배경 테마 번호, 문제 시간(초), 유형 목록)
+    ("1단계 쉬움 · 36칸", 6, 3, 8.0, ["easy"]),
+    ("2단계 보통 · 49칸", 7, 4, 10.0, ["medium", "art"]),
+    ("3단계 어려움 · 64칸", 8, 1, 12.0, ["hard", "icon", "mirror", "color"]),
+    ("4단계 극악 · 100칸", 10, 0, 15.0, ["hard", "icon", "mirror", "art", "color"]),
 ]
-KINDS = ["hard", "icon", "mirror", "art", "color"]  # 문제마다 유형을 돌린다
 
 
 def norm(p):
@@ -48,7 +49,7 @@ def norm(p):
 
 
 def build_questions(rng, used):
-    """30문제. 한 영상 안에서 같은 그림이 두 번 나오지 않고, 그림체(평면/3D)와 유형을 섞는다."""
+    """40문제. 한 영상 안에서 같은 그림이 두 번 나오지 않고, 그림체(평면/3D)와 유형을 섞는다."""
     taken = set()
     parts = lambda p: set(p.split("|")) if "|" in p else set(p)  # 아이콘 쌍은 'lock|lock_open' 형태
 
@@ -61,12 +62,16 @@ def build_questions(rng, used):
 
     qs = []
     art_pool = [c for c in ms.FLUENT if not ms.is_face(c)]
-    for level, (label, n, _) in enumerate(LEVELS):
+    for level, (label, n, _, show, kinds) in enumerate(LEVELS):
         for i in range(PER_LEVEL):
             k = level * PER_LEVEL + i
             style = "fluent" if k % 2 else "noto"
-            kind = KINDS[(k + level) % len(KINDS)]  # 단계가 바뀌어도 같은 순서로 반복되지 않게 한 칸씩 민다
-            if kind == "hard":
+            kind = kinds[(k + level) % len(kinds)]  # 단계가 바뀌어도 같은 순서로 반복되지 않게 한 칸씩 민다
+            if kind == "easy":
+                q = {"kind": "emoji", "pair": take(EASY, style)}
+            elif kind == "medium":
+                q = {"kind": "emoji", "pair": take(MEDIUM, style)}
+            elif kind == "hard":
                 q = {"kind": "emoji", "pair": take(HARD, style)}
             elif kind == "icon":
                 q = {"kind": "icon", "pair": take(["|".join(p) for p in ICON_PAIRS], style)}
@@ -76,7 +81,7 @@ def build_questions(rng, used):
                 q = {"kind": "art", "pair": take(art_pool, style)}
             else:
                 q = {"kind": "color", "pair": None}
-            q.update(n=n, style=style, level=level)
+            q.update(n=n, style=style, level=level, show=show)
             if q["kind"] == "emoji" and rng.random() < 0.5:
                 q["pair"] = q["pair"][::-1]
             qs.append(q)
@@ -112,17 +117,18 @@ def question_frames(q, number, grid, ans):
     panel(base, q["level"], number)
     base.alpha_composite(grid, (GRID_X, GRID_Y))
     bar_y, bar_w = 760, 560
-    for f in range(int(SHOW * FPS)):
+    show = q["show"]
+    for f in range(int(show * FPS)):
         t = f / FPS
         im = base.copy()
         d = ImageDraw.Draw(im)
-        frac = 1 - t / SHOW
+        frac = 1 - t / show
         x0 = PANEL_X - bar_w // 2
         d.rounded_rectangle((x0, bar_y, x0 + bar_w, bar_y + 34), radius=17, fill=(0, 0, 0, 120))
         if frac > 0:
             col = accent(q["level"]) if frac > 0.3 else (255, 70, 70)
             d.rounded_rectangle((x0, bar_y, x0 + max(34, int(bar_w * frac)), bar_y + 34), radius=17, fill=col)
-        sec = math.ceil(SHOW - t)
+        sec = math.ceil(show - t)
         pop = 1 + 0.2 * max(0, 1 - (t % 1) * 4) if sec <= 5 else 1
         ms.draw_text(d, (PANEL_X, bar_y + 150), str(sec), int(120 * pop), (255, 255, 255))
         yield im
@@ -160,14 +166,15 @@ def card_frames(level, lines, seconds):
 
 def intro_frames():
     return card_frames(0, [
-        ("다른 하나 찾기 극악 30문제", 104, (255, 255, 255)),
-        ("64칸 → 81칸 → 100칸, 갈수록 어려워져요", 60, accent(0)),
+        ("다른 하나 찾기 40문제", 104, (255, 255, 255)),
+        ("쉬움 → 보통 → 어려움 → 극악, 갈수록 어려워져요", 60, accent(0)),
         ("끝까지 다 찾으면 상위 1% 눈썰미!", 64, (255, 255, 255)),
     ], INTRO)
 
 
 def level_frames(level):
-    tips = ["한 문제에 15초씩 드려요", "이제 81개 중 하나예요", "마지막! 100개 중 하나를 찾아보세요"]
+    tips = ["몸풀기! 한 문제에 8초씩", "조금 어려워져요 · 10초씩", "이제 64개 중 하나 · 12초씩",
+            "마지막! 100개 중 하나 · 15초씩"]
     return card_frames(level, [
         (LEVELS[level][0] + " 시작!", 110, (255, 255, 255)),
         (tips[level], 56, accent(level)),
@@ -175,9 +182,9 @@ def level_frames(level):
 
 
 def outro_frames():
-    return card_frames(2, [
+    return card_frames(len(LEVELS) - 1, [
         ("몇 문제 찾으셨나요?", 110, (255, 255, 255)),
-        ("댓글로 점수를 남겨 주세요", 64, accent(2)),
+        ("댓글로 점수를 남겨 주세요", 64, accent(len(LEVELS) - 1)),
         (f"{ms.CHANNEL} {ms.HANDLE} · 매일 새 문제", 48, (255, 255, 255)),
     ], OUTRO)
 
@@ -185,7 +192,7 @@ def outro_frames():
 # ---------- 소리 ----------
 
 def make_audio(timeline, total, path):
-    """timeline: (시작 시각, 종류) 목록. 종류는 'question' 또는 'card'."""
+    """timeline: (시작 시각, 종류, 문제 시간) 목록. 종류는 'question' 또는 'card'."""
     a = np.zeros(int(ms.SR * total) + ms.SR)
 
     def add(sig, at):
@@ -196,11 +203,11 @@ def make_audio(timeline, total, path):
     beat = 0.5  # 긴 영상은 배경음을 느리고 잔잔하게
     for k in range(int(total / beat)):
         add(ms.tone(notes[k % len(notes)], 0.6, 4, 0.04), k * beat)
-    for at, kind in timeline:
+    for at, kind, show in timeline:
         if kind == "question":
-            for s in range(int(SHOW) - 5, int(SHOW)):  # 마지막 5초만 째깍
-                add(ms.tone(1500 if s == int(SHOW) - 1 else 1000, 0.08, 40, 0.25), at + s)
-            add(ms.tone(880, 0.8, 5, 0.3) + ms.tone(1320, 0.8, 6, 0.18), at + SHOW)
+            for s in range(int(show) - 5, int(show)):  # 마지막 5초만 째깍
+                add(ms.tone(1500 if s == int(show) - 1 else 1000, 0.08, 40, 0.25), at + s)
+            add(ms.tone(880, 0.8, 5, 0.3) + ms.tone(1320, 0.8, 6, 0.18), at + show)
         else:
             add(ms.tone(523.3, 0.4, 6, 0.25) + ms.tone(784.0, 0.4, 6, 0.18), at)
     a = np.clip(a, -1, 1)
@@ -218,9 +225,10 @@ def stamp(sec):
 
 
 def make_metadata(date, number, questions, chapters):
-    title = f"【다른 하나 찾기/치매예방】 극악 30문제, 다 찾으면 상위 1% 눈썰미! | 눈썰미 연구소 #{number}"
+    # 영어를 함께 적는다: 작은 채널 긴 영상 중 1,000회를 넘긴 것은 영어를 섞은 제목뿐이었다(research/2026-10-31.md)
+    title = f"【다른 하나 찾기/치매예방】 쉬움→극악 40문제, 다 찾으면 상위 1%! | Find the Odd One Out #{number}"
     lines = [
-        "숨어 있는 '다른 하나'를 찾아보세요! 30문제 모두 극악, 64칸에서 시작해 81칸, 100칸으로 갈수록 어려워집니다. 한 문제에 15초씩 드려요.",
+        "숨어 있는 '다른 하나'를 찾아보세요! 쉬움 10문제로 몸을 풀고 보통, 어려움을 지나 마지막 극악 100칸까지 40문제입니다. 뒤로 갈수록 시간도 8초에서 15초로 늘어나요.",
         "그림 모양, 그림체(평면/3D), 아이콘, 색깔, 좌우 반전까지 매 문제가 다릅니다.",
         "몇 문제 찾으셨는지 댓글로 남겨 주세요 👇",
         "",
@@ -228,7 +236,7 @@ def make_metadata(date, number, questions, chapters):
         "",
         f"{ms.CHANNEL}에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 두뇌 운동하세요!",
         "",
-        "Find the odd one out! 30 extreme puzzles, from 64 to 100 tiles. How many can you find?",
+        "Find the odd one out! 40 puzzles from Easy to Impossible, 36 to 100 tiles. How many can you find?",
         "",
         "#다른그림찾기 #틀린그림찾기 #치매예방 #두뇌운동 #집중력 #눈썰미테스트 #spotthedifference #findtheoddoneout",
     ]
@@ -255,8 +263,8 @@ def make_thumbnail(path, grid, level):
     im.alpha_composite(g, (680, 80))
     d = ImageDraw.Draw(im)
     ms.draw_text(d, (340, 190), "다른 하나", 110, (255, 255, 255))
-    ms.draw_text(d, (340, 320), "극악 30문제", 104, accent(level))
-    ms.draw_text(d, (340, 470), "다 찾으면", 72, (255, 255, 255))
+    ms.draw_text(d, (340, 320), "40문제", 104, accent(level))
+    ms.draw_text(d, (340, 470), "쉬움 → 극악", 72, (255, 255, 255))
     ms.draw_text(d, (340, 570), "상위 1% 눈썰미!", 72, (255, 230, 60))
     im.convert("RGB").save(path, quality=92)
 
@@ -283,16 +291,17 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
 
     # 순서: 인트로 → (단계 카드 → 10문제) x 3 → 아웃트로
-    timeline, chapters, t = [(0.0, "card")], [(0.0, "시작")], INTRO
+    timeline, chapters, t = [(0.0, "card", 0)], [(0.0, "시작")], INTRO
     for level in range(len(LEVELS)):
         chapters.append((t, LEVELS[level][0]))
-        timeline.append((t, "card"))
+        timeline.append((t, "card", 0))
         t += LEVEL_CARD
+        show = LEVELS[level][3]
         for _ in range(PER_LEVEL):
-            timeline.append((t, "question"))
-            t += SHOW + REVEAL
+            timeline.append((t, "question", show))
+            t += show + REVEAL
     chapters.append((t, "마무리"))
-    timeline.append((t, "card"))
+    timeline.append((t, "card", 0))
     total = t + OUTRO
 
     wav = out / "audio.wav"
@@ -322,7 +331,7 @@ def main():
         raise SystemExit("ffmpeg 인코딩 실패")
     wav.unlink()
 
-    make_thumbnail(out / "thumbnail.jpg", grids[-1][0], 2)
+    make_thumbnail(out / "thumbnail.jpg", grids[-1][0], len(LEVELS) - 1)
     meta = make_metadata(args.date, number, questions, chapters)
     (out / "metadata.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2))
     history[args.date] = [q["pair"] for q in questions if q["pair"]]

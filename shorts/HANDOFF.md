@@ -30,7 +30,7 @@
 - **매주 월요일 9:52 주간 보고서**: Artifact 페이지로 게시하고, 그 주 개선을 정해 `experiments.md`에 기록.
   - 1주차 보고서: https://claude.ai/artifact/EVnBXA1wbRkKwiq4U3qSBG
   - 계획서: https://claude.ai/artifact/BdkbUeqpZrBTNK8Age3jXy
-- **수요일**: 긴 영상 `make_long.py --date <금요일>` → 검수 → `upload.py --long --date <금요일>` (금 18:00 예약).
+- **수요일**: 긴 영상 `make_long.py --date <금요일>` → 검수 → `upload.py --long --date <금요일>` (금 18:00 예약). 11/6 편부터 '쉬움→극악 40문제'(약 10분, 단계별 8·10·12·15초).
 - 작업 브랜치: `ccr-aaca7a09-rdvvku` (이 브랜치에 직접 커밋·push).
 
 ## 지금 상태 (10/29 오후)
