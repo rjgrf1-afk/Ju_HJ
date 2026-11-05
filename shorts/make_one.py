@@ -164,7 +164,7 @@ def make_metadata(rng, date, r):
         pre = S.loc_prefix(L, kind)
         options = [f"{pre} {hook} | {t} #shorts" for t in [T["tails"][tail_i]] + T["tails"]]
         localizations[lang] = {
-            "title": next((t for t in options if S.utf16_len(t) <= 90), f"{pre} {hook} #shorts"),
+            "title": next((t for t in options if S.utf16_len(t) <= 97), f"{pre} {hook} #shorts"),
             "description": "\n".join(T["desc"] + ["", " ".join(S.loc_tags(L, kind))]),
         }
     return {

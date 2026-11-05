@@ -77,11 +77,11 @@ LOCALES = {
         "label": "영어",
         "prefix": "Find the Odd One Out:",
         # 'find the odd emoji'가 우리 형식과 같은 영어 검색어 중 수요가 가장 크다 (research/2026-10-29.md)
-        "prefixes": {"emoji": "Find the Odd Emoji:", "mirror": "Find the Odd Emoji:"},
+        "prefixes": {"emoji": "Find the Odd Emoji:", "mirror": "Find the Odd Emoji:", "color": "Find the Odd Color:"},
         "emoji_tags": ["#emoji"],
         "hooks": {"emoji": "only 1 of these {n} {e} is different 👀",
                   "mirror": "only 1 of these {n} {e} is flipped ↔️",
-                  "color": "only 1 of these {n} squares is a different color 🎨",
+                  "color": "only 1 of these {n} squares is different 🎨",
                   "icon": "only 1 of these {n} icons is different 👀",
                   "number": "only 1 of these {n} numbers is different 🔢"},
         "tails": ["Can you beat level 3?", "Most people get stuck at level 3",
@@ -111,11 +111,12 @@ LOCALES = {
         "prefix": "Encuentra el diferente:",
         "hooks": {"emoji": "solo 1 de estos {n} {e} es distinto 👀",
                   "mirror": "solo 1 de estos {n} {e} está invertido ↔️",
-                  "color": "solo 1 de estas {n} casillas tiene otro color 🎨",
+                  "color": "solo 1 de {n} casillas es de otro color 🎨",
                   "icon": "solo 1 de estos {n} íconos es distinto 👀",
                   "number": "solo 1 de estos {n} números es distinto 🔢"},
         "tails": ["¿Llegas al nivel 3?", "Casi nadie pasa el nivel 3",
-                  "Encuéntralo en 5 segundos", "¿Hasta qué nivel llegas?"],
+                  "Encuéntralo en 5 segundos", "¿Hasta qué nivel llegas?",
+                  "¿Lo ves?", "¿Lo encuentras?"],  # 짧은 꼬리말: 긴 스페인어 제목에도 꼬리말이 붙게
         "desc": ["¡Encuentra el diferente en 5 segundos! Cada nivel es más difícil 🔍",
                  "Comenta hasta qué nivel llegaste 👇",
                  "Un nuevo reto visual cada día. ¡Suscríbete y juega a diario!"],
@@ -141,7 +142,7 @@ LOCALES = {
         "prefix": "अलग वाला ढूंढो:",
         "hooks": {"emoji": "इन {n} {e} में से सिर्फ 1 अलग है 👀",
                   "mirror": "इन {n} {e} में से सिर्फ 1 उल्टा है ↔️",
-                  "color": "इन {n} खानों में से सिर्फ 1 का रंग अलग है 🎨",
+                  "color": "{n} खानों में से 1 का रंग अलग 🎨",
                   "icon": "इन {n} आइकन में से सिर्फ 1 अलग है 👀",
                   "number": "इन {n} नंबरों में से सिर्फ 1 अलग है 🔢"},
         "tails": ["क्या आप लेवल 3 तक पहुंच पाएंगे?", "ज़्यादातर लोग लेवल 3 पर अटक जाते हैं",
@@ -648,9 +649,15 @@ def make_metadata(rng, date, rounds):
         name = NAMES.get(last["pair"][0], "그림")
     hook = "【다른 하나 찾기】 " + HOOKS[last["kind"]].strip().format(
         name=name, n=last["n"] ** 2, e="" if last["kind"] == "icon" else (last["pair"] or "")[:1])
-    # 최근 영상과 제목이 똑같으면 '찍어 낸 영상'처럼 보이므로 겹치지 않는 꼬리말을 고른다
+    # 최근 영상과 제목이 똑같으면 '찍어 낸 영상'처럼 보이므로 겹치지 않는 꼬리말을 고른다.
+    # 11/5: 같은 유형(색깔)끼리는 소재 이름만 다르고 꼬리말이 같으면 사실상 같은 제목이다
+    # (10/29 '초록 49칸 …다들 멈춰요' → 11/4 '청록 49칸 …다들 멈춰요', 11/4 영상은 조회 3회에서 멈춤).
+    # 그래서 최근 14일 같은 유형 영상이 쓴 꼬리말도 피한다.
     seen = recent_titles(date)
-    tails = [t for t in TAILS if f"{hook} | {t} #shorts"[:100] not in seen]
+    recent = recent_meta(date)
+    same_kind = [m for m in recent if m["rounds"][-1]["kind"] == last["kind"]]
+    used_tails = {t for m in same_kind for t in TAILS if f"| {t}" in m["title"]}
+    tails = [t for t in TAILS if f"{hook} | {t} #shorts"[:100] not in seen and t not in used_tails]
     title = f"{hook} | {rng.choice(tails or TAILS)}"
     desc = "\n".join([
         "5초 안에 다른 하나를 찾아보세요! 단계가 올라갈수록 어려워집니다 🔍",
@@ -666,11 +673,14 @@ def make_metadata(rng, date, rounds):
     localizations = {}
     for lang, L in LOCALES.items():
         hook_l = L["hooks"][last["kind"]].format(n=last["n"] ** 2, e=e)
-        # 유튜브는 이모지를 두 글자로 셀 수 있어서 여유 있게 90자 안으로 맞춘다
+        # 유튜브 제목 한도 100자. 이모지는 두 글자로 세므로 utf16_len으로 재고 여유를 3자 둔다
+        # (11/5: 90자로 자르면 대부분 언어에서 꼬리말이 빠져 같은 유형 영상의 번역 제목이 매번 똑같아졌다)
         tails = [L["tails"][tail_i]] + sorted(L["tails"], key=len)
         pre = loc_prefix(L, last["kind"])
-        title_l = next((t for t in (f"{pre} {hook_l} | {tail} #shorts" for tail in tails)
-                        if utf16_len(t) <= 90), f"{pre} {hook_l} #shorts")
+        # 번역 제목도 최근 14일 같은 유형 영상과 똑같지 않게 (11/5: 색깔 3편의 영어 제목이 글자 하나까지 같았다)
+        seen_l = {m.get("localizations", {}).get(lang, {}).get("title") for m in same_kind}
+        cands = [t for t in (f"{pre} {hook_l} | {tail} #shorts" for tail in tails) if utf16_len(t) <= 97]
+        title_l = next((t for t in cands if t not in seen_l), cands[0] if cands else f"{pre} {hook_l} #shorts")
         localizations[lang] = {
             "title": title_l,
             "description": "\n".join(L["desc"] + ["", " ".join(loc_tags(L, last["kind"]))]),
