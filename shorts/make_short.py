@@ -62,7 +62,7 @@ HANDLE = "@nunsseulmi_lab"
 HOOKS = {
     "mirror": "{name} {n}개 중 하나만 좌우가 뒤집혀 있어요 {e}",
     "emoji": "{name} {n}개 중 딱 하나가 달라요 {e}",
-    "color": "{name} {n}칸 중 딱 한 칸만 색이 달라요 🎨",
+    "color": "{name} {n}개 중 딱 하나만 색이 달라요 🎨",
     "icon": "{name} 아이콘 {n}개 중 딱 하나가 달라요 👀",
 }
 TAILS = ["3단계까지 찾을 수 있나요?", "마지막 문제에서 다들 멈춰요", "5초 안에 찾아보세요",
@@ -81,7 +81,7 @@ LOCALES = {
         "emoji_tags": ["#emoji"],
         "hooks": {"emoji": "only 1 of these {n} {e} is different 👀",
                   "mirror": "only 1 of these {n} {e} is flipped ↔️",
-                  "color": "only 1 of these {n} squares is different 🎨",
+                  "color": "only 1 of these {n} shapes is different 🎨",
                   "icon": "only 1 of these {n} icons is different 👀",
                   "number": "only 1 of these {n} numbers is different 🔢"},
         "tails": ["Can you beat level 3?", "Most people get stuck at level 3",
@@ -127,7 +127,7 @@ LOCALES = {
         "prefix": "Ache o diferente:",
         "hooks": {"emoji": "só 1 destes {n} {e} é diferente 👀",
                   "mirror": "só 1 destes {n} {e} está espelhado ↔️",
-                  "color": "só 1 destes {n} quadrados tem outra cor 🎨",
+                  "color": "só 1 destas {n} peças tem outra cor 🎨",
                   "icon": "só 1 destes {n} ícones é diferente 👀",
                   "number": "só 1 destes {n} números é diferente 🔢"},
         "tails": ["Você chega ao nível 3?", "Quase todo mundo trava no nível 3",
@@ -307,13 +307,52 @@ def pick_answer(rng, n, past):
     return r * n + c
 
 
-def build_rounds(rng, used, recent=(), style="noto", sibling=None):
+# 11/5: 색깔 문제는 네모 49개라 날마다 첫 화면이 거의 같았다(11/4 영상이 조회 3회에서 멈춤, research/2026-11-05.md).
+# 모양과 칸 수를 바꿔 매번 다른 화면이 되게 한다
+SHAPES = ["square", "circle", "heart", "star", "hexagon"]
+SHAPE_KO = {"square": "네모", "circle": "동그라미", "heart": "하트", "star": "별", "hexagon": "육각형"}
+
+
+def pick_color_look(rng, metas):
+    """최근 영상 색깔 문제에 쓰지 않은 모양과 칸 수를 고른다."""
+    looks = [(r.get("shape", "square"), r["grid"]) for m in metas for r in m["rounds"] if r["kind"] == "color"]
+    shapes = [x for x in SHAPES if x not in {a for a, _ in looks}] or SHAPES
+    sizes = [x for x in (6, 7, 8) if x not in {b for _, b in looks[:1]}]
+    return rng.choice(shapes), rng.choice(sizes)
+
+
+def shape_points(shape, x, y, size):
+    import math as m
+    cx, cy, r = x + size / 2, y + size / 2, size / 2
+    if shape == "star":
+        return [(cx + (r if i % 2 == 0 else r * 0.45) * m.sin(i * m.pi / 5), cy - (r if i % 2 == 0 else r * 0.45) * m.cos(i * m.pi / 5)) for i in range(10)]
+    if shape == "hexagon":
+        return [(cx + r * m.cos(m.pi / 6 + i * m.pi / 3), cy + r * m.sin(m.pi / 6 + i * m.pi / 3)) for i in range(6)]
+    # heart: 매개변수 곡선
+    pts = [(16 * m.sin(t) ** 3, 13 * m.cos(t) - 5 * m.cos(2 * t) - 2 * m.cos(3 * t) - m.cos(4 * t))
+           for t in [k * 2 * m.pi / 60 for k in range(60)]]
+    return [(cx + px / 17 * r, cy - py / 17 * r + r * 0.08) for px, py in pts]
+
+
+def draw_color_cell(d, shape, x, y, size, fill):
+    if shape == "circle":
+        d.ellipse((x, y, x + size, y + size), fill=fill)
+    elif shape == "square":
+        d.rounded_rectangle((x, y, x + size, y + size), radius=size // 5, fill=fill)
+    else:
+        d.polygon(shape_points(shape, x, y, size), fill=fill)
+
+
+def build_rounds(rng, used, recent=(), style="noto", sibling=None, color_hist=()):
     """recent: 최근 며칠의 metadata (어제가 맨 앞). 3단계 유형, 얼굴 이모지, 정답 자리가 연달아 겹치지 않게 쓴다.
     sibling: 같은 날 낮 12시 한 문제 쇼츠의 metadata. 그 문제와 유형·그림이 겹치지 않게 한다."""
     last3 = recent[0]["rounds"][-1] if recent else None
     norm = lambda k: "hard" if k == "emoji" else k
-    avoid = {norm(m["rounds"][-1]["kind"]) for m in [recent[0] if recent else None, sibling] if m}
-    kind = rng.choice([k for k in ["hard", "mirror", "color", "icon"] if k not in avoid])
+    # 11/5: 이틀 연속만 막으니 색깔이 6일에 세 번 나왔다. 최근 3일 안에 나온 3단계 유형은 피한다
+    avoid = {norm(m["rounds"][-1]["kind"]) for m in [*recent[:3], sibling] if m}
+    kind = rng.choice([k for k in ["hard", "mirror", "color", "icon"] if k not in avoid]
+                      or [k for k in ["hard", "mirror", "color", "icon"]
+                          if k != norm(recent[0]["rounds"][-1]["kind"] if recent else "")])
     styled = lambda pool: [p for p in pool if has_style(p, style)]
     # 최근 며칠 영상에 나온 그림은 빼서 '어제 본 판다가 또 나오네' 같은 느낌이 들지 않게 한다
     seen = {c for m in [*recent, *([sibling] if sibling else [])] for r in m["rounds"]
@@ -330,7 +369,9 @@ def build_rounds(rng, used, recent=(), style="noto", sibling=None):
     elif kind == "icon":
         third = {"kind": "icon", "pair": pick(rng, ["|".join(p) for p in ICON_PAIRS], used), "n": 8, "label": "3단계 · 극악"}
     else:
-        third = {"kind": "color", "pair": None, "n": 7, "label": "3단계 · 극악"}
+        # 색깔 문제는 나흘에 한 번꼴이라 모양은 3주치 기록(color_hist)을 보고 고른다
+        shape, n = pick_color_look(rng, [*([sibling] if sibling else []), *(color_hist or recent)])
+        third = {"kind": "color", "pair": None, "n": n, "shape": shape, "label": "3단계 · 극악"}
 
     taken = (emoji_chars(third["pair"]) if kind != "icon" else set()) | seen
     last1 = recent[0]["rounds"][0] if recent else None
@@ -390,8 +431,7 @@ def render_grid(r, rng):
         y = int(i // n * cell + pad)
         is_odd = i == r["answer"]
         if r["kind"] == "color":
-            d.rounded_rectangle((x, y, x + size, y + size), radius=size // 5,
-                                fill=odd if is_odd else base)
+            draw_color_cell(d, r.get("shape", "square"), x, y, size, odd if is_odd else base)
         elif r["kind"] == "mirror":
             im.alpha_composite(emoji_img(r["pair"], size, mirror=is_odd, style=r["style"]), (x, y))
         elif r["kind"] == "art":
@@ -642,7 +682,7 @@ def utf16_len(s):
 def make_metadata(rng, date, rounds):
     last = rounds[-1]
     if last["kind"] == "color":
-        name = next(c for limit, c in COLOR_NAMES if last["hue"] < limit)
+        name = next(c for limit, c in COLOR_NAMES if last["hue"] < limit) + " " + SHAPE_KO[last.get("shape", "square")]
     elif last["kind"] == "icon":
         name = ICON_NAMES.get(last["pair"].split("|")[0], "그림")
     else:
@@ -697,7 +737,8 @@ def make_metadata(rng, date, rounds):
         "containsSyntheticMedia": False,  # 실사처럼 보이는 합성물이 아니라 표시 대상 아님
         "style": rounds[0]["style"],
         "rounds": [{"kind": r["kind"], "pair": r["pair"], "grid": r["n"],
-                    "answer_row": r["answer"] // r["n"] + 1, "answer_col": r["answer"] % r["n"] + 1}
+                    "answer_row": r["answer"] // r["n"] + 1, "answer_col": r["answer"] % r["n"] + 1,
+                    **({"shape": r["shape"]} if "shape" in r else {})}
                    for r in rounds],
     }
 
@@ -722,7 +763,8 @@ def main():
 
     sib = ROOT / "output_one" / args.date / "metadata.json"
     sibling = json.loads(sib.read_text()) if sib.exists() else None
-    rounds = build_rounds(rng, used, recent_meta(args.date, days=4), style_for(args.date), sibling)
+    rounds = build_rounds(rng, used, recent_meta(args.date, days=4), style_for(args.date), sibling,
+                          color_hist=recent_meta(args.date, days=21))
     # 날짜 순서대로 돌려서 연속된 이틀이 같은 색이 되지 않게 한다
     theme = THEMES[datetime.strptime(args.date, "%Y-%m-%d").toordinal() % len(THEMES)]
     bg = background(theme)

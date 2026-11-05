@@ -33,7 +33,7 @@ SUBJECTS = {
     "emoji": "{name} {n}개 중 딱 하나가 달라요 {e}",
     "mirror": "{name} {n}개 중 하나만 뒤집혀 있어요 {e}",
     "icon": "{name} 아이콘 {n}개 중 딱 하나가 달라요 👀",
-    "color": "{name} {n}칸 중 한 칸만 색이 달라요 🎨",
+    "color": "{name} {n}개 중 하나만 색이 달라요 🎨",
 }
 TAILS = ["8초 안에 찾으면 상위 1%", "한 번에 찾으면 눈썰미 천재", "점심시간 눈썰미 테스트", "못 찾으면 다시 보기 🔁"]
 # 언어별 꼬리말과 설명 (제목 앞부분은 make_short.LOCALES를 같이 쓴다)
@@ -99,7 +99,8 @@ def build_one(rng, used, date, evening):
         a, b = rng.choice([p for p in NUMBER_PAIRS if "|".join(p) not in used] or NUMBER_PAIRS)
         r = {"kind": "number", "pair": f"{a}|{b}", "n": 8}
     else:
-        r = {"kind": "color", "pair": None, "n": 7}
+        shape, n = S.pick_color_look(rng, [m for m in [evening, last_eve] if m] + recent_one(date, 21) + S.recent_meta(date, 21))
+        r = {"kind": "color", "pair": None, "n": n, "shape": shape}
     r["style"], r["label"] = style, LABEL
     # 같은 날 저녁 3단계 정답을 맨 앞(어제 자리)에 두어 화면에서 같은 줄·칸을 피한다
     past = [(m["rounds"][-1]["answer_row"] - 1, m["rounds"][-1]["answer_col"] - 1, m["rounds"][-1]["grid"])
@@ -143,7 +144,7 @@ def make_audio(path):
 def make_metadata(rng, date, r):
     kind = r["kind"]
     if kind == "color":
-        name = next(c for limit, c in S.COLOR_NAMES if r["hue"] < limit)
+        name = next(c for limit, c in S.COLOR_NAMES if r["hue"] < limit) + " " + S.SHAPE_KO[r.get("shape", "square")]
     elif kind == "icon":
         name = ICON_NAMES.get(r["pair"].split("|")[0], "그림")
     elif kind == "number":
@@ -181,7 +182,8 @@ def make_metadata(rng, date, r):
         "containsSyntheticMedia": False,
         "style": r["style"],
         "rounds": [{"kind": kind, "pair": r["pair"], "grid": r["n"],
-                    "answer_row": r["answer"] // r["n"] + 1, "answer_col": r["answer"] % r["n"] + 1}],
+                    "answer_row": r["answer"] // r["n"] + 1, "answer_col": r["answer"] % r["n"] + 1,
+                    **({"shape": r["shape"]} if "shape" in r else {})}],
     }
 
 
