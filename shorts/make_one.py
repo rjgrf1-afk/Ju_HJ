@@ -74,8 +74,10 @@ def recent_one(date, days=4):
 def build_one(rng, used, date, evening):
     """evening: 같은 날 저녁 쇼츠 metadata (없으면 None)."""
     recent = recent_one(date)
+    # 11/5: 어제 저녁 3단계(색깔 49칸, 4줄 3칸)와 오늘 낮 문제가 유형·자리까지 똑같이 나온 일이 있어 어제 저녁도 피한다
+    last_eve = (S.recent_meta(date, days=1) or [None])[0]
     norm = lambda k: "hard" if k == "emoji" else k
-    avoid = {norm(m["rounds"][-1]["kind"]) for m in [recent[0] if recent else None, evening] if m}
+    avoid = {norm(m["rounds"][-1]["kind"]) for m in [recent[0] if recent else None, evening, last_eve] if m}
     kinds = [k for k in KINDS if k not in avoid]
     kind = rng.choices(kinds, weights=[KINDS[k] for k in kinds])[0]
     # 저녁 쇼츠와 그림체를 반대로 해서 같은 날 두 영상의 느낌이 다르게
@@ -101,7 +103,7 @@ def build_one(rng, used, date, evening):
     r["style"], r["label"] = style, LABEL
     # 같은 날 저녁 3단계 정답을 맨 앞(어제 자리)에 두어 화면에서 같은 줄·칸을 피한다
     past = [(m["rounds"][-1]["answer_row"] - 1, m["rounds"][-1]["answer_col"] - 1, m["rounds"][-1]["grid"])
-            for m in ([evening] if evening else []) + recent]
+            for m in ([evening] if evening else []) + ([last_eve] if last_eve else []) + recent]
     r["answer"] = S.pick_answer(rng, r["n"], past)
     return r
 
