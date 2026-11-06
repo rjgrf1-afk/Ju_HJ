@@ -114,17 +114,18 @@ NAMES = {
 
 # 3단계 '아이콘 찾기'(구글 Material Symbols, Apache 2.0): (많이 깔리는 아이콘, 다른 하나)
 ICON_PAIRS = [
-    ("lock", "lock_open"), ("notifications", "notifications_off"), ("signal_cellular_alt_2_bar", "signal_cellular_alt"), ("volume_down", "volume_up"), ("star", "star_half"),
+    ("lock", "lock_open"), ("signal_cellular_alt_2_bar", "signal_cellular_alt"), ("volume_down", "volume_up"), ("star", "star_half"),
     ("favorite", "heart_broken"), ("home", "house"), ("rocket", "rocket_launch"), ("coffee", "local_cafe"),
-    ("bedtime", "nights_stay"), ("mail", "drafts"), ("folder", "folder_open"), ("visibility", "visibility_off"),
-    ("mic", "mic_off"), ("videocam", "videocam_off"), ("bookmark", "bookmark_added"),
+    ("bedtime", "nights_stay"), ("mail", "drafts"), ("folder", "folder_open"), ("bookmark", "bookmark_added"),
     ("shopping_cart", "add_shopping_cart"), ("person", "person_add"), ("cloud", "cloud_done"),
     ("sentiment_satisfied", "sentiment_neutral"), ("sentiment_very_satisfied", "sentiment_satisfied"),
-    ("music_note", "music_off"), ("alarm", "alarm_on"), ("timer", "timer_off"), ("brightness_5", "brightness_6"),
-    ("hourglass_empty", "hourglass_full"), ("print", "print_disabled"), ("key", "key_off"), ("schedule", "history"),
+    ("alarm", "alarm_on"), ("brightness_5", "brightness_6"),
+    ("hourglass_empty", "hourglass_full"), ("schedule", "history"),
     ("umbrella", "beach_access"), ("local_florist", "filter_vintage"), ("eco", "spa"), ("north_east", "north_west"),
     ("wifi", "wifi_2_bar"), ("light_mode", "wb_sunny"),
 ]
+# 11/6 뺌: 사선 하나로 바로 구별되는 '_off' 쌍(알림·눈·마이크·카메라·음표·타이머·프린터·열쇠).
+# 11/5 낮 마이크 문제에 '넘 쉽잖아요', '냐무 시워요' 댓글 — 극악 문제로 쓰기엔 너무 쉽다
 ICON_NAMES = {
     "lock": "자물쇠", "notifications": "종", "battery_5_bar": "배터리", "battery_4_bar": "배터리",
     "signal_cellular_alt_2_bar": "신호 막대", "volume_down": "스피커", "star": "별", "favorite": "하트",
