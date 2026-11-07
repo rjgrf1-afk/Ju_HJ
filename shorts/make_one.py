@@ -40,22 +40,22 @@ TAILS = ["8초 안에 찾으면 상위 1%", "한 번에 찾으면 눈썰미 천�
 ONE_TEXT = {
     "ko": {"desc": ["8초 안에 다른 하나를 찾아보세요! 🔍", "한 번에 찾았는지 댓글로 남겨주세요 👇",
                     f"{S.CHANNEL}에서 매일 낮 12시 한 문제, 저녁 6시 3단계 문제가 올라옵니다. 구독하고 매일 도전하세요!"]},
-    "en": {"tails": ["Find it in 8 seconds", "Can you spot it on the first try?"],
+    "en": {"tails": ["Find it in 8 seconds", "Can you spot it on the first try?", "Only sharp eyes see it", "Lunch break eye test"],
            "desc": ["Find the odd one out in 8 seconds! 🔍", "Did you get it on the first try? Comment below 👇",
                     "New puzzles every day. Subscribe and play daily!"]},
-    "ja": {"tails": ["8秒で見つけられる？", "一発で見つけたら天才"],
+    "ja": {"tails": ["8秒で見つけられる？", "一発で見つけたら天才", "観察力に自信ある？", "お昼の脳トレ"],
            "desc": ["8秒で仲間はずれを見つけよう！🔍", "一発で見つけられたかコメントしてね 👇",
                     "毎日新しい問題を公開中。チャンネル登録して毎日挑戦しよう！"]},
-    "es": {"tails": ["Encuéntralo en 8 segundos", "¿Lo ves a la primera?"],
+    "es": {"tails": ["Encuéntralo en 8 segundos", "¿Lo ves a la primera?", "¿Tienes buen ojo?", "Reto rápido"],
            "desc": ["¡Encuentra el diferente en 8 segundos! 🔍", "¿Lo encontraste a la primera? Comenta 👇",
                     "Un nuevo reto visual cada día. ¡Suscríbete y juega a diario!"]},
-    "pt-BR": {"tails": ["Ache em 8 segundos", "Você acha de primeira?"],
+    "pt-BR": {"tails": ["Ache em 8 segundos", "Você acha de primeira?", "Tem olho bom?", "Teste rápido"],
               "desc": ["Ache o diferente em 8 segundos! 🔍", "Achou de primeira? Comente 👇",
                        "Um novo teste de visão todo dia. Inscreva-se e jogue diariamente!"]},
-    "hi": {"tails": ["8 सेकंड में ढूंढो", "क्या आप एक बार में ढूंढ पाएंगे?"],
+    "hi": {"tails": ["8 सेकंड में ढूंढो", "क्या आप एक बार में ढूंढ पाएंगे?", "तेज़ नज़र वाले ही देखें", "आज का आई टेस्ट"],
            "desc": ["8 सेकंड में अलग वाला ढूंढो! 🔍", "क्या आपने पहली बार में ढूंढ लिया? कमेंट करें 👇",
                     "हर दिन एक नया आई टेस्ट। सब्सक्राइब करो और रोज़ खेलो!"]},
-    "id": {"tails": ["Temukan dalam 8 detik", "Bisa langsung ketemu?"],
+    "id": {"tails": ["Temukan dalam 8 detik", "Bisa langsung ketemu?", "Matamu tajam?", "Tes mata siang ini"],
            "desc": ["Cari yang beda dalam 8 detik! 🔍", "Langsung ketemu? Tulis di komentar 👇",
                     "Tes mata baru setiap hari. Subscribe dan main tiap hari!"]},
 }
@@ -155,7 +155,11 @@ def make_metadata(rng, date, r):
     subject = SUBJECTS[kind].format(name=name, n=r["n"] ** 2, e=e,
                                     a=r["pair"].split("|")[0] if kind == "number" else "")
     seen = {m["title"] for m in recent_one(date, 14) + S.recent_meta(date, 14)}
-    tails = [t for t in TAILS if f"【다른 하나 찾기】 {subject} | {t} #shorts" not in seen]
+    # 11/7: 저녁 쇼츠(11/5)처럼 같은 유형 최근 14일 영상의 꼬리말·번역 제목도 피한다
+    # (숫자 문제 10/30·11/4의 영어 제목이 글자 하나까지 같았다)
+    same_kind = [m for m in recent_one(date, 14) if m["rounds"][-1]["kind"] == kind]
+    used_tails = {t for m in same_kind for t in TAILS if f"| {t}" in m["title"]}
+    tails = [t for t in TAILS if f"【다른 하나 찾기】 {subject} | {t} #shorts" not in seen and t not in used_tails]
     title = f"【다른 하나 찾기】 {subject} | {rng.choice(tails or TAILS)} #shorts"
     tail_i = rng.randrange(2)
     localizations = {}
@@ -163,9 +167,11 @@ def make_metadata(rng, date, r):
         T = ONE_TEXT[lang]
         hook = L["hooks"][kind].format(n=r["n"] ** 2, e=e)
         pre = S.loc_prefix(L, kind)
-        options = [f"{pre} {hook} | {t} #shorts" for t in [T["tails"][tail_i]] + T["tails"]]
+        options = [t for t in (f"{pre} {hook} | {t} #shorts" for t in [T["tails"][tail_i]] + T["tails"])
+                   if S.utf16_len(t) <= 97]
+        seen_l = {m.get("localizations", {}).get(lang, {}).get("title") for m in same_kind}
         localizations[lang] = {
-            "title": next((t for t in options if S.utf16_len(t) <= 97), f"{pre} {hook} #shorts"),
+            "title": next((t for t in options if t not in seen_l), options[0] if options else f"{pre} {hook} #shorts"),
             "description": "\n".join(T["desc"] + ["", " ".join(S.loc_tags(L, kind))]),
         }
     return {
