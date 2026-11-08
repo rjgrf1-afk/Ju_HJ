@@ -357,7 +357,10 @@ def build_rounds(rng, used, recent=(), style="noto", sibling=None, color_hist=()
     # 최근 며칠 영상에 나온 그림은 빼서 '어제 본 판다가 또 나오네' 같은 느낌이 들지 않게 한다
     seen = {c for m in [*recent, *([sibling] if sibling else [])] for r in m["rounds"]
             if r["kind"] not in ("icon", "number") for c in emoji_chars(r["pair"])}
-    unseen = lambda pool: [p for p in pool if not seen & emoji_chars(p)] or pool
+    # 11/8: 그림이 달라도 제목 이름이 같으면('웃는 얼굴' 😃 → 🙂) 제목이 거의 같아진다. 최근 제목에 나온 이름은 3단계에 쓰지 않는다
+    recent_titles = " ".join(m.get("title", "") for m in [*recent, *([sibling] if sibling else [])])
+    fresh = lambda p: NAMES.get(p[0], "그림") == "그림" or NAMES.get(p[0]) not in recent_titles
+    unseen = lambda pool: [p for p in pool if not seen & emoji_chars(p) and fresh(p)] or pool
 
     if kind == "hard":
         pool = styled(HARD)

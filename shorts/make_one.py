@@ -86,7 +86,10 @@ def build_one(rng, used, date, evening):
     metas = recent + S.recent_meta(date, days=4) + ([evening] if evening else [])
     seen = {c for m in metas for r in m["rounds"] if r["kind"] not in ("icon", "number")
             for c in S.emoji_chars(r["pair"])}
-    unseen = lambda pool: [p for p in pool if not seen & S.emoji_chars(p)] or pool
+    # 11/8: 그림은 달라도 제목 이름이 같으면('웃는 얼굴' 😃 → 🙂) 제목이 거의 같아진다. 최근 제목에 나온 이름은 피한다
+    recent_titles = " ".join(m["title"] for m in metas)
+    fresh_name = lambda p: NAMES.get(p[0], "그림") == "그림" or NAMES.get(p[0]) not in recent_titles
+    unseen = lambda pool: [p for p in pool if not seen & S.emoji_chars(p) and fresh_name(p)] or pool
 
     if kind == "hard":
         pair = S.pick(rng, unseen(styled(HARD)), used)
