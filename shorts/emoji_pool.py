@@ -115,18 +115,16 @@ NAMES = {
 
 # 3단계 '아이콘 찾기'(구글 Material Symbols, Apache 2.0): (많이 깔리는 아이콘, 다른 하나)
 ICON_PAIRS = [
-    ("lock", "lock_open"), ("signal_cellular_alt_2_bar", "signal_cellular_alt"), ("volume_down", "volume_up"), ("star", "star_half"),
-    ("favorite", "heart_broken"), ("home", "house"), ("rocket", "rocket_launch"), ("coffee", "local_cafe"),
-    ("bedtime", "nights_stay"), ("mail", "drafts"), ("folder", "folder_open"), ("bookmark", "bookmark_added"),
-    ("shopping_cart", "add_shopping_cart"), ("person", "person_add"), ("cloud", "cloud_done"),
+    ("lock", "lock_open"), ("volume_down", "volume_up"), ("coffee", "local_cafe"),
+    ("bedtime", "nights_stay"), ("folder", "folder_open"),
     ("sentiment_satisfied", "sentiment_neutral"), ("sentiment_very_satisfied", "sentiment_satisfied"),
-    ("alarm", "alarm_on"), ("brightness_5", "brightness_6"),
-    ("hourglass_empty", "hourglass_full"), ("schedule", "history"),
-    ("umbrella", "beach_access"), ("local_florist", "filter_vintage"), ("eco", "spa"), ("north_east", "north_west"),
-    ("wifi", "wifi_2_bar"), ("light_mode", "wb_sunny"),
+    ("schedule", "history"), ("north_east", "north_west"), ("light_mode", "wb_sunny"),
 ]
+
 # 11/6 뺌: 사선 하나로 바로 구별되는 '_off' 쌍(알림·눈·마이크·카메라·음표·타이머·프린터·열쇠).
 # 11/5 낮 마이크 문제에 '넘 쉽잖아요', '냐무 시워요' 댓글 — 극악 문제로 쓰기엔 너무 쉽다
+# 11/9 같은 이유로 '+'·'✓' 표시가 붙은 쌍(북마크·장바구니·사람·구름·알람)도 뺌
+# 11/9 남은 22쌍을 한 화면에 그려 눈으로 보고, 한눈에 보이는 12쌍(꽉 찬 모양: 반쪽 별·모래시계·밝기, 모양이 확 다른 것: 집·로켓·우산·꽃·잎·하트, 크기가 다른 것: 신호·와이파이, 열린 편지)도 뺐다. 남은 10쌍만 극악용
 ICON_NAMES = {
     "lock": "자물쇠", "notifications": "종", "battery_5_bar": "배터리", "battery_4_bar": "배터리",
     "signal_cellular_alt_2_bar": "신호 막대", "volume_down": "스피커", "star": "별", "favorite": "하트",
