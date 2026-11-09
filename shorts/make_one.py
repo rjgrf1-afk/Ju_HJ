@@ -25,7 +25,8 @@ from emoji_pool import HARD, ICON_NAMES, ICON_PAIRS, MIRROR, NAMES, NUMBER_PAIRS
 OUT_DIR = S.ROOT / "output_one"
 SHOW, REVEAL = 8.0, 3.0
 # 숫자는 말이 필요 없어 해외에서도 통하므로 다른 유형보다 두 배 자주 낸다 (이틀 연속은 안 됨)
-KINDS = {"number": 2, "hard": 1, "mirror": 1, "icon": 1, "color": 1}
+# 11/9 주간 결정: 숫자 문제가 넘기지 않고 본 비율 1위(11/6 연구) → 가중치 2 → 4. 이틀 연속 같은 유형은 막혀 있어 하루걸러 숫자가 된다
+KINDS = {"number": 4, "hard": 1, "mirror": 1, "icon": 1, "color": 1}
 LABEL = "FIND THE ODD ONE"
 
 SUBJECTS = {

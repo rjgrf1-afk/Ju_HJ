@@ -275,6 +275,12 @@ def main():
     ap.add_argument("--date", default=kst_today)
     args = ap.parse_args()
 
+    # 11/9 주간 결정: 긴 영상 두 편이 조회 1~2회 → 구독자가 늘 때까지 격주로. 최근 13일 안에 올린 긴 영상이 있으면 건너뛴다
+    target = datetime.strptime(args.date, "%Y-%m-%d")
+    for m in OUT_DIR.glob("*/metadata.json"):
+        d = datetime.strptime(m.parent.name, "%Y-%m-%d")
+        if m.parent.name != args.date and json.loads(m.read_text()).get("videoId") and 0 < (target - d).days < 14:
+            raise SystemExit(f"{m.parent.name} 긴 영상을 올린 지 14일이 안 돼 건너뜁니다(격주)")
     rng = random.Random(f"nunsseulmi-long-{args.date}")
     history = json.loads(HISTORY.read_text()) if HISTORY.exists() else {}
     used = {norm(p) for d, ps in history.items() if d != args.date for p in ps}

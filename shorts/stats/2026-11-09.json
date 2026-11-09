@@ -1,5 +1,5 @@
 {
- "collectedAt": "2026-11-09T09:34:07+09:00",
+ "collectedAt": "2026-11-09T09:53:07+09:00",
  "channel": {
   "subscribers": 31,
   "videos": 32,
@@ -642,7 +642,7 @@
    "publishedAt": "2026-11-08T09:00:28Z",
    "privacyStatus": "public",
    "views": 1019,
-   "likes": 6,
+   "likes": 7,
    "comments": 1,
    "analytics": null
   },
@@ -650,6 +650,16 @@
    "id": "yKoeTUJ22Ws",
    "title": "【다른 하나 찾기】 시계 아이콘 64개 중 딱 하나가 달라요 👀 | 한 번에 찾으면 눈썰미 천재 #shorts",
    "publishedAt": "2026-11-09T00:33:51Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "dv05GIghjbo",
+   "title": "【다른 하나 찾기】 공룡 64개 중 하나만 좌우가 뒤집혀 있어요 🦕 | 몇 단계까지 보이세요? #shorts",
+   "publishedAt": "2026-11-09T00:33:57Z",
    "privacyStatus": "private",
    "views": 0,
    "likes": 0,
