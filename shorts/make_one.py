@@ -100,7 +100,10 @@ def build_one(rng, used, date, evening):
     elif kind == "icon":
         r = {"kind": "icon", "pair": S.pick(rng, ["|".join(p) for p in ICON_PAIRS], used), "n": 8}
     elif kind == "number":
-        a, b = rng.choice([p for p in NUMBER_PAIRS if "|".join(p) not in used] or NUMBER_PAIRS)
+        # 11/10: 같은 숫자가 며칠 새 다시 나오지 않게(11/7 '77 사이 71' → 11/10 '17 사이 71') 최근 숫자 문제에 쓴 숫자는 피한다
+        recent_nums = {x for m in recent_one(date, 10) for r in m["rounds"] if r["kind"] == "number" for x in r["pair"].split("|")}
+        fresh = [p for p in NUMBER_PAIRS if "|".join(p) not in used and not recent_nums & set(p)]
+        a, b = rng.choice(fresh or [p for p in NUMBER_PAIRS if "|".join(p) not in used] or NUMBER_PAIRS)
         r = {"kind": "number", "pair": f"{a}|{b}", "n": 8}
     else:
         shape, n = S.pick_color_look(rng, [m for m in [evening, last_eve] if m] + recent_one(date, 21) + S.recent_meta(date, 21))
