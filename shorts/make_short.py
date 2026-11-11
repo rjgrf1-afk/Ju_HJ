@@ -370,7 +370,9 @@ def build_rounds(rng, used, recent=(), style="noto", sibling=None, color_hist=()
     elif kind == "mirror":
         third = {"kind": "mirror", "pair": pick(rng, unseen(styled(MIRROR)), used), "n": 8, "label": "3단계 · 극악"}
     elif kind == "icon":
-        third = {"kind": "icon", "pair": pick(rng, ["|".join(p) for p in ICON_PAIRS], used), "n": 8, "label": "3단계 · 극악"}
+        # 아이콘도 최근 제목에 나온 이름(예: '해 아이콘')은 피한다(11/11: 11/7과 같은 '해 아이콘' 제목이 나올 뻔함)
+        icons = [p for p in ICON_PAIRS if ICON_NAMES.get(p[0], "그림") not in recent_titles] or ICON_PAIRS
+        third = {"kind": "icon", "pair": pick(rng, ["|".join(p) for p in icons], used), "n": 8, "label": "3단계 · 극악"}
     else:
         # 색깔 문제는 나흘에 한 번꼴이라 모양은 3주치 기록(color_hist)을 보고 고른다
         shape, n = pick_color_look(rng, [*([sibling] if sibling else []), *(color_hist or recent)])

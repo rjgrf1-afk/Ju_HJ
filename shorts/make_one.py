@@ -98,7 +98,8 @@ def build_one(rng, used, date, evening):
     elif kind == "mirror":
         r = {"kind": "mirror", "pair": S.pick(rng, unseen(styled(MIRROR)), used), "n": 8}
     elif kind == "icon":
-        r = {"kind": "icon", "pair": S.pick(rng, ["|".join(p) for p in ICON_PAIRS], used), "n": 8}
+        icons = [p for p in ICON_PAIRS if ICON_NAMES.get(p[0], "그림") not in recent_titles] or ICON_PAIRS
+        r = {"kind": "icon", "pair": S.pick(rng, ["|".join(p) for p in icons], used), "n": 8}
     elif kind == "number":
         # 11/10: 같은 숫자가 며칠 새 다시 나오지 않게(11/7 '77 사이 71' → 11/10 '17 사이 71') 최근 숫자 문제에 쓴 숫자는 피한다
         recent_nums = {x for m in recent_one(date, 10) for r in m["rounds"] if r["kind"] == "number" for x in r["pair"].split("|")}

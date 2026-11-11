@@ -118,7 +118,7 @@ ICON_PAIRS = [
     ("lock", "lock_open"), ("volume_down", "volume_up"), ("coffee", "local_cafe"),
     ("bedtime", "nights_stay"), ("folder", "folder_open"),
     ("sentiment_satisfied", "sentiment_neutral"), ("sentiment_very_satisfied", "sentiment_satisfied"),
-    ("schedule", "history"), ("north_east", "north_west"), ("light_mode", "wb_sunny"),
+    ("schedule", "history"), ("light_mode", "wb_sunny"),  # 11/11 화살표 뺌: 판 전체에서 반대 방향 하나가 바로 보임
 ]
 
 # 11/6 뺌: 사선 하나로 바로 구별되는 '_off' 쌍(알림·눈·마이크·카메라·음표·타이머·프린터·열쇠).
