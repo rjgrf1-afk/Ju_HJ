@@ -119,6 +119,10 @@ ICON_PAIRS = [
     ("bedtime", "nights_stay"), ("folder", "folder_open"),
     ("sentiment_satisfied", "sentiment_neutral"), ("sentiment_very_satisfied", "sentiment_satisfied"),
     ("schedule", "history"), ("light_mode", "wb_sunny"),  # 11/11 화살표 뺌: 판 전체에서 반대 방향 하나가 바로 보임
+    # 11/11 추가: 후보 41쌍을 그려 보고 '어렵지만 구별은 되는' 것만(research/2026-11-11.md). 똑같아 보이는 쌍은 넣지 않음
+    ("sentiment_neutral", "sentiment_dissatisfied"), ("mood", "mood_bad"), ("battery_5_bar", "battery_6_bar"),
+    ("battery_3_bar", "battery_4_bar"), ("filter_1", "filter_7"), ("counter_1", "counter_7"), ("dark_mode", "bedtime"),
+    ("star", "star_rate"), ("toggle_on", "toggle_off"), ("bolt", "flash_on"),
 ]
 
 # 11/6 뺌: 사선 하나로 바로 구별되는 '_off' 쌍(알림·눈·마이크·카메라·음표·타이머·프린터·열쇠).
@@ -126,6 +130,8 @@ ICON_PAIRS = [
 # 11/9 같은 이유로 '+'·'✓' 표시가 붙은 쌍(북마크·장바구니·사람·구름·알람)도 뺌
 # 11/9 남은 22쌍을 한 화면에 그려 눈으로 보고, 한눈에 보이는 12쌍(꽉 찬 모양: 반쪽 별·모래시계·밝기, 모양이 확 다른 것: 집·로켓·우산·꽃·잎·하트, 크기가 다른 것: 신호·와이파이, 열린 편지)도 뺐다. 남은 10쌍만 극악용
 ICON_NAMES = {
+    "sentiment_neutral": "무표정", "mood": "웃는 얼굴", "battery_3_bar": "배터리", "battery_5_bar": "배터리",
+    "filter_1": "숫자 상자", "counter_1": "숫자 동그라미", "dark_mode": "달", "toggle_on": "스위치", "bolt": "번개",
     "lock": "자물쇠", "notifications": "종", "battery_5_bar": "배터리", "battery_4_bar": "배터리",
     "signal_cellular_alt_2_bar": "신호 막대", "volume_down": "스피커", "star": "별", "favorite": "하트",
     "home": "집", "rocket": "로켓", "coffee": "커피잔", "bedtime": "달", "mail": "편지", "folder": "폴더",
