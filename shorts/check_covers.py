@@ -48,8 +48,10 @@ def main():
             print(f"{label} {vid}: 영상을 찾지 못함")
         elif "sqp=" in items[vid]["snippet"]["thumbnails"]["default"]["url"]:
             print(f"{label} {vid}: 표지 정상")
-        elif not long and items[vid]["status"]["privacyStatus"] == "public":
-            print(f"{label} {vid}: 공개된 쇼츠라 유튜브가 영상 장면을 표지로 씀(다시 지정 안 함)")
+        elif items[vid]["status"]["privacyStatus"] == "public":
+            # 공개된 영상은 맞춤 표지가 있어도 썸네일 주소에 sqp=가 붙지 않아 주소로는 확인할 수 없다(11/13 확인).
+            # 쇼츠는 공개 뒤 유튜브가 영상 장면을 표지로 쓰고, 긴 영상은 예약 때 지정한 표지가 그대로 남는다.
+            print(f"{label} {vid}: 공개됨 — 주소로는 표지 확인 불가(다시 지정 안 함)")
         else:
             t = requests.post("https://www.googleapis.com/upload/youtube/v3/thumbnails/set",
                               params={"videoId": vid}, headers={**headers, "Content-Type": "image/jpeg"},
