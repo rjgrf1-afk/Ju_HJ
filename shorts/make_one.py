@@ -39,25 +39,25 @@ SUBJECTS = {
 TAILS = ["8초 안에 찾으면 상위 1%", "한 번에 찾으면 눈썰미 천재", "점심시간 눈썰미 테스트", "못 찾으면 다시 보기 🔁"]
 # 언어별 꼬리말과 설명 (제목 앞부분은 make_short.LOCALES를 같이 쓴다)
 ONE_TEXT = {
-    "ko": {"desc": ["8초 안에 다른 하나를 찾아보세요! 🔍", "한 번에 찾았는지 댓글로 남겨주세요 👇",
+    "ko": {"desc": ["8초 안에 다른 하나를 찾아보세요! 🔍", "정답 칸을 댓글로 남겨주세요 (예: C5) 👇",
                     f"{S.CHANNEL}에서 매일 낮 12시 한 문제, 저녁 6시 3단계 문제가 올라옵니다. 구독하고 매일 도전하세요!"]},
     "en": {"tails": ["Find it in 8 seconds", "Can you spot it on the first try?", "Only sharp eyes see it", "Lunch break eye test"],
-           "desc": ["Find the odd one out in 8 seconds! 🔍", "Did you get it on the first try? Comment below 👇",
+           "desc": ["Find the odd one out in 8 seconds! 🔍", "Comment the answer cell (e.g. C5) 👇",
                     "New puzzles every day. Subscribe and play daily!"]},
     "ja": {"tails": ["8秒で見つけられる？", "一発で見つけたら天才", "観察力に自信ある？", "お昼の脳トレ"],
-           "desc": ["8秒で仲間はずれを見つけよう！🔍", "一発で見つけられたかコメントしてね 👇",
+           "desc": ["8秒で仲間はずれを見つけよう！🔍", "答えのマスをコメントしてね（例: C5）👇",
                     "毎日新しい問題を公開中。チャンネル登録して毎日挑戦しよう！"]},
     "es": {"tails": ["Encuéntralo en 8 segundos", "¿Lo ves a la primera?", "¿Tienes buen ojo?", "Reto rápido"],
-           "desc": ["¡Encuentra el diferente en 8 segundos! 🔍", "¿Lo encontraste a la primera? Comenta 👇",
+           "desc": ["¡Encuentra el diferente en 8 segundos! 🔍", "Comenta la casilla de la respuesta (ej.: C5) 👇",
                     "Un nuevo reto visual cada día. ¡Suscríbete y juega a diario!"]},
     "pt-BR": {"tails": ["Ache em 8 segundos", "Você acha de primeira?", "Tem olho bom?", "Teste rápido"],
-              "desc": ["Ache o diferente em 8 segundos! 🔍", "Achou de primeira? Comente 👇",
+              "desc": ["Ache o diferente em 8 segundos! 🔍", "Comente a casa da resposta (ex.: C5) 👇",
                        "Um novo teste de visão todo dia. Inscreva-se e jogue diariamente!"]},
     "hi": {"tails": ["8 सेकंड में ढूंढो", "क्या आप एक बार में ढूंढ पाएंगे?", "तेज़ नज़र वाले ही देखें", "आज का आई टेस्ट"],
-           "desc": ["8 सेकंड में अलग वाला ढूंढो! 🔍", "क्या आपने पहली बार में ढूंढ लिया? कमेंट करें 👇",
+           "desc": ["8 सेकंड में अलग वाला ढूंढो! 🔍", "जवाब वाला खाना कमेंट करें (जैसे C5) 👇",
                     "हर दिन एक नया आई टेस्ट। सब्सक्राइब करो और रोज़ खेलो!"]},
     "id": {"tails": ["Temukan dalam 8 detik", "Bisa langsung ketemu?", "Matamu tajam?", "Tes mata siang ini"],
-           "desc": ["Cari yang beda dalam 8 detik! 🔍", "Langsung ketemu? Tulis di komentar 👇",
+           "desc": ["Cari yang beda dalam 8 detik! 🔍", "Tulis kotak jawabannya di komentar (mis. C5) 👇",
                     "Tes mata baru setiap hari. Subscribe dan main tiap hari!"]},
 }
 
