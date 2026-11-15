@@ -122,7 +122,7 @@ ICON_PAIRS = [
     # 11/11 추가: 후보 41쌍을 그려 보고 '어렵지만 구별은 되는' 것만(research/2026-11-11.md). 똑같아 보이는 쌍은 넣지 않음
     ("sentiment_neutral", "sentiment_dissatisfied"), ("mood", "mood_bad"), ("battery_5_bar", "battery_6_bar"),
     ("battery_3_bar", "battery_4_bar"), ("filter_1", "filter_7"), ("counter_1", "counter_7"), ("dark_mode", "bedtime"),
-    ("star", "star_rate"), ("toggle_on", "toggle_off"), ("bolt", "flash_on"),
+    ("star", "star_rate"), ("bolt", "flash_on"),  # 11/15: 스위치 켜짐/꺼짐은 점이 반대쪽이라 한눈에 보여 뺌
 ]
 
 # 11/6 뺌: 사선 하나로 바로 구별되는 '_off' 쌍(알림·눈·마이크·카메라·음표·타이머·프린터·열쇠).
