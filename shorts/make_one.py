@@ -20,6 +20,7 @@ import numpy as np
 from PIL import ImageDraw
 
 import make_short as S
+import make_spin
 from emoji_pool import HARD, ICON_NAMES, ICON_PAIRS, MIRROR, NAMES, NUMBER_PAIRS
 
 OUT_DIR = S.ROOT / "output_one"
@@ -68,8 +69,21 @@ def recent_one(date, days=4):
     for k in range(1, days + 1):
         f = OUT_DIR / (day - timedelta(days=k)).strftime("%Y-%m-%d") / "metadata.json"
         if f.exists():
-            out.append(json.loads(f.read_text()))
+            m = json.loads(f.read_text())
+            if m.get("format") != "spin":  # 착시 편(make_spin.py)은 낮 한 문제 기록이 아니다
+                out.append(m)
     return out
+
+
+def ink_diff(a, b):
+    """두 숫자를 영상 글꼴로 그렸을 때 겹치지 않는 부분의 비율. 작을수록 구별이 어렵다."""
+    x = np.array(S.number_img(a, 100))[:, :, 3] > 0
+    y = np.array(S.number_img(b, 100))[:, :, 3] > 0
+    return (x ^ y).sum() / (x | y).sum()
+
+
+def hard_number(a, b):
+    return sorted(a) == sorted(b) or ink_diff(a, b) < 0.17
 
 
 def build_one(rng, used, date, evening):
@@ -103,8 +117,10 @@ def build_one(rng, used, date, evening):
     elif kind == "number":
         # 11/10: 같은 숫자가 며칠 새 다시 나오지 않게(11/7 '77 사이 71' → 11/10 '17 사이 71') 최근 숫자 문제에 쓴 숫자는 피한다
         recent_nums = {x for m in recent_one(date, 10) for r in m["rounds"] if r["kind"] == "number" for x in r["pair"].split("|")}
-        fresh = [p for p in NUMBER_PAIRS if "|".join(p) not in used and not recent_nums & set(p)]
-        a, b = rng.choice(fresh or [p for p in NUMBER_PAIRS if "|".join(p) not in used] or NUMBER_PAIRS)
+        # 11/16(주간 보고서 4주차): '쉽다' 댓글 2번 → 잉크 차이 0.17 미만이거나 자리만 바꾼 쌍만 낸다 (research/2026-11-14.md)
+        pool = [p for p in NUMBER_PAIRS if hard_number(*p)]
+        fresh = [p for p in pool if "|".join(p) not in used and not recent_nums & set(p)]
+        a, b = rng.choice(fresh or [p for p in pool if "|".join(p) not in used] or pool)
         r = {"kind": "number", "pair": f"{a}|{b}", "n": 8}
     else:
         shape, n = S.pick_color_look(rng, [m for m in [evening, last_eve] if m] + recent_one(date, 21) + S.recent_meta(date, 21))
@@ -206,6 +222,11 @@ def main():
     ap.add_argument("--date", default=datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d"))
     ap.add_argument("--force", action="store_true", help="이미 올린 날짜도 다시 만든다 (올린 영상은 그대로)")
     args = ap.parse_args()
+
+    # 5주차 결정(11/16): 수·토요일 낮 자리는 '회전 방향 착시' 편
+    if datetime.strptime(args.date, "%Y-%m-%d").weekday() in make_spin.SPIN_DAYS:
+        make_spin.main(args.date, args.force)
+        return
 
     out = OUT_DIR / args.date
     old = out / "metadata.json"

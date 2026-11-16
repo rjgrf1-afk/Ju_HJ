@@ -1,5 +1,5 @@
 {
- "collectedAt": "2026-11-16T09:33:36+09:00",
+ "collectedAt": "2026-11-16T09:53:27+09:00",
  "channel": {
   "subscribers": 43,
   "videos": 46,
@@ -921,15 +921,25 @@
    "title": "【다른 하나 찾기】 번개 아이콘 64개 중 딱 하나가 달라요 👀 | 5초 안에 찾아보세요 #shorts",
    "publishedAt": "2026-11-15T09:00:29Z",
    "privacyStatus": "public",
-   "views": 1175,
+   "views": 1176,
    "likes": 8,
-   "comments": 1,
+   "comments": 2,
    "analytics": null
   },
   {
    "id": "1rjRaZesIsY",
    "title": "【다른 하나 찾기】 959 사이에 다른 숫자 하나 🔢 | 점심시간 눈썰미 테스트 #shorts",
    "publishedAt": "2026-11-16T00:33:20Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "RwlbKWkqwME",
+   "title": "【다른 하나 찾기】 파란 별 64개 중 딱 하나만 색이 달라요 🎨 | 몇 단계까지 보이세요? #shorts",
+   "publishedAt": "2026-11-16T00:33:26Z",
    "privacyStatus": "private",
    "views": 0,
    "likes": 0,

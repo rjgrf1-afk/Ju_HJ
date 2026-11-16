@@ -77,7 +77,8 @@ LOCALES = {
         "label": "영어",
         "prefix": "Find the Odd One Out:",
         # 'find the odd emoji'가 우리 형식과 같은 영어 검색어 중 수요가 가장 크다 (research/2026-10-29.md)
-        "prefixes": {"emoji": "Find the Odd Emoji:", "mirror": "Find the Odd Emoji:", "color": "Find the Odd Color:"},
+        "prefixes": {"emoji": "Find the Odd Emoji:", "mirror": "Find the Odd Emoji:", "color": "Find the Odd Color:",
+                     "number": "Find the Odd Number:"},  # 11/16: 인도·영어권 실제 검색어 (research/2026-11-15.md)
         "emoji_tags": ["#emoji"],
         "hooks": {"emoji": "only 1 of these {n} {e} is different 👀",
                   "mirror": "only 1 of these {n} {e} is flipped ↔️",
@@ -140,6 +141,7 @@ LOCALES = {
     "hi": {
         "label": "힌디어",
         "prefix": "अलग वाला ढूंढो:",
+        "prefixes": {"number": "Find the Odd Number:"},  # 11/16: 인도 시청자는 힌디어 글자로 검색하지 않음 (research/2026-11-15.md)
         "hooks": {"emoji": "इन {n} {e} में से सिर्फ 1 अलग है 👀",
                   "mirror": "इन {n} {e} में से सिर्फ 1 उल्टा है ↔️",
                   "color": "{n} खानों में से 1 का रंग अलग 🎨",
@@ -155,6 +157,7 @@ LOCALES = {
     "id": {
         "label": "인도네시아어",
         "prefix": "Cari yang beda:",
+        "prefixes": {"number": "Cari angka berbeda:"},  # 11/16: 인도네시아 실제 검색어 (research/2026-11-15.md)
         "hooks": {"emoji": "hanya 1 dari {n} {e} ini yang berbeda 👀",
                   "mirror": "hanya 1 dari {n} {e} ini yang terbalik ↔️",
                   "color": "hanya 1 dari {n} kotak ini yang warnanya beda 🎨",
@@ -788,6 +791,8 @@ def main():
 
     sib = ROOT / "output_one" / args.date / "metadata.json"
     sibling = json.loads(sib.read_text()) if sib.exists() else None
+    if sibling and sibling.get("format") == "spin":
+        sibling = None  # 착시 편은 겹칠 그림이 없다
     rounds = build_rounds(rng, used, recent_meta(args.date, days=4), style_for(args.date), sibling,
                           color_hist=recent_meta(args.date, days=21))
     # 날짜 순서대로 돌려서 연속된 이틀이 같은 색이 되지 않게 한다
