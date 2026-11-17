@@ -191,18 +191,15 @@ def outro_frames():
 
 # ---------- 소리 ----------
 
-def make_audio(timeline, total, path):
+def make_audio(timeline, total, path, date="2026-01-01"):
     """timeline: (시작 시각, 종류, 문제 시간) 목록. 종류는 'question' 또는 'card'."""
-    a = np.zeros(int(ms.SR * total) + ms.SR)
+    import music
+    a = music.bed(total, date, "long", vol=0.04, slow=2.0)  # 11/17: 날짜마다 다른 배경 곡, 느리고 잔잔하게
 
     def add(sig, at):
         i = int(at * ms.SR)
         a[i:i + len(sig)] += sig[: len(a) - i]
 
-    notes = [261.6, 329.6, 392.0, 523.3, 392.0, 329.6]
-    beat = 0.5  # 긴 영상은 배경음을 느리고 잔잔하게
-    for k in range(int(total / beat)):
-        add(ms.tone(notes[k % len(notes)], 0.6, 4, 0.04), k * beat)
     for at, kind, show in timeline:
         if kind == "question":
             for s in range(int(show) - 5, int(show)):  # 마지막 5초만 째깍
@@ -311,7 +308,7 @@ def main():
     total = t + OUTRO
 
     wav = out / "audio.wav"
-    make_audio(timeline, total, wav)
+    make_audio(timeline, total, wav, args.date)
     mp4 = out / "long.mp4"
     proc = subprocess.Popen([
         "ffmpeg", "-y", "-loglevel", "error",

@@ -642,18 +642,14 @@ def tone(freq, dur, decay, vol):
     return vol * np.sin(2 * np.pi * freq * t) * np.exp(-t * decay)
 
 
-def make_audio(total, n_rounds, path, bonus=False):
-    a = np.zeros(int(SR * total) + SR)
+def make_audio(total, n_rounds, path, bonus=False, date="2026-01-01"):
+    import music
+    a = music.bed(total, date, "evening")  # 11/17: 날짜마다 다른 배경 곡 (music.py)
 
     def add(sig, at):
         i = int(at * SR)
         a[i:i + len(sig)] += sig[: len(a) - i]
 
-    # 잔잔한 배경 아르페지오
-    notes = [261.6, 329.6, 392.0, 523.3, 392.0, 329.6]
-    beat = 0.25
-    for k in range(int(total / beat)):
-        add(tone(notes[k % len(notes)], 0.4, 6, 0.06), k * beat)
     add(tone(523.3, 0.3, 8, 0.3) + tone(784.0, 0.3, 8, 0.2), 0.0)  # 첫 화면 알림음
     t0 = HOOK
     for _ in range(n_rounds):
@@ -804,7 +800,7 @@ def main():
     quiz = pick_quiz(args.date)
     total = HOOK + len(rounds) * (ROUND_SHOW + ROUND_REVEAL) + BONUS_SHOW + BONUS_REVEAL + OUTRO
     wav = out / "audio.wav"
-    make_audio(total, len(rounds), wav, bonus=True)
+    make_audio(total, len(rounds), wav, bonus=True, date=args.date)
 
     mp4 = out / "short.mp4"
     proc = subprocess.Popen([

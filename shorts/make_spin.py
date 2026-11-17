@@ -131,16 +131,14 @@ def floor_arrow(d, cx, cy, hint, t, color):
     d.polygon([(ax + tx * s, ay + ty * s), (ax - ty * s * 0.6, ay + tx * s * 0.6), (ax + ty * s * 0.6, ay - tx * s * 0.6)], fill=color)
 
 
-def make_audio(path):
-    a = np.zeros(int(S.SR * TOTAL) + S.SR)
+def make_audio(path, date):
+    import music
+    a = music.bed(TOTAL, date, "spin", slow=1.5)  # 착시 편은 느리게
 
     def add(sig, at):
         i = int(at * S.SR)
         a[i:i + len(sig)] += sig[: len(a) - i]
 
-    notes = [220.0, 261.6, 329.6, 392.0, 329.6, 261.6]  # 착시 편은 조금 낮고 느린 음
-    for k in range(int(TOTAL / 0.4)):
-        add(S.tone(notes[k % len(notes)], 0.6, 4, 0.06), k * 0.4)
     for at in (6, 9, 12):
         add(S.tone(880, 0.6, 5, 0.3) + S.tone(1320, 0.6, 6, 0.15), at)
     a = np.clip(a, -1, 1)
@@ -221,7 +219,7 @@ def main(date=None, force=False):
 
     out.mkdir(parents=True, exist_ok=True)
     wav = out / "audio.wav"
-    make_audio(wav)
+    make_audio(wav, date)
     mp4 = out / "short.mp4"
     proc = subprocess.Popen([
         "ffmpeg", "-y", "-loglevel", "error",

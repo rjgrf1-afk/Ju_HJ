@@ -142,17 +142,15 @@ def header_one(base, theme, label):
     S.draw_text(d, (S.W // 2, 500), label, 50, (255, 255, 255), stroke=0)
 
 
-def make_audio(path):
+def make_audio(path, date):
+    import music
     total = SHOW + REVEAL
-    a = np.zeros(int(S.SR * total) + S.SR)
+    a = music.bed(total, date, "one")  # 11/17: 날짜마다 다른 배경 곡, 같은 날 저녁과도 다름
 
     def add(sig, at):
         i = int(at * S.SR)
         a[i:i + len(sig)] += sig[: len(a) - i]
 
-    notes = [261.6, 329.6, 392.0, 523.3, 392.0, 329.6]
-    for k in range(int(total / 0.25)):
-        add(S.tone(notes[k % len(notes)], 0.4, 6, 0.06), k * 0.25)
     for s in range(int(SHOW)):
         hi = s >= int(SHOW) - 3  # 마지막 3초는 높은 소리로 재촉
         add(S.tone(1500 if hi else 1000, 0.08, 40, 0.35), s)
@@ -247,7 +245,7 @@ def main():
     bg = S.background(theme)
     out.mkdir(parents=True, exist_ok=True)
     wav = out / "audio.wav"
-    make_audio(wav)
+    make_audio(wav, args.date)
     mp4 = out / "short.mp4"
     proc = subprocess.Popen([
         "ffmpeg", "-y", "-loglevel", "error",
