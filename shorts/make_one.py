@@ -93,6 +93,9 @@ def build_one(rng, used, date, evening):
     last_eve = (S.recent_meta(date, days=1) or [None])[0]
     norm = lambda k: "hard" if k == "emoji" else k
     avoid = {norm(m["rounds"][-1]["kind"]) for m in [recent[0] if recent else None, evening, last_eve] if m}
+    # 11/19: 저녁 3단계가 숫자 들어간 아이콘(숫자 상자·숫자 동그라미)이면 같은 날 낮 숫자 문제는 피한다
+    if evening and str(evening["rounds"][-1].get("pair") or "").startswith(("filter_", "counter_")):
+        avoid.add("number")
     kinds = [k for k in KINDS if k not in avoid]
     kind = rng.choices(kinds, weights=[KINDS[k] for k in kinds])[0]
     # 저녁 쇼츠와 그림체를 반대로 해서 같은 날 두 영상의 느낌이 다르게
