@@ -286,12 +286,14 @@ def is_face(pair):
     return any(0x1F600 <= ord(c) <= 0x1F64F or c in "☹☺" for c in pair or "")
 
 
-def pick_answer(rng, n, past):
+def pick_answer(rng, n, past, siblings=()):
     """최근 영상의 같은 단계와 정답 자리가 겹쳐 보이지 않게 고른다.
     past: 같은 단계의 최근 정답 (행, 열, 칸 수) 목록, 어제가 맨 앞.
     칸 수가 달라도(7칸, 8칸) 화면에서 같은 자리로 보이므로 화면 비율(0~1)로 비교한다."""
     pos = lambda r, c, k: ((r + 0.5) / k, (c + 0.5) / k)
     prev = [pos(*p) for p in past[:4]]
+    # 11/22: 같은 영상 앞 단계와 같은 줄·같은 세로줄 금지 (11/21 B5·B5, 11/22 A1·D1·H1 모두 1줄)
+    sib = [pos(*p) for p in siblings]
     cells = [(i // n, i % n) for i in range(n * n)]
 
     def far(rc, gap, line):
@@ -299,6 +301,8 @@ def pick_answer(rng, n, past):
         if any(((y - py) ** 2 + (x - px) ** 2) ** 0.5 < gap for py, px in prev):
             return False
         if prev and (abs(y - prev[0][0]) < line or abs(x - prev[0][1]) < line):  # 어제와 같은 줄·같은 세로줄
+            return False
+        if any(abs(y - sy) < 0.12 or abs(x - sx) < 0.12 for sy, sx in sib):
             return False
         return True
 
@@ -411,7 +415,8 @@ def build_rounds(rng, used, recent=(), style="noto", sibling=None, color_hist=()
             r["pair"] = r["pair"][::-1] if len(r["pair"]) == 2 else r["pair"]
         past = [(m["rounds"][i]["answer_row"] - 1, m["rounds"][i]["answer_col"] - 1, m["rounds"][i]["grid"])
                 for m in recent if len(m["rounds"]) > i]
-        r["answer"] = pick_answer(rng, r["n"], past)
+        sibs = [(q["answer"] // q["n"], q["answer"] % q["n"], q["n"]) for q in rounds[:i]]
+        r["answer"] = pick_answer(rng, r["n"], past, sibs)
     return rounds
 
 
