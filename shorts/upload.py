@@ -73,8 +73,8 @@ def main():
             "description": meta["description"],
             "tags": meta["tags"],
             "categoryId": meta["categoryId"],
-            "defaultLanguage": "ko",
-            "defaultAudioLanguage": "ko",
+            "defaultLanguage": meta.get("defaultLanguage", "ko"),
+            "defaultAudioLanguage": meta.get("defaultAudioLanguage", meta.get("defaultLanguage", "ko")),
         },
         "status": status,
     }

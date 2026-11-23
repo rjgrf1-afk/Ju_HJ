@@ -218,6 +218,27 @@ def make_metadata(rng, date, r):
     }
 
 
+def english_default(meta, date):
+    """6주차 결정(11/23): 일주일에 한 편, 목~일 첫 숫자 문제는 기본 제목·언어를 영어로 (한국어는 번역).
+    해외 조회는 숫자 편에서만, 그것도 해외 시험 노출을 받은 편에서만 났다(research/2026-11-19.md)."""
+    day = datetime.strptime(date, "%Y-%m-%d")
+    if meta["rounds"][-1]["kind"] != "number" or day.weekday() < 3:
+        return meta
+    week = day.isocalendar()[:2]
+    for k in range(1, 7):
+        f = OUT_DIR / (day - timedelta(days=k)).strftime("%Y-%m-%d") / "metadata.json"
+        if f.exists():
+            m = json.loads(f.read_text())
+            if m.get("defaultLanguage") == "en" and datetime.strptime(m["date"], "%Y-%m-%d").isocalendar()[:2] == week:
+                return meta
+    en = meta["localizations"].pop("en")
+    meta["localizations"]["ko"] = {"title": meta["title"], "description": meta["description"]}
+    meta["title"], meta["description"] = en["title"], en["description"]
+    meta["defaultLanguage"] = meta["defaultAudioLanguage"] = "en"
+    meta["englishDefault"] = True
+    return meta
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--date", default=datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d"))
@@ -268,7 +289,7 @@ def main():
         raise SystemExit("ffmpeg 인코딩 실패")
     wav.unlink()
 
-    meta = make_metadata(rng, args.date, r) | uploaded
+    meta = english_default(make_metadata(rng, args.date, r), args.date) | uploaded
     old.write_text(json.dumps(meta, ensure_ascii=False, indent=2))
     history[key] = [r["pair"]] if r["pair"] else []
     S.HISTORY.write_text(json.dumps(dict(sorted(history.items())), ensure_ascii=False, indent=1))

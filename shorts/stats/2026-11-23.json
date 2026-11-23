@@ -1,5 +1,5 @@
 {
- "collectedAt": "2026-11-23T09:35:37+09:00",
+ "collectedAt": "2026-11-23T09:53:23+09:00",
  "channel": {
   "subscribers": 48,
   "videos": 61,
@@ -257,22 +257,22 @@
    }
   },
   {
-   "id": "C5shz3qYGX8",
-   "title": "【다른 하나 찾기/치매예방】 극악 30문제, 다 찾으면 상위 1% 눈썰미! | 눈썰미 연구소 #1",
-   "publishedAt": "2026-10-30T09:00:33Z",
+   "id": "KaA0bzNmigA",
+   "title": "【다른 하나 찾기】 개 64개 중 하나만 좌우가 뒤집혀 있어요 🐕 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-10-30T09:00:25Z",
    "privacyStatus": "public",
-   "views": 15,
-   "likes": 0,
+   "views": 1465,
+   "likes": 9,
    "comments": 0,
    "analytics": {
-    "views": 15,
-    "estimatedMinutesWatched": 19,
-    "averageViewDuration": 98,
-    "averageViewPercentage": 17.33,
-    "likes": 0,
+    "views": 1465,
+    "estimatedMinutesWatched": 191,
+    "averageViewDuration": 18,
+    "averageViewPercentage": 81.7,
+    "likes": 9,
     "comments": 0,
     "shares": 0,
-    "subscribersGained": 0,
+    "subscribersGained": 1,
     "subscribersLost": 0
    }
   },
@@ -1183,7 +1183,7 @@
    "privacyStatus": "public",
    "views": 2518,
    "likes": 10,
-   "comments": 1,
+   "comments": 2,
    "analytics": {
     "views": 1234,
     "estimatedMinutesWatched": 173,
@@ -1213,7 +1213,7 @@
    "privacyStatus": "public",
    "views": 1143,
    "likes": 5,
-   "comments": 2,
+   "comments": 4,
    "analytics": null
   },
   {
@@ -1230,6 +1230,16 @@
    "id": "8F5ZS4GF5NQ",
    "title": "【다른 하나 찾기】 28 사이에 다른 숫자 하나 🔢 | 한 번에 찾으면 눈썰미 천재 #shorts",
    "publishedAt": "2026-11-23T00:33:14Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "g1NmV5eev-w",
+   "title": "【다른 그림 찾기】 커피잔 64개 중 다른 3개를 모두 찾아보세요 👀 | 3개 다 찾으면 상위 1% #shorts",
+   "publishedAt": "2026-11-23T00:35:26Z",
    "privacyStatus": "private",
    "views": 0,
    "likes": 0,
