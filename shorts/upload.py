@@ -74,7 +74,8 @@ def main():
             "tags": meta["tags"],
             "categoryId": meta["categoryId"],
             "defaultLanguage": meta.get("defaultLanguage", "ko"),
-            "defaultAudioLanguage": meta.get("defaultAudioLanguage", meta.get("defaultLanguage", "ko")),
+            # 빈 값이면 오디오 언어를 넣지 않는다(말 없는 영상, research/2026-11-23.md)
+            **({"defaultAudioLanguage": meta.get("defaultAudioLanguage", "ko")} if meta.get("defaultAudioLanguage", "ko") else {}),
         },
         "status": status,
     }

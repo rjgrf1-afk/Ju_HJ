@@ -234,7 +234,8 @@ def english_default(meta, date):
     en = meta["localizations"].pop("en")
     meta["localizations"]["ko"] = {"title": meta["title"], "description": meta["description"]}
     meta["title"], meta["description"] = en["title"], en["description"]
-    meta["defaultLanguage"] = meta["defaultAudioLanguage"] = "en"
+    meta["defaultLanguage"] = "en"
+    meta["defaultAudioLanguage"] = ""  # 말 없는 영상이라 오디오 언어는 비운다 (11/23 연구)
     meta["englishDefault"] = True
     return meta
 
