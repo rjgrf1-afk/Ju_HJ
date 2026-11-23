@@ -1,0 +1,1329 @@
+{
+ "collectedAt": "2026-11-23T09:35:37+09:00",
+ "channel": {
+  "subscribers": 48,
+  "videos": 61,
+  "views": 63004
+ },
+ "daily": [
+  {
+   "day": "2026-11-17",
+   "views": 2498,
+   "engagedViews": 930,
+   "subscribersGained": 2,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-11-18",
+   "views": 3166,
+   "engagedViews": 1194,
+   "subscribersGained": 2,
+   "subscribersLost": 2
+  },
+  {
+   "day": "2026-11-19",
+   "views": 1306,
+   "engagedViews": 471,
+   "subscribersGained": 1,
+   "subscribersLost": 0
+  },
+  {
+   "day": "2026-11-20",
+   "views": 1935,
+   "engagedViews": 812,
+   "subscribersGained": 0,
+   "subscribersLost": 0
+  }
+ ],
+ "videos": [
+  {
+   "id": "mYY0dmerhfQ",
+   "title": "다른 하나 찾기 🔍 3단계 성공하면 상위 1% #shorts",
+   "publishedAt": "2026-10-20T07:53:21Z",
+   "privacyStatus": "public",
+   "views": 397,
+   "likes": 5,
+   "comments": 0,
+   "analytics": {
+    "views": 397,
+    "estimatedMinutesWatched": 45,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 89.36,
+    "likes": 5,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "0z3Dw8NWhEg",
+   "title": "똑같아 보이는 64개 중 딱 하나가 달라요 🐥 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-10-21T08:52:43Z",
+   "privacyStatus": "public",
+   "views": 304,
+   "likes": 2,
+   "comments": 0,
+   "analytics": {
+    "views": 304,
+    "estimatedMinutesWatched": 35,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 89.78,
+    "likes": 2,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "xCsVs-JuG4w",
+   "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-10-22T08:59:39Z",
+   "privacyStatus": "public",
+   "views": 1324,
+   "likes": 12,
+   "comments": 1,
+   "analytics": {
+    "views": 1324,
+    "estimatedMinutesWatched": 202,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 89.64,
+    "likes": 12,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 4,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Ot3kX2rWpKo",
+   "title": "똑같아 보이는 64개 중 딱 하나가 달라요 😦 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-10-23T09:00:27Z",
+   "privacyStatus": "public",
+   "views": 1307,
+   "likes": 16,
+   "comments": 1,
+   "analytics": {
+    "views": 1307,
+    "estimatedMinutesWatched": 192,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 98.27,
+    "likes": 16,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Bn5iMs_Bq-w",
+   "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-10-24T09:00:01Z",
+   "privacyStatus": "public",
+   "views": 22,
+   "likes": 1,
+   "comments": 0,
+   "analytics": {
+    "views": 22,
+    "estimatedMinutesWatched": 4,
+    "averageViewDuration": 21,
+    "averageViewPercentage": 92.46,
+    "likes": 1,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "48xGIvpgl5A",
+   "title": "49칸 중 딱 한 칸만 색이 달라요 🎨 | 몇 단계까지 보이세요? #shorts",
+   "publishedAt": "2026-10-25T10:34:47Z",
+   "privacyStatus": "public",
+   "views": 1237,
+   "likes": 8,
+   "comments": 1,
+   "analytics": {
+    "views": 1237,
+    "estimatedMinutesWatched": 131,
+    "averageViewDuration": 20,
+    "averageViewPercentage": 89.43,
+    "likes": 8,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "lVLq0OK_JPk",
+   "title": "【다른 하나 찾기】 스피커 아이콘 64개 중 딱 하나가 달라요 👀 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-10-26T09:00:37Z",
+   "privacyStatus": "public",
+   "views": 1184,
+   "likes": 11,
+   "comments": 2,
+   "analytics": {
+    "views": 1184,
+    "estimatedMinutesWatched": 158,
+    "averageViewDuration": 20,
+    "averageViewPercentage": 88.55,
+    "likes": 11,
+    "comments": 2,
+    "shares": 0,
+    "subscribersGained": 2,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "fTsuLoCF5GM",
+   "title": "【다른 하나 찾기】 시계 64개 중 딱 하나가 달라요 🕕 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-10-27T09:00:02Z",
+   "privacyStatus": "public",
+   "views": 1297,
+   "likes": 11,
+   "comments": 1,
+   "analytics": {
+    "views": 1297,
+    "estimatedMinutesWatched": 182,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 98.17,
+    "likes": 11,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 2,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "eZyJa_tQ6Ko",
+   "title": "【다른 하나 찾기】 구급차 64개 중 하나만 좌우가 뒤집혀 있어요 🚑 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-10-28T09:00:21Z",
+   "privacyStatus": "public",
+   "views": 1160,
+   "likes": 16,
+   "comments": 1,
+   "analytics": {
+    "views": 1159,
+    "estimatedMinutesWatched": 142,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 84.81,
+    "likes": 16,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "L2YljQHJNig",
+   "title": "【다른 하나 찾기】 초록 49칸 중 딱 한 칸만 색이 달라요 🎨 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-10-29T09:00:04Z",
+   "privacyStatus": "public",
+   "views": 1316,
+   "likes": 5,
+   "comments": 2,
+   "analytics": {
+    "views": 1316,
+    "estimatedMinutesWatched": 165,
+    "averageViewDuration": 21,
+    "averageViewPercentage": 92.01,
+    "likes": 5,
+    "comments": 2,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "1v7kRMDCNLk",
+   "title": "【다른 하나 찾기】 18 사이에 다른 숫자 하나 🔢 | 못 찾으면 다시 보기 🔁 #shorts",
+   "publishedAt": "2026-10-30T03:00:28Z",
+   "privacyStatus": "public",
+   "views": 1661,
+   "likes": 22,
+   "comments": 7,
+   "analytics": {
+    "views": 1661,
+    "estimatedMinutesWatched": 166,
+    "averageViewDuration": 13,
+    "averageViewPercentage": 116.38999999999999,
+    "likes": 22,
+    "comments": 5,
+    "shares": 0,
+    "subscribersGained": 4,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "C5shz3qYGX8",
+   "title": "【다른 하나 찾기/치매예방】 극악 30문제, 다 찾으면 상위 1% 눈썰미! | 눈썰미 연구소 #1",
+   "publishedAt": "2026-10-30T09:00:33Z",
+   "privacyStatus": "public",
+   "views": 15,
+   "likes": 0,
+   "comments": 0,
+   "analytics": {
+    "views": 15,
+    "estimatedMinutesWatched": 19,
+    "averageViewDuration": 98,
+    "averageViewPercentage": 17.33,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "C5shz3qYGX8",
+   "title": "【다른 하나 찾기/치매예방】 극악 30문제, 다 찾으면 상위 1% 눈썰미! | 눈썰미 연구소 #1",
+   "publishedAt": "2026-10-30T09:00:33Z",
+   "privacyStatus": "public",
+   "views": 15,
+   "likes": 0,
+   "comments": 0,
+   "analytics": {
+    "views": 15,
+    "estimatedMinutesWatched": 19,
+    "averageViewDuration": 98,
+    "averageViewPercentage": 17.33,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "MCWcv2MRCY4",
+   "title": "【다른 하나 찾기】 식은땀 얼굴 64개 중 딱 하나가 달라요 😥 | 8초 안에 찾으면 상위 1% #shorts",
+   "publishedAt": "2026-10-31T03:00:02Z",
+   "privacyStatus": "public",
+   "views": 2027,
+   "likes": 9,
+   "comments": 0,
+   "analytics": {
+    "views": 2025,
+    "estimatedMinutesWatched": 149,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 95.46,
+    "likes": 9,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 3,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "TK5-dR4rd34",
+   "title": "【다른 하나 찾기】 폴더 아이콘 64개 중 딱 하나가 달라요 👀 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-10-31T09:00:32Z",
+   "privacyStatus": "public",
+   "views": 1131,
+   "likes": 7,
+   "comments": 0,
+   "analytics": {
+    "views": 1131,
+    "estimatedMinutesWatched": 172,
+    "averageViewDuration": 21,
+    "averageViewPercentage": 80.63,
+    "likes": 7,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "IJufU5OW2cE",
+   "title": "【다른 하나 찾기】 로켓 64개 중 하나만 뒤집혀 있어요 🚀 | 못 찾으면 다시 보기 🔁 #shorts",
+   "publishedAt": "2026-11-01T03:00:33Z",
+   "privacyStatus": "public",
+   "views": 1269,
+   "likes": 4,
+   "comments": 0,
+   "analytics": {
+    "views": 1269,
+    "estimatedMinutesWatched": 89,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 97.78,
+    "likes": 4,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "fWuOHW3kfjQ",
+   "title": "【다른 하나 찾기】 스피커 64개 중 딱 하나가 달라요 🔊 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-11-01T09:00:03Z",
+   "privacyStatus": "public",
+   "views": 1057,
+   "likes": 8,
+   "comments": 2,
+   "analytics": {
+    "views": 1057,
+    "estimatedMinutesWatched": 149,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 82.05,
+    "likes": 8,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "DcgZtRmLzoM",
+   "title": "【다른 하나 찾기】 알람시계 아이콘 64개 중 딱 하나가 달라요 👀 | 8초 안에 찾으면 상위 1% #shorts",
+   "publishedAt": "2026-11-02T03:00:31Z",
+   "privacyStatus": "public",
+   "views": 1131,
+   "likes": 6,
+   "comments": 0,
+   "analytics": {
+    "views": 1131,
+    "estimatedMinutesWatched": 81,
+    "averageViewDuration": 12,
+    "averageViewPercentage": 102.1,
+    "likes": 6,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 2,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "mXVcBcGMecA",
+   "title": "【다른 하나 찾기】 보라 49칸 중 딱 한 칸만 색이 달라요 🎨 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-11-02T09:00:00Z",
+   "privacyStatus": "public",
+   "views": 1129,
+   "likes": 4,
+   "comments": 0,
+   "analytics": {
+    "views": 1129,
+    "estimatedMinutesWatched": 204,
+    "averageViewDuration": 30,
+    "averageViewPercentage": 114.45,
+    "likes": 4,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "-RB71x6-oco",
+   "title": "【다른 하나 찾기】 시계 64개 중 딱 하나가 달라요 🕣 | 점심시간 눈썰미 테스트 #shorts",
+   "publishedAt": "2026-11-03T03:00:13Z",
+   "privacyStatus": "public",
+   "views": 1036,
+   "likes": 7,
+   "comments": 5,
+   "analytics": {
+    "views": 1036,
+    "estimatedMinutesWatched": 75,
+    "averageViewDuration": 12,
+    "averageViewPercentage": 104.47,
+    "likes": 7,
+    "comments": 3,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "rfelLNRmItQ",
+   "title": "【다른 하나 찾기】 별 아이콘 64개 중 딱 하나가 달라요 👀 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-11-03T09:00:40Z",
+   "privacyStatus": "public",
+   "views": 1058,
+   "likes": 12,
+   "comments": 2,
+   "analytics": {
+    "views": 1058,
+    "estimatedMinutesWatched": 171,
+    "averageViewDuration": 24,
+    "averageViewPercentage": 89,
+    "likes": 12,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 2,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "m3mmojg08gM",
+   "title": "【다른 하나 찾기】 66 사이에 다른 숫자 하나 🔢 | 점심시간 눈썰미 테스트 #shorts",
+   "publishedAt": "2026-11-04T03:00:10Z",
+   "privacyStatus": "public",
+   "views": 1091,
+   "likes": 8,
+   "comments": 2,
+   "analytics": {
+    "views": 1091,
+    "estimatedMinutesWatched": 167,
+    "averageViewDuration": 21,
+    "averageViewPercentage": 177.04,
+    "likes": 8,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "czZu_4A6Ils",
+   "title": "【다른 하나 찾기】 청록 49칸 중 딱 한 칸만 색이 달라요 🎨 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-11-04T09:00:05Z",
+   "privacyStatus": "public",
+   "views": 13,
+   "likes": 0,
+   "comments": 0,
+   "analytics": {
+    "views": 13,
+    "estimatedMinutesWatched": 2,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 83.43,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "3kNrfiV8GA0",
+   "title": "【다른 하나 찾기】 마이크 아이콘 64개 중 딱 하나가 달라요 👀 | 8초 안에 찾으면 상위 1% #shorts",
+   "publishedAt": "2026-11-05T03:00:18Z",
+   "privacyStatus": "public",
+   "views": 1165,
+   "likes": 19,
+   "comments": 5,
+   "analytics": {
+    "views": 1165,
+    "estimatedMinutesWatched": 101,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 97.28,
+    "likes": 19,
+    "comments": 3,
+    "shares": 1,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "akw-kKkxmo8",
+   "title": "【다른 하나 찾기】 기린 64개 중 하나만 좌우가 뒤집혀 있어요 🦒 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-11-05T09:00:09Z",
+   "privacyStatus": "public",
+   "views": 1756,
+   "likes": 34,
+   "comments": 6,
+   "analytics": {
+    "views": 1756,
+    "estimatedMinutesWatched": 302,
+    "averageViewDuration": 23,
+    "averageViewPercentage": 85.19,
+    "likes": 34,
+    "comments": 4,
+    "shares": 3,
+    "subscribersGained": 3,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "1ptd0BIsvdQ",
+   "title": "【다른 하나 찾기】 빨간 하트 64개 중 하나만 색이 달라요 🎨 | 점심시간 눈썰미 테스트 #shorts",
+   "publishedAt": "2026-11-06T03:00:12Z",
+   "privacyStatus": "public",
+   "views": 1865,
+   "likes": 11,
+   "comments": 3,
+   "analytics": {
+    "views": 1865,
+    "estimatedMinutesWatched": 182,
+    "averageViewDuration": 13,
+    "averageViewPercentage": 111.85000000000001,
+    "likes": 11,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "B_8ZvLMmOCk",
+   "title": "【다른 하나 찾기】 웃는 얼굴 64개 중 딱 하나가 달라요 😃 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-11-06T09:00:04Z",
+   "privacyStatus": "public",
+   "views": 889,
+   "likes": 8,
+   "comments": 0,
+   "analytics": {
+    "views": 889,
+    "estimatedMinutesWatched": 186,
+    "averageViewDuration": 23,
+    "averageViewPercentage": 86.36,
+    "likes": 8,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "dLGo2R0ZJds",
+   "title": "【다른 하나 찾기/치매예방】 쉬움→극악 40문제, 다 찾으면 상위 1%! | Find the Odd One Out #2",
+   "publishedAt": "2026-11-06T09:00:32Z",
+   "privacyStatus": "public",
+   "views": 8,
+   "likes": 0,
+   "comments": 0,
+   "analytics": {
+    "views": 8,
+    "estimatedMinutesWatched": 10,
+    "averageViewDuration": 127,
+    "averageViewPercentage": 21.17,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Nw1xLyxV_s0",
+   "title": "【다른 하나 찾기】 77 사이에 다른 숫자 하나 🔢 | 한 번에 찾으면 눈썰미 천재 #shorts",
+   "publishedAt": "2026-11-07T03:00:38Z",
+   "privacyStatus": "public",
+   "views": 1882,
+   "likes": 22,
+   "comments": 3,
+   "analytics": {
+    "views": 1881,
+    "estimatedMinutesWatched": 155,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 92.97,
+    "likes": 22,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "jh9vzOcUC8w",
+   "title": "【다른 하나 찾기】 해 아이콘 64개 중 딱 하나가 달라요 👀 | 몇 단계까지 보이세요? #shorts",
+   "publishedAt": "2026-11-07T09:00:15Z",
+   "privacyStatus": "public",
+   "views": 1266,
+   "likes": 14,
+   "comments": 4,
+   "analytics": {
+    "views": 1265,
+    "estimatedMinutesWatched": 228,
+    "averageViewDuration": 23,
+    "averageViewPercentage": 86.25,
+    "likes": 14,
+    "comments": 2,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Ar-7v-GvRng",
+   "title": "【다른 하나 찾기】 편안한 얼굴 64개 중 딱 하나가 달라요 😌 | 못 찾으면 다시 보기 🔁 #shorts",
+   "publishedAt": "2026-11-08T03:00:32Z",
+   "privacyStatus": "public",
+   "views": 1139,
+   "likes": 6,
+   "comments": 2,
+   "analytics": {
+    "views": 1139,
+    "estimatedMinutesWatched": 92,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 94.33,
+    "likes": 6,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "neVCxQKbIBI",
+   "title": "【다른 하나 찾기】 파란 육각형 64개 중 딱 하나만 색이 달라요 🎨 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-11-08T09:00:28Z",
+   "privacyStatus": "public",
+   "views": 1330,
+   "likes": 11,
+   "comments": 1,
+   "analytics": {
+    "views": 1330,
+    "estimatedMinutesWatched": 304,
+    "averageViewDuration": 28,
+    "averageViewPercentage": 106.28,
+    "likes": 11,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "yKoeTUJ22Ws",
+   "title": "【다른 하나 찾기】 시계 아이콘 64개 중 딱 하나가 달라요 👀 | 한 번에 찾으면 눈썰미 천재 #shorts",
+   "publishedAt": "2026-11-09T03:00:34Z",
+   "privacyStatus": "public",
+   "views": 1033,
+   "likes": 6,
+   "comments": 0,
+   "analytics": {
+    "views": 1031,
+    "estimatedMinutesWatched": 108,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 158.78,
+    "likes": 6,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "dv05GIghjbo",
+   "title": "【다른 하나 찾기】 공룡 64개 중 하나만 좌우가 뒤집혀 있어요 🦕 | 몇 단계까지 보이세요? #shorts",
+   "publishedAt": "2026-11-09T09:00:39Z",
+   "privacyStatus": "public",
+   "views": 1037,
+   "likes": 12,
+   "comments": 2,
+   "analytics": {
+    "views": 1036,
+    "estimatedMinutesWatched": 164,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 85.02,
+    "likes": 12,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "XVF3vrCPRDk",
+   "title": "【다른 하나 찾기】 88 사이에 다른 숫자 하나 🔢 | 8초 안에 찾으면 상위 1% #shorts",
+   "publishedAt": "2026-11-10T03:00:07Z",
+   "privacyStatus": "public",
+   "views": 1562,
+   "likes": 30,
+   "comments": 8,
+   "analytics": {
+    "views": 1561,
+    "estimatedMinutesWatched": 159,
+    "averageViewDuration": 13,
+    "averageViewPercentage": 108.69,
+    "likes": 30,
+    "comments": 5,
+    "shares": 0,
+    "subscribersGained": 2,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "ezcBwSAldZc",
+   "title": "【다른 하나 찾기】 뽀뽀 얼굴 64개 중 딱 하나가 달라요 😙 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-11-10T09:00:03Z",
+   "privacyStatus": "public",
+   "views": 1142,
+   "likes": 14,
+   "comments": 0,
+   "analytics": {
+    "views": 1141,
+    "estimatedMinutesWatched": 216,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 85.18,
+    "likes": 14,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 3,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "mUNKUPu1AGA",
+   "title": "【다른 하나 찾기】 거북이 64개 중 하나만 뒤집혀 있어요 🐢 | 한 번에 찾으면 눈썰미 천재 #shorts",
+   "publishedAt": "2026-11-11T03:00:35Z",
+   "privacyStatus": "public",
+   "views": 1304,
+   "likes": 13,
+   "comments": 2,
+   "analytics": {
+    "views": 1303,
+    "estimatedMinutesWatched": 110,
+    "averageViewDuration": 10,
+    "averageViewPercentage": 88.82,
+    "likes": 13,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "BVpyEq5byBU",
+   "title": "【다른 하나 찾기】 자물쇠 아이콘 64개 중 딱 하나가 달라요 👀 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-11-11T09:00:21Z",
+   "privacyStatus": "public",
+   "views": 990,
+   "likes": 15,
+   "comments": 0,
+   "analytics": {
+    "views": 989,
+    "estimatedMinutesWatched": 207,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 82.74,
+    "likes": 15,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "4vKYs9h9ZZA",
+   "title": "【다른 하나 찾기】 93 사이에 다른 숫자 하나 🔢 | 못 찾으면 다시 보기 🔁 #shorts",
+   "publishedAt": "2026-11-12T03:00:25Z",
+   "privacyStatus": "public",
+   "views": 1025,
+   "likes": 1,
+   "comments": 4,
+   "analytics": {
+    "views": 1024,
+    "estimatedMinutesWatched": 90,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 93.43,
+    "likes": 1,
+    "comments": 2,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "DqLdj-ljnbs",
+   "title": "【다른 하나 찾기】 연두 동그라미 49개 중 딱 하나만 색이 달라요 🎨 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-11-12T09:00:33Z",
+   "privacyStatus": "public",
+   "views": 1344,
+   "likes": 16,
+   "comments": 0,
+   "analytics": {
+    "views": 1341,
+    "estimatedMinutesWatched": 258,
+    "averageViewDuration": 23,
+    "averageViewPercentage": 85.89,
+    "likes": 16,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 3,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "498CFijbFg0",
+   "title": "【다른 하나 찾기】 원숭이 64개 중 딱 하나가 달라요 🙉 | 한 번에 찾으면 눈썰미 천재 #shorts",
+   "publishedAt": "2026-11-13T03:00:24Z",
+   "privacyStatus": "public",
+   "views": 1639,
+   "likes": 16,
+   "comments": 0,
+   "analytics": {
+    "views": 1636,
+    "estimatedMinutesWatched": 129,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 93.99,
+    "likes": 16,
+    "comments": 0,
+    "shares": 1,
+    "subscribersGained": 2,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "q7D10YvG1jw",
+   "title": "【다른 하나 찾기】 경찰차 64개 중 하나만 좌우가 뒤집혀 있어요 🚓 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-11-13T09:00:06Z",
+   "privacyStatus": "public",
+   "views": 1142,
+   "likes": 18,
+   "comments": 0,
+   "analytics": {
+    "views": 1141,
+    "estimatedMinutesWatched": 183,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 83.71,
+    "likes": 18,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 1
+   }
+  },
+  {
+   "id": "KiKjKOoN20s",
+   "title": "【다른 하나 찾기】 무표정 아이콘 64개 중 딱 하나가 달라요 👀 | 못 찾으면 다시 보기 🔁 #shorts",
+   "publishedAt": "2026-11-14T03:00:06Z",
+   "privacyStatus": "public",
+   "views": 1191,
+   "likes": 4,
+   "comments": 0,
+   "analytics": {
+    "views": 1190,
+    "estimatedMinutesWatched": 91,
+    "averageViewDuration": 12,
+    "averageViewPercentage": 101.94000000000001,
+    "likes": 4,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "JMGEB0gkRtU",
+   "title": "【다른 하나 찾기】 시계 64개 중 딱 하나가 달라요 🕜 | 몇 단계까지 보이세요? #shorts",
+   "publishedAt": "2026-11-14T09:00:38Z",
+   "privacyStatus": "public",
+   "views": 1022,
+   "likes": 5,
+   "comments": 0,
+   "analytics": {
+    "views": 1022,
+    "estimatedMinutesWatched": 111,
+    "averageViewDuration": 20,
+    "averageViewPercentage": 78.42,
+    "likes": 5,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "aEhnq9S4AqM",
+   "title": "【다른 하나 찾기】 트럭 64개 중 하나만 뒤집혀 있어요 🚚 | 8초 안에 찾으면 상위 1% #shorts",
+   "publishedAt": "2026-11-15T03:00:38Z",
+   "privacyStatus": "public",
+   "views": 1153,
+   "likes": 7,
+   "comments": 0,
+   "analytics": {
+    "views": 1149,
+    "estimatedMinutesWatched": 78,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 94.03,
+    "likes": 7,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "JxqnUtGc7rg",
+   "title": "【다른 하나 찾기】 번개 아이콘 64개 중 딱 하나가 달라요 👀 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-11-15T09:00:29Z",
+   "privacyStatus": "public",
+   "views": 1624,
+   "likes": 15,
+   "comments": 2,
+   "analytics": {
+    "views": 1624,
+    "estimatedMinutesWatched": 273,
+    "averageViewDuration": 23,
+    "averageViewPercentage": 91.68,
+    "likes": 15,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "1rjRaZesIsY",
+   "title": "【다른 하나 찾기】 959 사이에 다른 숫자 하나 🔢 | 점심시간 눈썰미 테스트 #shorts",
+   "publishedAt": "2026-11-16T03:00:28Z",
+   "privacyStatus": "public",
+   "views": 1040,
+   "likes": 11,
+   "comments": 0,
+   "analytics": {
+    "views": 1040,
+    "estimatedMinutesWatched": 93,
+    "averageViewDuration": 14,
+    "averageViewPercentage": 121.70999999999998,
+    "likes": 11,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "RwlbKWkqwME",
+   "title": "【다른 하나 찾기】 파란 별 64개 중 딱 하나만 색이 달라요 🎨 | 몇 단계까지 보이세요? #shorts",
+   "publishedAt": "2026-11-16T09:00:32Z",
+   "privacyStatus": "public",
+   "views": 944,
+   "likes": 8,
+   "comments": 0,
+   "analytics": {
+    "views": 942,
+    "estimatedMinutesWatched": 165,
+    "averageViewDuration": 21,
+    "averageViewPercentage": 84.39,
+    "likes": 8,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Oty11kNYqjY",
+   "title": "【다른 하나 찾기】 배터리 아이콘 64개 중 딱 하나가 달라요 👀 | 점심시간 눈썰미 테스트 #shorts",
+   "publishedAt": "2026-11-17T03:00:12Z",
+   "privacyStatus": "public",
+   "views": 1043,
+   "likes": 9,
+   "comments": 0,
+   "analytics": {
+    "views": 1043,
+    "estimatedMinutesWatched": 83,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 99.92,
+    "likes": 9,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "8iVnDMb1n_A",
+   "title": "【다른 하나 찾기】 소방차 64개 중 하나만 좌우가 뒤집혀 있어요 🚒 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-11-17T09:00:29Z",
+   "privacyStatus": "public",
+   "views": 1418,
+   "likes": 16,
+   "comments": 0,
+   "analytics": {
+    "views": 1406,
+    "estimatedMinutesWatched": 235,
+    "averageViewDuration": 21,
+    "averageViewPercentage": 84.23,
+    "likes": 16,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 2,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "0xf0YxJ8G94",
+   "title": "【착시】 시계 방향? 반시계 방향? 보는 사람마다 달라요 🌀 | 몇 초 만에 바뀌었나요? #shorts",
+   "publishedAt": "2026-11-18T03:00:31Z",
+   "privacyStatus": "public",
+   "views": 2334,
+   "likes": 2,
+   "comments": 0,
+   "analytics": {
+    "views": 2223,
+    "estimatedMinutesWatched": 280,
+    "averageViewDuration": 18,
+    "averageViewPercentage": 109.18,
+    "likes": 2,
+    "comments": 0,
+    "shares": 1,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "YO9N7yWN1Hg",
+   "title": "【다른 하나 찾기】 걱정 얼굴 64개 중 딱 하나가 달라요 😟 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-11-18T09:00:38Z",
+   "privacyStatus": "public",
+   "views": 1031,
+   "likes": 15,
+   "comments": 0,
+   "analytics": {
+    "views": 1015,
+    "estimatedMinutesWatched": 182,
+    "averageViewDuration": 22,
+    "averageViewPercentage": 87.55,
+    "likes": 14,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 1,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "6yJ3g2_xkfM",
+   "title": "【다른 하나 찾기】 스쿠터 64개 중 하나만 뒤집혀 있어요 🛵 | 못 찾으면 다시 보기 🔁 #shorts",
+   "publishedAt": "2026-11-19T03:00:02Z",
+   "privacyStatus": "public",
+   "views": 1249,
+   "likes": 3,
+   "comments": 0,
+   "analytics": {
+    "views": 1094,
+    "estimatedMinutesWatched": 77,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 93.41,
+    "likes": 3,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "fBvbUXbGxSg",
+   "title": "【다른 하나 찾기】 숫자 상자 아이콘 64개 중 딱 하나가 달라요 👀 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-11-19T09:00:29Z",
+   "privacyStatus": "public",
+   "views": 5,
+   "likes": 1,
+   "comments": 0,
+   "analytics": {
+    "views": 3,
+    "estimatedMinutesWatched": 0,
+    "averageViewDuration": 16,
+    "averageViewPercentage": 64.42,
+    "likes": 1,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "OtMMktUg0NU",
+   "title": "【다른 하나 찾기】 69 사이에 다른 숫자 하나 🔢 | 점심시간 눈썰미 테스트 #shorts",
+   "publishedAt": "2026-11-20T03:00:15Z",
+   "privacyStatus": "public",
+   "views": 1684,
+   "likes": 12,
+   "comments": 2,
+   "analytics": {
+    "views": 1177,
+    "estimatedMinutesWatched": 90,
+    "averageViewDuration": 11,
+    "averageViewPercentage": 93.72,
+    "likes": 7,
+    "comments": 1,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "4z6RfvsiKb8",
+   "title": "【다른 하나 찾기/치매예방】 쉬움→극악 40문제, 다 찾으면 상위 1%! | Find the Odd One Out #3",
+   "publishedAt": "2026-11-20T09:00:13Z",
+   "privacyStatus": "public",
+   "views": 7,
+   "likes": 0,
+   "comments": 0,
+   "analytics": {
+    "views": 7,
+    "estimatedMinutesWatched": 21,
+    "averageViewDuration": 144,
+    "averageViewPercentage": 23.98,
+    "likes": 0,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "PIbnCtieSw4",
+   "title": "【다른 하나 찾기】 노란 하트 36개 중 딱 하나만 색이 달라요 🎨 | 3단계는 진짜 안 보여요 #shorts",
+   "publishedAt": "2026-11-20T09:00:34Z",
+   "privacyStatus": "public",
+   "views": 277,
+   "likes": 7,
+   "comments": 0,
+   "analytics": {
+    "views": 209,
+    "estimatedMinutesWatched": 44,
+    "averageViewDuration": 26,
+    "averageViewPercentage": 100.76,
+    "likes": 5,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "Ctt9v9b0xfA",
+   "title": "【착시】 이 그림자, 어느 쪽으로 돌아요? 🌀 | 도움 화면 보고 바꿔 보세요 #shorts",
+   "publishedAt": "2026-11-21T03:00:33Z",
+   "privacyStatus": "public",
+   "views": 2518,
+   "likes": 10,
+   "comments": 1,
+   "analytics": {
+    "views": 1234,
+    "estimatedMinutesWatched": 173,
+    "averageViewDuration": 19,
+    "averageViewPercentage": 112.65,
+    "likes": 8,
+    "comments": 0,
+    "shares": 0,
+    "subscribersGained": 0,
+    "subscribersLost": 0
+   }
+  },
+  {
+   "id": "o8_P1CjXbzc",
+   "title": "【다른 하나 찾기】 나무늘보 64개 중 하나만 좌우가 뒤집혀 있어요 🦥 | 3단계까지 찾을 수 있나요? #shorts",
+   "publishedAt": "2026-11-21T09:00:39Z",
+   "privacyStatus": "public",
+   "views": 96,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "ahphNDPSRtQ",
+   "title": "【다른 하나 찾기】 주황 동그라미 49개 중 하나만 색이 달라요 🎨 | 한 번에 찾으면 눈썰미 천재 #shorts",
+   "publishedAt": "2026-11-22T03:00:07Z",
+   "privacyStatus": "public",
+   "views": 1143,
+   "likes": 5,
+   "comments": 2,
+   "analytics": null
+  },
+  {
+   "id": "yzV8nmScbhg",
+   "title": "【다른 하나 찾기】 무표정 64개 중 딱 하나가 달라요 😑 | 마지막 문제에서 다들 멈춰요 #shorts",
+   "publishedAt": "2026-11-22T09:00:07Z",
+   "privacyStatus": "public",
+   "views": 952,
+   "likes": 11,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "8F5ZS4GF5NQ",
+   "title": "【다른 하나 찾기】 28 사이에 다른 숫자 하나 🔢 | 한 번에 찾으면 눈썰미 천재 #shorts",
+   "publishedAt": "2026-11-23T00:33:14Z",
+   "privacyStatus": "private",
+   "views": 0,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  }
+ ],
+ "countries28d": [
+  {
+   "country": "KR",
+   "views": 55617,
+   "engagedViews": 21130
+  },
+  {
+   "country": "US",
+   "views": 379,
+   "engagedViews": 142
+  },
+  {
+   "country": "JP",
+   "views": 156,
+   "engagedViews": 69
+  },
+  {
+   "country": "AU",
+   "views": 63,
+   "engagedViews": 23
+  },
+  {
+   "country": "CA",
+   "views": 33,
+   "engagedViews": 10
+  },
+  {
+   "country": "SG",
+   "views": 25,
+   "engagedViews": 10
+  }
+ ],
+ "audience28d": [
+  {
+   "ageGroup": "age18-24",
+   "gender": "male",
+   "viewerPercentage": 0.4
+  },
+  {
+   "ageGroup": "age25-34",
+   "gender": "female",
+   "viewerPercentage": 4.1
+  },
+  {
+   "ageGroup": "age25-34",
+   "gender": "male",
+   "viewerPercentage": 10.2
+  },
+  {
+   "ageGroup": "age35-44",
+   "gender": "female",
+   "viewerPercentage": 16.4
+  },
+  {
+   "ageGroup": "age35-44",
+   "gender": "male",
+   "viewerPercentage": 17.9
+  },
+  {
+   "ageGroup": "age45-54",
+   "gender": "female",
+   "viewerPercentage": 8.4
+  },
+  {
+   "ageGroup": "age45-54",
+   "gender": "male",
+   "viewerPercentage": 18.1
+  },
+  {
+   "ageGroup": "age55-64",
+   "gender": "female",
+   "viewerPercentage": 2.5
+  },
+  {
+   "ageGroup": "age55-64",
+   "gender": "male",
+   "viewerPercentage": 6
+  },
+  {
+   "ageGroup": "age65-",
+   "gender": "female",
+   "viewerPercentage": 6.8
+  },
+  {
+   "ageGroup": "age65-",
+   "gender": "male",
+   "viewerPercentage": 9.2
+  }
+ ]
+}

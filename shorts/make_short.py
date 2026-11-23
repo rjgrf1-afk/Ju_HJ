@@ -459,7 +459,7 @@ def render_grid(r, rng):
     for i in range(n * n):
         x = int(i % n * cell + pad)
         y = int(i // n * cell + pad)
-        is_odd = i == r["answer"]
+        is_odd = i in r["answers"] if "answers" in r else i == r["answer"]
         if r["kind"] == "color":
             draw_color_cell(d, r.get("shape", "square"), x, y, size, odd if is_odd else base)
         elif r["kind"] == "mirror":
@@ -772,6 +772,12 @@ def make_metadata(rng, date, rounds):
     }
 
 
+def is_find3_day(date):
+    """11/23부터 하루걸러 '3개 다 찾기'. 11/23(월)이 첫날."""
+    d = datetime.strptime(date, "%Y-%m-%d").toordinal()
+    return d >= datetime(2026, 11, 23).toordinal() and (d - datetime(2026, 11, 23).toordinal()) % 2 == 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     kst_today = datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d")
@@ -796,6 +802,11 @@ def main():
         sibling = None  # 착시 편은 겹칠 그림이 없다
     rounds = build_rounds(rng, used, recent_meta(args.date, days=4), style_for(args.date), sibling,
                           color_hist=recent_meta(args.date, days=21))
+    # 6주차 결정(11/23): 저녁 쇼츠 하루걸러 '다른 3개 다 찾기' 형식 (make_find3.py)
+    if is_find3_day(args.date):
+        import make_find3
+        make_find3.build(args, rng, rounds, uploaded, history)
+        return
     # 날짜 순서대로 돌려서 연속된 이틀이 같은 색이 되지 않게 한다
     theme = THEMES[datetime.strptime(args.date, "%Y-%m-%d").toordinal() % len(THEMES)]
     bg = background(theme)
