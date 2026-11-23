@@ -31,10 +31,14 @@
   6. 짧은 보고
 - **매일 14:07 오후 연구**: 해외 확장 중심으로 경쟁 채널·수익화를 조사하고 `shorts/research/<날짜>.md`에 쓴 뒤 짧게 보고.
 - **매주 월요일 9:52 주간 보고서**: Artifact 페이지로 게시하고, 그 주 개선을 정해 `experiments.md`에 기록.
-  - 1주차 보고서: https://claude.ai/artifact/EVnBXA1wbRkKwiq4U3qSBG · 3주차: https://claude.ai/artifact/KtTjdku36BmKTBDGc1Dzye · 4주차: https://claude.ai/artifact/QhSBYErHYvWkQ54orwi6QM
+  - 1주차 보고서: https://claude.ai/artifact/EVnBXA1wbRkKwiq4U3qSBG · 3주차: https://claude.ai/artifact/KtTjdku36BmKTBDGc1Dzye · 4주차: https://claude.ai/artifact/QhSBYErHYvWkQ54orwi6QM · 5주차: https://claude.ai/artifact/3qSNifKGFJbTXG6MWKrgGK
   - 계획서: https://claude.ai/artifact/BdkbUeqpZrBTNK8Age3jXy
 - **수요일**: 긴 영상 `make_long.py --date <금요일>` → 검수 → `upload.py --long --date <금요일>` (금 18:00 예약). 11/6 편부터 '쉬움→극악 40문제'(약 10분, 단계별 8·10·12·15초). 11/9부터 격주(make_long.py가 최근 13일 안에 올린 긴 영상이 있으면 스스로 건너뜀, 다음 편 11/20).
 - 작업 브랜치: `ccr-aaca7a09-rdvvku` (이 브랜치에 직접 커밋·push).
+
+## 저녁 형식 (11/23부터, 6주차 결정)
+- 하루걸러 '다른 3개 다 찾기'(make_find3.py, make_short.py가 is_find3_day로 자동 선택). 검수 시각: 0~12초 문제, 12~15초 정답 3개(칸 이름 3개 글자 확인), 15~19.5초 보너스, 아웃트로. 나머지 날은 3단계.
+- 목~일 첫 낮 숫자 문제는 기본 언어·제목 영어(make_one.english_default, metadata의 englishDefault).
 
 ## 낮 자리 착시 편 (11/18부터, 5주차 결정)
 - 수·토요일에는 make_one.py가 자동으로 make_spin.py를 불러 '회전 방향 착시' 16초 편을 만든다(output_one/<날짜>/, format "spin"). 검수: 0~6초 그림자, 6~9초 '시계 방향' 도움 화면(바닥 화살표가 앞쪽에서 왼쪽으로), 9~12초 '반시계 방향'(앞쪽에서 오른쪽으로), 12~16초 그림자 + 댓글 문구. 업로드는 똑같이 `upload.py --one`.
