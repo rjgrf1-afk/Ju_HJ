@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-25",
+  "format": "find3",
+  "title": "【다른 그림 찾기】 병아리 64개 중 뒤집힌 3개를 모두 찾아보세요 🐥 | 몇 개 찾았나요? #shorts",
+  "description": "12초 안에 다른 그림 3개를 모두 찾아보세요! 🔍\n찾은 칸 3개를 댓글로 남겨주세요 (예: B2 E5 G7) 👇\n눈썰미 연구소에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 도전하세요!\n\nFind all 3 odd ones in 12 seconds!\n\n#shorts #다른그림찾기 #틀린그림찾기 #치매예방 #눈썰미테스트 #두뇌게임 #oddoneout #間違い探し #brainteaser",
+  "defaultLanguage": "ko",
+  "localizations": {
+    "en": {
+      "title": "Find the 3 Odd Ones: 3 of these 64 are different 🐥 | Only 1% find the last one #shorts",
+      "description": "Find all 3 odd ones in 12 seconds! 🔍\nComment the 3 cells (e.g. B2 E5 G7) 👇\nNew puzzles every day. Subscribe and play daily!\n\n#shorts #oddoneout #findthedifference #brainteaser"
+    },
+    "ja": {
+      "title": "【仲間はずれ3つ探し】 64個の中に違うものが3つ🐥 | 全部見つけられる？ #shorts",
+      "description": "12秒で仲間はずれを3つ全部見つけよう！🔍\n答えのマス3つをコメントしてね（例: B2 E5 G7）👇\n毎日新しい問題を公開中！\n\n#shorts #間違い探し #脳トレ #認知症予防"
+    },
+    "es": {
+      "title": "Encuentra los 3 diferentes: 3 de estos 64 son distintos 🐥 | El último casi nadie lo ve #shorts",
+      "description": "¡Encuentra los 3 diferentes en 12 segundos! 🔍\nComenta las 3 casillas (ej.: B2 E5 G7) 👇\n¡Un nuevo reto cada día!\n\n#shorts #encuentraladiferencia #retovisual"
+    },
+    "pt-BR": {
+      "title": "Ache os 3 diferentes: 3 destes 64 são diferentes 🐥 | Você acha os 3? #shorts",
+      "description": "Ache os 3 diferentes em 12 segundos! 🔍\nComente as 3 casas (ex.: B2 E5 G7) 👇\nUm novo desafio todo dia!\n\n#shorts #testedevisao #desafio"
+    },
+    "hi": {
+      "title": "Find the 3 Odd Ones: 3 of these 64 are different 🐥 | Only 1% find the last one #shorts",
+      "description": "12 सेकंड में तीनों अलग वाले ढूंढो! 🔍\nतीनों खाने कमेंट करें (जैसे B2 E5 G7) 👇\nहर दिन नया चैलेंज!\n\n#shorts #oddoneout #braintest"
+    },
+    "id": {
+      "title": "Cari 3 yang beda: 3 dari 64 ini berbeda 🐥 | Yang terakhir susah dicari #shorts",
+      "description": "Temukan 3 yang beda dalam 12 detik! 🔍\nTulis 3 kotaknya di komentar (mis. B2 E5 G7) 👇\nTantangan baru setiap hari!\n\n#shorts #tesmata #asahotak"
+    }
+  },
+  "tags": [
+    "shorts",
+    "다른그림찾기",
+    "틀린그림찾기",
+    "치매예방",
+    "눈썰미테스트",
+    "두뇌게임",
+    "oddoneout",
+    "間違い探し",
+    "brainteaser",
+    "눈썰미",
+    "숨은그림찾기",
+    "odd one out",
+    "find 3 differences"
+  ],
+  "categoryId": "24",
+  "madeForKids": false,
+  "containsSyntheticMedia": false,
+  "style": "fluent",
+  "bonus": [
+    "",
+    "2시간 30분 = ?분",
+    "150"
+  ],
+  "rounds": [
+    {
+      "kind": "mirror",
+      "pair": "🐥",
+      "grid": 8,
+      "answer_row": 5,
+      "answer_col": 7,
+      "answers": [
+        [
+          5,
+          7
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          7,
+          3
+        ]
+      ]
+    }
+  ],
+  "videoId": "FDTs1t3Uco0",
+  "publishAt": "2026-11-25T09:00:00Z",
+  "uploadedBy": "api"
+}
