@@ -20,7 +20,9 @@ import requests
 
 ROOT = Path(__file__).resolve().parent
 KST = timezone(timedelta(hours=9))
-PUBLISH_HOUR = 18
+PUBLISH_HOUR = 18  # 긴 영상(금요일)
+# 11/26: 저녁 쇼츠가 18시 자리에서 11/19~11/25 다섯 번 막혀(낮은 정상) 20시로 옮겨 시험 (research/2026-11-25.md)
+EVENING_HOUR = 20
 ONE_HOUR = 12  # 낮 한 문제 쇼츠 (점심시간)
 
 
@@ -62,7 +64,7 @@ def main():
     elif args.private:
         status["privacyStatus"] = "private"
     else:
-        publish = datetime.strptime(args.date, "%Y-%m-%d").replace(hour=ONE_HOUR if args.one else PUBLISH_HOUR,
+        publish = datetime.strptime(args.date, "%Y-%m-%d").replace(hour=ONE_HOUR if args.one else PUBLISH_HOUR if args.long else EVENING_HOUR,
                                                                    tzinfo=KST)
         status["privacyStatus"] = "private"  # publishAt은 private일 때만 동작
         status["publishAt"] = publish.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
