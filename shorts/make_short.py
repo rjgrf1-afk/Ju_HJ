@@ -27,9 +27,9 @@ HISTORY = ROOT / "history.json"
 
 W, H, FPS = 1080, 1920, 30
 SR = 44100
-ROUND_SHOW, ROUND_REVEAL, OUTRO = 5.0, 1.5, 1.6
+ROUND_SHOW, ROUND_REVEAL, OUTRO = 5.0, 1.5, 1.0  # 11/26: 아웃트로 1.6 → 1.0초
 HOOK = 0  # 11/14: 첫 화면 3단계 미리보기(실험 1)는 효과가 없어 영상에서 뺐다. 표지(cover.jpg)로만 쓴다
-BONUS_SHOW, BONUS_REVEAL = 3.0, 1.5  # 3단계 뒤 3초 보너스 퀴즈 (10/31부터, quiz_pool.py)
+BONUS_SHOW, BONUS_REVEAL = 2.5, 1.0  # 11/26: 3.0+1.5 → 2.5+1.0초 (보너스 시작에서 10% 이탈, research/2026-11-21.md). 3단계 뒤 3초 보너스 퀴즈 (10/31부터, quiz_pool.py)
 CHANNEL = "눈썰미 연구소"
 
 # 쇼츠 UI(우측 버튼, 하단 제목)를 피한 그리드 영역
@@ -88,7 +88,7 @@ LOCALES = {
         "tails": ["Can you beat level 3?", "Most people get stuck at level 3",
                   "Find it in 5 seconds", "How far can you get?"],
         "desc": ["Find the odd one out in 5 seconds! It gets harder every level 🔍",
-                 "Comment how far you got and the answer cell (e.g. C5) 👇",
+                 "Comment how far you got and where it was hiding 👇",
                  "A new eye test every day. Subscribe and play daily!"],
         "tags": ["#oddoneout", "#challenge", "#brainteaser", "#puzzle"],
     },
@@ -103,7 +103,7 @@ LOCALES = {
         "tails": ["レベル3まで見つけられる？", "最後の問題でみんな止まる",
                   "5秒で見つけられる？", "何レベルまで行ける？"],
         "desc": ["5秒で仲間はずれを見つけよう！レベルが上がるほど難しくなります 🔍",
-                 "何レベルまで見つけられたか、答えのマスをコメントしてね（例: C5）👇",
+                 "何レベルまで見つけられたか、どこにあったかコメントしてね 👇",
                  "毎日新しい問題を公開中。チャンネル登録して毎日挑戦しよう！"],
         "tags": ["#間違い探し", "#脳トレ", "#認知症予防", "#観察力", "#まちがいさがし", "#仲間はずれ"],
     },
@@ -119,7 +119,7 @@ LOCALES = {
                   "Encuéntralo en 5 segundos", "¿Hasta qué nivel llegas?",
                   "¿Lo ves?", "¿Lo encuentras?"],  # 짧은 꼬리말: 긴 스페인어 제목에도 꼬리말이 붙게
         "desc": ["¡Encuentra el diferente en 5 segundos! Cada nivel es más difícil 🔍",
-                 "Comenta hasta qué nivel llegaste y la casilla (ej.: C5) 👇",
+                 "Comenta hasta qué nivel llegaste y dónde estaba 👇",
                  "Un nuevo reto visual cada día. ¡Suscríbete y juega a diario!"],
         "tags": ["#encuentraladiferencia", "#acertijos", "#retovisual", "#juegomental"],
     },
@@ -134,7 +134,7 @@ LOCALES = {
         "tails": ["Você chega ao nível 3?", "Quase todo mundo trava no nível 3",
                   "Ache em 5 segundos", "Até que nível você vai?"],
         "desc": ["Ache o diferente em 5 segundos! Cada nível fica mais difícil 🔍",
-                 "Comente até que nível chegou e a casa da resposta (ex.: C5) 👇",
+                 "Comente até que nível chegou e onde estava 👇",
                  "Um novo teste de visão todo dia. Inscreva-se e jogue diariamente!"],
         "tags": ["#acheodiferente", "#desafio", "#quiz", "#enigma"],
     },
@@ -150,7 +150,7 @@ LOCALES = {
         "tails": ["क्या आप लेवल 3 तक पहुंच पाएंगे?", "ज़्यादातर लोग लेवल 3 पर अटक जाते हैं",
                   "5 सेकंड में ढूंढो", "आप कितने लेवल तक जा सकते हैं?"],
         "desc": ["5 सेकंड में अलग वाला ढूंढो! हर लेवल पहले से मुश्किल है 🔍",
-                 "कमेंट में बताओ आप किस लेवल तक पहुंचे और जवाब वाला खाना (जैसे C5) 👇",
+                 "कमेंट में बताओ आप किस लेवल तक पहुंचे और वो कहाँ छिपा था 👇",
                  "हर दिन एक नया आई टेस्ट। सब्सक्राइब करो और रोज़ खेलो!"],
         "tags": ["#पहेली", "#दिमागीखेल", "#puzzle", "#oddoneout"],
     },
@@ -166,7 +166,7 @@ LOCALES = {
         "tails": ["Bisa sampai level 3?", "Kebanyakan orang gagal di level 3",
                   "Temukan dalam 5 detik", "Kamu bisa sampai level berapa?"],
         "desc": ["Cari yang beda dalam 5 detik! Tiap level makin sulit 🔍",
-                 "Tulis di komentar sampai level berapa dan kotak jawabannya (mis. C5) 👇",
+                 "Tulis di komentar sampai level berapa dan di mana letaknya 👇",
                  "Tes mata baru setiap hari. Subscribe dan main tiap hari!"],
         "tags": ["#cariyangbeda", "#tebakgambar", "#asahotak", "#tesmata"],
     },
@@ -541,7 +541,8 @@ def make_round_frames(r, grid, ans, bg, theme, show=ROUND_SHOW, reveal_t=ROUND_R
         grow = min(1, f / 6)
         rr = rad * (1.6 - 0.6 * grow)
         d.ellipse((cx - rr, cy - rr, cx + rr, cy + rr), outline=(255, 40, 40), width=14)
-        draw_text(d, (W // 2, bar_y + 150), f"정답! {cell_label(r['answer'], r['n'])}", 110, (255, 230, 60))
+        # 11/26: '정답! C5'로 위치를 말해 주자 댓글이 4분의 1로 줄어(research/2026-11-26.md) 링만 남긴다
+        draw_text(d, (W // 2, bar_y + 150), "정답!", 110, (255, 230, 60))
         yield im
 
 
@@ -634,7 +635,7 @@ def make_outro_frames(bg, theme):
     draw_text(d, (W // 2, 760), "몇 단계까지", 120, (255, 255, 255))
     draw_text(d, (W // 2, 910), "찾았어요?", 120, (255, 255, 255))
     draw_text(d, (W // 2, 1100), "댓글로 알려주세요", 70, theme[2], stroke=6)
-    draw_text(d, (W // 2, 1200), "예: 3단계 C5", 56, (255, 255, 255), stroke=5)
+    draw_text(d, (W // 2, 1200), "어디 숨어 있었는지도!", 56, (255, 255, 255), stroke=5)
     draw_text(d, (W // 2, 1320), f"{CHANNEL} {HANDLE}", 46, (255, 255, 255), stroke=0)
     for _ in range(int(OUTRO * FPS)):
         yield base
@@ -730,7 +731,7 @@ def make_metadata(rng, date, rounds):
     title = f"{hook} | {rng.choice(tails or TAILS)}"
     desc = "\n".join([
         "5초 안에 다른 하나를 찾아보세요! 단계가 올라갈수록 어려워집니다 🔍",
-        "몇 단계까지 찾았는지, 정답 칸을 댓글로 남겨주세요 (예: 3단계 C5) 👇",
+        "몇 단계까지 찾았는지, 어디 숨어 있었는지 댓글로 남겨주세요 👇",
         f"{CHANNEL}에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 도전하세요!",
         "",
         "Find the odd one out in 5 seconds! How far can you get?",

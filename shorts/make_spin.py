@@ -90,6 +90,37 @@ def figure(rng):
     return P
 
 
+def arrow(rng):
+    """납작한 화살표(앞뒤 두께 없음)를 작은 공으로 채운다. 세로축으로 돌면 어느 쪽으로 도는지 정해지지 않는다.
+    미국 240만·멕시코 454만·일본 127만 회 소재 (research/2026-11-16.md, 2026-11-24.md)."""
+    P = []
+    y0 = rng.uniform(95, 115)
+    length, head = rng.uniform(80, 100), rng.uniform(30, 40)
+    shaft_h, head_h = rng.uniform(14, 20), rng.uniform(44, 56)
+    x0 = -length / 2
+    step = 3.0
+    x = x0
+    while x <= x0 + length:
+        if x < x0 + length - head:
+            half = shaft_h / 2
+        else:
+            half = head_h / 2 * (x0 + length - x) / head
+        y = -half
+        while y <= half:
+            P.append((np.array((x, y0 + y, 0.0)), 2.6))
+            y += step
+        x += step
+    # 기둥(받침) — 바닥에서 화살표 가운데까지
+    P += cap((0, 8, 0), (0, y0 - shaft_h / 2, 0), 2.5, 2.5)
+    return P
+
+
+def shape_for(date):
+    """착시 편 소재를 돌려 쓴다: 사람 → 화살표 → 사람 … (11/26부터, 같은 그림자 반복 방지)"""
+    n = len(recent_spins(date, days=60))
+    return "arrow" if n % 2 == 1 else "person"
+
+
 def render(P, th, hint, scale, cx, cy, theme):
     SS = 2
     im = Image.new("RGBA", (W * SS, H * SS), (0, 0, 0, 0))
@@ -161,20 +192,31 @@ def recent_spins(date, days=28):
     return out
 
 
-def make_metadata(rng, date, pose):
+ARROW_HOOKS = ["이 화살표, 어느 쪽으로 돌아요? 🌀", "화살표가 도는 방향, 생각만으로 바꿀 수 있나요? 🌀",
+               "3%만 거꾸로 돌릴 수 있는 화살표 🌀"]
+ARROW_LOC = {"en": ["Which way is the arrow spinning? 🌀", "Only 3% can reverse this arrow 🌀"],
+             "hi": ["Which way is the arrow spinning? 🌀", "Only 3% can reverse this arrow 🌀"],
+             "es": ["¿Hacia dónde gira la flecha? 🌀"], "pt-BR": ["Para que lado a seta gira? 🌀"],
+             "ja": ["3%しか逆に回せない矢印🌀", "この矢印、どっちに回ってる？🌀"], "id": ["Panah ini berputar ke arah mana? 🌀"]}
+JA_EXTRA = ["10人中9人が逆に回せない錯視🌀", "頭の中で逆回転できる？🌀"]  # 일본 상위 착시 제목 형식 (11/16·11/24 연구)
+
+
+def make_metadata(rng, date, pose, shape="person"):
     seen = {m["title"] for m in recent_spins(date)}
-    combos = [(h, t) for h in HOOKS for t in TAILS if f"【착시】 {h} | {t} #shorts" not in seen]
-    hook, tail = rng.choice(combos or [(h, t) for h in HOOKS for t in TAILS])
+    hooks = ARROW_HOOKS if shape == "arrow" else HOOKS
+    combos = [(h, t) for h in hooks for t in TAILS if f"【착시】 {h} | {t} #shorts" not in seen]
+    hook, tail = rng.choice(combos or [(h, t) for h in hooks for t in TAILS])
     title = f"【착시】 {hook} | {tail} #shorts"
     loc = {}
     for lang, (pre, hooks, tails, desc, tags) in LOC.items():
-        cands = [f"{pre} {h} | {t} #shorts" for h in hooks for t in tails]
+        hs = ARROW_LOC[lang] if shape == "arrow" else hooks + (JA_EXTRA if lang == "ja" else [])
+        cands = [f"{pre} {h} | {t} #shorts" for h in hs for t in tails]
         seen_l = {m.get("localizations", {}).get(lang, {}).get("title") for m in recent_spins(date)}
         cands = [c for c in cands if S.utf16_len(c) <= 97]
         loc[lang] = {"title": next((c for c in rng.sample(cands, len(cands)) if c not in seen_l), cands[0]),
                      "description": "\n".join(desc + ["", " ".join(tags)])}
     desc = "\n".join([
-        "검은 그림자가 시계 방향으로 도나요, 반시계 방향으로 도나요? 🌀",
+        ("화살표" if shape == "arrow" else "검은 그림자") + "가 시계 방향으로 도나요, 반시계 방향으로 도나요? 🌀",
         "그림자에는 앞뒤 깊이가 없어서, 어느 쪽으로 도는지는 눈이 아니라 뇌가 정합니다.",
         "6초부터 앞쪽을 밝게 칠한 도움 화면이 나와요. 본 뒤에 생각만으로 방향을 바꿔 보세요.",
         "처음에 어느 쪽으로 보였는지 댓글로 남겨 주세요 (시계 / 반시계) 👇",
@@ -186,7 +228,7 @@ def make_metadata(rng, date, pose):
     return {
         "date": date, "format": "spin", "title": title[:100], "description": desc,
         "defaultLanguage": "ko", "localizations": loc, "tags": TAGS, "categoryId": "24",
-        "madeForKids": False, "containsSyntheticMedia": False, "pose": pose,
+        "madeForKids": False, "containsSyntheticMedia": False, "pose": pose, "shape": shape,
         "rounds": [{"kind": "spin"}],
     }
 
@@ -206,7 +248,8 @@ def main(date=None, force=False):
         raise SystemExit(f"{date} 낮 영상은 이미 올렸습니다 ({uploaded['videoId']}). 다시 만들려면 --force")
 
     rng = random.Random(f"nunsseulmi-spin-{date}")
-    P = figure(rng)
+    shape = shape_for(date)
+    P = arrow(rng) if shape == "arrow" else figure(rng)
     period = rng.uniform(2.2, 2.8)          # 한 바퀴 도는 시간
     theme = S.THEMES[(datetime.strptime(date, "%Y-%m-%d").toordinal() + 2) % len(S.THEMES)]
     bg = S.background(theme)
@@ -236,7 +279,7 @@ def main(date=None, force=False):
         if t < 6:
             S.draw_text(d, (W // 2, 240), "어느 쪽으로 돌아요?", 92, (255, 255, 255))
             S.draw_text(d, (W // 2, 370), "시계 방향? 반시계 방향?", 62, theme[2], stroke=6)
-            S.draw_text(d, (W // 2, 455), "Which way is she spinning?", 40, (255, 255, 255), stroke=4)
+            S.draw_text(d, (W // 2, 455), "Which way is it spinning?" if shape == "arrow" else "Which way is she spinning?", 40, (255, 255, 255), stroke=4)
         elif hint:
             S.draw_text(d, (W // 2, 240), "도움 화면", 80, (255, 255, 255))
             S.draw_text(d, (W // 2, 370), "시계 방향으로 보면" if hint == "cw" else "반시계 방향으로 보면", 66, theme[2], stroke=6)
@@ -261,7 +304,7 @@ def main(date=None, force=False):
     if proc.wait() != 0:
         raise SystemExit("ffmpeg 인코딩 실패")
     wav.unlink()
-    meta = make_metadata(rng, date, {"period": round(period, 2)}) | uploaded
+    meta = make_metadata(rng, date, {"period": round(period, 2)}, shape) | uploaded
     old.write_text(json.dumps(meta, ensure_ascii=False, indent=2))
     print(f"완료: {mp4} ({TOTAL:.0f}초)  제목: {meta['title']}")
 

@@ -99,6 +99,15 @@ def main():
         a = v["analytics"] or {}
         print(f"- {v['publishedAt'][:10]} {v['privacyStatus']:8} 조회 {v['views']:>6} 좋아요 {v['likes']:>4} "
               f"댓글 {v['comments']:>3} 평균시청률 {a.get('averageViewPercentage', '-')}%  {v['id']}")
+    # 11/26: 정체 감시 — 공개 15~72시간인데 조회 100회 미만이면 표시 (research/2026-11-20.md)
+    from datetime import datetime as _dt, timezone as _tz
+    now = _dt.now(_tz.utc)
+    for v in out["videos"]:
+        if v["privacyStatus"] != "public":
+            continue
+        hours = (now - _dt.fromisoformat(v["publishedAt"].replace("Z", "+00:00"))).total_seconds() / 3600
+        if 15 <= hours <= 72 and v["views"] < 100:
+            print(f"⚠ 정체 의심: {v['id']} 공개 {hours:.0f}시간 조회 {v['views']}회 — {v['title'][:40]}")
     total = sum(r["views"] for r in out["countries28d"]) or 1
     print("나라별 (28일): " + ", ".join(f"{r['country']} {r['views'] / total:.0%}" for r in out["countries28d"][:5]))
     print(f"저장: {path.relative_to(ROOT.parent)}")

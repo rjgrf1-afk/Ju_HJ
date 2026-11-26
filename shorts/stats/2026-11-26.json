@@ -1,9 +1,9 @@
 {
- "collectedAt": "2026-11-26T09:34:17+09:00",
+ "collectedAt": "2026-11-26T17:58:47+09:00",
  "channel": {
   "subscribers": 49,
-  "videos": 67,
-  "views": 71903
+  "videos": 68,
+  "views": 72461
  },
  "daily": [
   {
@@ -705,7 +705,7 @@
    "likes": 12,
    "comments": 2,
    "analytics": {
-    "views": 1037,
+    "views": 1036,
     "estimatedMinutesWatched": 164,
     "averageViewDuration": 22,
     "averageViewPercentage": 85.02,
@@ -725,8 +725,8 @@
    "likes": 30,
    "comments": 8,
    "analytics": {
-    "views": 1562,
-    "estimatedMinutesWatched": 160,
+    "views": 1561,
+    "estimatedMinutesWatched": 159,
     "averageViewDuration": 13,
     "averageViewPercentage": 108.69,
     "likes": 30,
@@ -765,7 +765,7 @@
    "likes": 13,
    "comments": 2,
    "analytics": {
-    "views": 1304,
+    "views": 1303,
     "estimatedMinutesWatched": 110,
     "averageViewDuration": 10,
     "averageViewPercentage": 88.82,
@@ -825,7 +825,7 @@
    "likes": 16,
    "comments": 0,
    "analytics": {
-    "views": 1345,
+    "views": 1343,
     "estimatedMinutesWatched": 258,
     "averageViewDuration": 23,
     "averageViewPercentage": 85.9,
@@ -845,7 +845,7 @@
    "likes": 16,
    "comments": 0,
    "analytics": {
-    "views": 1640,
+    "views": 1638,
     "estimatedMinutesWatched": 129,
     "averageViewDuration": 11,
     "averageViewPercentage": 93.83,
@@ -885,7 +885,7 @@
    "likes": 4,
    "comments": 0,
    "analytics": {
-    "views": 1192,
+    "views": 1191,
     "estimatedMinutesWatched": 91,
     "averageViewDuration": 12,
     "averageViewPercentage": 101.94000000000001,
@@ -905,7 +905,7 @@
    "likes": 5,
    "comments": 0,
    "analytics": {
-    "views": 1023,
+    "views": 1022,
     "estimatedMinutesWatched": 111,
     "averageViewDuration": 20,
     "averageViewPercentage": 78.42,
@@ -945,7 +945,7 @@
    "likes": 15,
    "comments": 2,
    "analytics": {
-    "views": 1626,
+    "views": 1625,
     "estimatedMinutesWatched": 272,
     "averageViewDuration": 23,
     "averageViewPercentage": 91.68,
@@ -985,7 +985,7 @@
    "likes": 8,
    "comments": 0,
    "analytics": {
-    "views": 946,
+    "views": 945,
     "estimatedMinutesWatched": 165,
     "averageViewDuration": 21,
     "averageViewPercentage": 84.22,
@@ -1005,7 +1005,7 @@
    "likes": 9,
    "comments": 0,
    "analytics": {
-    "views": 1046,
+    "views": 1045,
     "estimatedMinutesWatched": 83,
     "averageViewDuration": 11,
     "averageViewPercentage": 99.94,
@@ -1025,7 +1025,7 @@
    "likes": 16,
    "comments": 0,
    "analytics": {
-    "views": 1418,
+    "views": 1417,
     "estimatedMinutesWatched": 236,
     "averageViewDuration": 21,
     "averageViewPercentage": 84.16,
@@ -1045,7 +1045,7 @@
    "likes": 3,
    "comments": 0,
    "analytics": {
-    "views": 2334,
+    "views": 2333,
     "estimatedMinutesWatched": 295,
     "averageViewDuration": 18,
     "averageViewPercentage": 110.09,
@@ -1065,7 +1065,7 @@
    "likes": 15,
    "comments": 0,
    "analytics": {
-    "views": 1032,
+    "views": 1031,
     "estimatedMinutesWatched": 185,
     "averageViewDuration": 22,
     "averageViewPercentage": 87.68,
@@ -1085,7 +1085,7 @@
    "likes": 3,
    "comments": 0,
    "analytics": {
-    "views": 1257,
+    "views": 1255,
     "estimatedMinutesWatched": 108,
     "averageViewDuration": 13,
     "averageViewPercentage": 113.27000000000001,
@@ -1105,7 +1105,7 @@
    "likes": 1,
    "comments": 0,
    "analytics": {
-    "views": 6,
+    "views": 5,
     "estimatedMinutesWatched": 0,
     "averageViewDuration": 23,
     "averageViewPercentage": 90.96,
@@ -1125,7 +1125,7 @@
    "likes": 13,
    "comments": 2,
    "analytics": {
-    "views": 1847,
+    "views": 1844,
     "estimatedMinutesWatched": 153,
     "averageViewDuration": 11,
     "averageViewPercentage": 95.66,
@@ -1141,7 +1141,7 @@
    "title": "【다른 하나 찾기/치매예방】 쉬움→극악 40문제, 다 찾으면 상위 1%! | Find the Odd One Out #3",
    "publishedAt": "2026-11-20T09:00:13Z",
    "privacyStatus": "public",
-   "views": 7,
+   "views": 8,
    "likes": 0,
    "comments": 0,
    "analytics": {
@@ -1165,7 +1165,7 @@
    "likes": 7,
    "comments": 0,
    "analytics": {
-    "views": 280,
+    "views": 278,
     "estimatedMinutesWatched": 57,
     "averageViewDuration": 25,
     "averageViewPercentage": 96.95,
@@ -1185,7 +1185,7 @@
    "likes": 10,
    "comments": 2,
    "analytics": {
-    "views": 2642,
+    "views": 2639,
     "estimatedMinutesWatched": 382,
     "averageViewDuration": 19,
     "averageViewPercentage": 111.77,
@@ -1205,8 +1205,8 @@
    "likes": 0,
    "comments": 0,
    "analytics": {
-    "views": 109,
-    "estimatedMinutesWatched": 18,
+    "views": 105,
+    "estimatedMinutesWatched": 17,
     "averageViewDuration": 21,
     "averageViewPercentage": 84.33,
     "likes": 0,
@@ -1225,7 +1225,7 @@
    "likes": 6,
    "comments": 4,
    "analytics": {
-    "views": 1327,
+    "views": 1304,
     "estimatedMinutesWatched": 108,
     "averageViewDuration": 14,
     "averageViewPercentage": 117.6,
@@ -1241,7 +1241,7 @@
    "title": "【다른 하나 찾기】 무표정 64개 중 딱 하나가 달라요 😑 | 마지막 문제에서 다들 멈춰요 #shorts",
    "publishedAt": "2026-11-22T09:00:07Z",
    "privacyStatus": "public",
-   "views": 1050,
+   "views": 1061,
    "likes": 17,
    "comments": 0,
    "analytics": {
@@ -1261,7 +1261,7 @@
    "title": "【다른 하나 찾기】 28 사이에 다른 숫자 하나 🔢 | 한 번에 찾으면 눈썰미 천재 #shorts",
    "publishedAt": "2026-11-23T03:00:33Z",
    "privacyStatus": "public",
-   "views": 1432,
+   "views": 1449,
    "likes": 5,
    "comments": 0,
    "analytics": {
@@ -1281,7 +1281,7 @@
    "title": "【다른 그림 찾기】 커피잔 64개 중 다른 3개를 모두 찾아보세요 👀 | 3개 다 찾으면 상위 1% #shorts",
    "publishedAt": "2026-11-23T09:00:15Z",
    "privacyStatus": "public",
-   "views": 1015,
+   "views": 1016,
    "likes": 7,
    "comments": 0,
    "analytics": {
@@ -1301,7 +1301,7 @@
    "title": "【다른 하나 찾기】 공작 64개 중 하나만 뒤집혀 있어요 🦚 | 점심시간 눈썰미 테스트 #shorts",
    "publishedAt": "2026-11-24T03:00:35Z",
    "privacyStatus": "public",
-   "views": 267,
+   "views": 361,
    "likes": 1,
    "comments": 0,
    "analytics": {
@@ -1331,7 +1331,7 @@
    "title": "【착시】 시계 방향? 반시계 방향? 보는 사람마다 달라요 🌀 | 도움 화면 보고 바꿔 보세요 #shorts",
    "publishedAt": "2026-11-25T03:00:19Z",
    "privacyStatus": "public",
-   "views": 1213,
+   "views": 1278,
    "likes": 1,
    "comments": 0,
    "analytics": null
@@ -1341,7 +1341,17 @@
    "title": "【다른 그림 찾기】 병아리 64개 중 뒤집힌 3개를 모두 찾아보세요 🐥 | 몇 개 찾았나요? #shorts",
    "publishedAt": "2026-11-25T09:00:31Z",
    "privacyStatus": "public",
-   "views": 82,
+   "views": 108,
+   "likes": 0,
+   "comments": 0,
+   "analytics": null
+  },
+  {
+   "id": "pfjn_zLRprU",
+   "title": "【다른 하나 찾기】 시계 64개 중 딱 하나가 달라요 🕟 | 5초 안에 찾아보세요 #shorts",
+   "publishedAt": "2026-11-26T00:34:05Z",
+   "privacyStatus": "private",
+   "views": 0,
    "likes": 0,
    "comments": 0,
    "analytics": null
@@ -1349,10 +1359,10 @@
   {
    "id": "R_-_pFiISYQ",
    "title": "【다른 하나 찾기】 별 아이콘 64개 중 딱 하나가 달라요 👀 | 8초 안에 찾으면 상위 1% #shorts",
-   "publishedAt": "2026-11-26T00:33:58Z",
-   "privacyStatus": "private",
-   "views": 0,
-   "likes": 0,
+   "publishedAt": "2026-11-26T03:00:16Z",
+   "privacyStatus": "public",
+   "views": 18,
+   "likes": 1,
    "comments": 0,
    "analytics": null
   }

@@ -26,22 +26,22 @@ HOOKS = {
 TAILS = ["3개 다 찾으면 상위 1%", "마지막 하나가 안 보여요", "몇 개 찾았나요?", "12초 안에 전부 찾기"]
 LOC = {  # (앞머리, 문구, 꼬리말들, 설명)
     "en": ("Find the 3 Odd Ones:", "3 of these {n} are different {e}", ["Can you find all 3?", "Only 1% find the last one"],
-           ["Find all 3 odd ones in 12 seconds! 🔍", "Comment the 3 cells (e.g. B2 E5 G7) 👇", "New puzzles every day. Subscribe and play daily!"],
+           ["Find all 3 odd ones in 12 seconds! 🔍", "Comment how many you found 👇", "New puzzles every day. Subscribe and play daily!"],
            ["#shorts", "#oddoneout", "#findthedifference", "#brainteaser"]),
     "ja": ("【仲間はずれ3つ探し】", "{n}個の中に違うものが3つ{e}", ["全部見つけられる？", "最後の1つが見つからない"],
-           ["12秒で仲間はずれを3つ全部見つけよう！🔍", "答えのマス3つをコメントしてね（例: B2 E5 G7）👇", "毎日新しい問題を公開中！"],
+           ["12秒で仲間はずれを3つ全部見つけよう！🔍", "いくつ見つけたかコメントしてね 👇", "毎日新しい問題を公開中！"],
            ["#shorts", "#間違い探し", "#脳トレ", "#認知症予防"]),
     "es": ("Encuentra los 3 diferentes:", "3 de estos {n} son distintos {e}", ["¿Encuentras los 3?", "El último casi nadie lo ve"],
-           ["¡Encuentra los 3 diferentes en 12 segundos! 🔍", "Comenta las 3 casillas (ej.: B2 E5 G7) 👇", "¡Un nuevo reto cada día!"],
+           ["¡Encuentra los 3 diferentes en 12 segundos! 🔍", "Comenta cuántos encontraste 👇", "¡Un nuevo reto cada día!"],
            ["#shorts", "#encuentraladiferencia", "#retovisual"]),
     "pt-BR": ("Ache os 3 diferentes:", "3 destes {n} são diferentes {e}", ["Você acha os 3?", "O último quase ninguém vê"],
-              ["Ache os 3 diferentes em 12 segundos! 🔍", "Comente as 3 casas (ex.: B2 E5 G7) 👇", "Um novo desafio todo dia!"],
+              ["Ache os 3 diferentes em 12 segundos! 🔍", "Comente quantos você achou 👇", "Um novo desafio todo dia!"],
               ["#shorts", "#testedevisao", "#desafio"]),
     "hi": ("Find the 3 Odd Ones:", "3 of these {n} are different {e}", ["Can you find all 3?", "Only 1% find the last one"],
-           ["12 सेकंड में तीनों अलग वाले ढूंढो! 🔍", "तीनों खाने कमेंट करें (जैसे B2 E5 G7) 👇", "हर दिन नया चैलेंज!"],
+           ["12 सेकंड में तीनों अलग वाले ढूंढो! 🔍", "कमेंट करें आपने कितने ढूंढे 👇", "हर दिन नया चैलेंज!"],
            ["#shorts", "#oddoneout", "#braintest"]),
     "id": ("Cari 3 yang beda:", "3 dari {n} ini berbeda {e}", ["Bisa temukan semuanya?", "Yang terakhir susah dicari"],
-           ["Temukan 3 yang beda dalam 12 detik! 🔍", "Tulis 3 kotaknya di komentar (mis. B2 E5 G7) 👇", "Tantangan baru setiap hari!"],
+           ["Temukan 3 yang beda dalam 12 detik! 🔍", "Tulis berapa yang kamu temukan 👇", "Tantangan baru setiap hari!"],
            ["#shorts", "#tesmata", "#asahotak"]),
 }
 
@@ -103,8 +103,7 @@ def puzzle_frames(r, grid, bg, theme):
         rr = rad * (1.6 - 0.6 * grow)
         for cx, cy in centers:
             d.ellipse((cx - rr, cy - rr, cx + rr, cy + rr), outline=(255, 40, 40), width=14)
-        S.draw_text(d, (S.W // 2, bar_y + 110), "정답!", 100, (255, 230, 60))
-        S.draw_text(d, (S.W // 2, bar_y + 220), labels, 72, (255, 255, 255))
+        S.draw_text(d, (S.W // 2, bar_y + 150), "정답!", 110, (255, 230, 60))  # 11/26: 칸 이름 글자는 뺌
         yield im
 
 
@@ -113,7 +112,7 @@ def outro_frames(bg, theme):
     d = ImageDraw.Draw(base)
     S.draw_text(d, (S.W // 2, 760), "몇 개 찾았어요?", 120, (255, 255, 255))
     S.draw_text(d, (S.W // 2, 950), "댓글로 알려주세요", 70, theme[2], stroke=6)
-    S.draw_text(d, (S.W // 2, 1060), "예: B2 E5 G7", 56, (255, 255, 255), stroke=5)
+    S.draw_text(d, (S.W // 2, 1060), "마지막 하나 어디였는지도!", 56, (255, 255, 255), stroke=5)
     S.draw_text(d, (S.W // 2, 1300), f"{S.CHANNEL} {S.HANDLE}", 46, (255, 255, 255), stroke=0)
     for _ in range(int(S.OUTRO * S.FPS)):
         yield base
@@ -166,7 +165,7 @@ def make_metadata(rng, date, r, quiz):
         "date": date, "format": "find3", "title": title,
         "description": "\n".join([
             "12초 안에 다른 그림 3개를 모두 찾아보세요! 🔍",
-            "찾은 칸 3개를 댓글로 남겨주세요 (예: B2 E5 G7) 👇",
+            "몇 개 찾았는지, 마지막 하나는 어디 있었는지 댓글로 남겨주세요 👇",
             f"{S.CHANNEL}에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 도전하세요!",
             "", "Find all 3 odd ones in 12 seconds!", "", " ".join(S.HASHTAGS)]),
         "defaultLanguage": "ko", "localizations": loc,
