@@ -1,0 +1,83 @@
+{
+  "date": "2026-11-27",
+  "format": "find3",
+  "title": "【다른 그림 찾기】 웃는 얼굴 64개 중 다른 3개를 모두 찾아보세요 👀 | 12초 안에 전부 찾기 #shorts",
+  "description": "12초 안에 다른 그림 3개를 모두 찾아보세요! 🔍\n몇 개 찾았는지, 마지막 하나는 어디 있었는지 댓글로 남겨주세요 👇\n눈썰미 연구소에서 매일 새로운 눈썰미 테스트가 올라옵니다. 구독하고 매일 도전하세요!\n\nFind all 3 odd ones in 12 seconds!\n\n#shorts #다른그림찾기 #틀린그림찾기 #치매예방 #눈썰미테스트 #두뇌게임 #oddoneout #間違い探し #brainteaser",
+  "defaultLanguage": "ko",
+  "localizations": {
+    "en": {
+      "title": "Find the 3 Odd Ones: 3 of these 64 are different 👀 | Can you find all 3? #shorts",
+      "description": "Find all 3 odd ones in 12 seconds! 🔍\nComment how many you found 👇\nNew puzzles every day. Subscribe and play daily!\n\n#shorts #oddoneout #findthedifference #brainteaser"
+    },
+    "ja": {
+      "title": "【仲間はずれ3つ探し】 64個の中に違うものが3つ👀 | 最後の1つが見つからない #shorts",
+      "description": "12秒で仲間はずれを3つ全部見つけよう！🔍\nいくつ見つけたかコメントしてね 👇\n毎日新しい問題を公開中！\n\n#shorts #間違い探し #脳トレ #認知症予防"
+    },
+    "es": {
+      "title": "Encuentra los 3 diferentes: 3 de estos 64 son distintos 👀 | ¿Encuentras los 3? #shorts",
+      "description": "¡Encuentra los 3 diferentes en 12 segundos! 🔍\nComenta cuántos encontraste 👇\n¡Un nuevo reto cada día!\n\n#shorts #encuentraladiferencia #retovisual"
+    },
+    "pt-BR": {
+      "title": "Ache os 3 diferentes: 3 destes 64 são diferentes 👀 | O último quase ninguém vê #shorts",
+      "description": "Ache os 3 diferentes em 12 segundos! 🔍\nComente quantos você achou 👇\nUm novo desafio todo dia!\n\n#shorts #testedevisao #desafio"
+    },
+    "hi": {
+      "title": "Find the 3 Odd Ones: 3 of these 64 are different 👀 | Can you find all 3? #shorts",
+      "description": "12 सेकंड में तीनों अलग वाले ढूंढो! 🔍\nकमेंट करें आपने कितने ढूंढे 👇\nहर दिन नया चैलेंज!\n\n#shorts #oddoneout #braintest"
+    },
+    "id": {
+      "title": "Cari 3 yang beda: 3 dari 64 ini berbeda 👀 | Yang terakhir susah dicari #shorts",
+      "description": "Temukan 3 yang beda dalam 12 detik! 🔍\nTulis berapa yang kamu temukan 👇\nTantangan baru setiap hari!\n\n#shorts #tesmata #asahotak"
+    }
+  },
+  "tags": [
+    "shorts",
+    "다른그림찾기",
+    "틀린그림찾기",
+    "치매예방",
+    "눈썰미테스트",
+    "두뇌게임",
+    "oddoneout",
+    "間違い探し",
+    "brainteaser",
+    "눈썰미",
+    "숨은그림찾기",
+    "odd one out",
+    "find 3 differences"
+  ],
+  "categoryId": "24",
+  "madeForKids": false,
+  "containsSyntheticMedia": false,
+  "style": "fluent",
+  "bonus": [
+    "",
+    "1 m = ? cm",
+    "100"
+  ],
+  "rounds": [
+    {
+      "kind": "icon",
+      "pair": "mood|mood_bad",
+      "grid": 8,
+      "answer_row": 8,
+      "answer_col": 6,
+      "answers": [
+        [
+          8,
+          6
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          7
+        ]
+      ]
+    }
+  ],
+  "videoId": "vO5zAy_P0eg",
+  "publishAt": "2026-11-27T11:00:00Z",
+  "uploadedBy": "api"
+}
