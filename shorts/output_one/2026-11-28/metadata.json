@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-28",
+  "format": "spin",
+  "title": "【착시】 이 화살표, 어느 쪽으로 돌아요? 🌀 | 처음엔 어느 쪽이었나요? #shorts",
+  "description": "화살표가 시계 방향으로 도나요, 반시계 방향으로 도나요? 🌀\n그림자에는 앞뒤 깊이가 없어서, 어느 쪽으로 도는지는 눈이 아니라 뇌가 정합니다.\n6초부터 앞쪽을 밝게 칠한 도움 화면이 나와요. 본 뒤에 생각만으로 방향을 바꿔 보세요.\n처음에 어느 쪽으로 보였는지 댓글로 남겨 주세요 (시계 / 반시계) 👇\n\n눈썰미 연구소에서 매일 눈썰미 테스트와 착시 문제가 올라옵니다.\n\n#shorts #착시 #착시현상 #두뇌게임 #치매예방 #눈썰미테스트",
+  "defaultLanguage": "ko",
+  "localizations": {
+    "en": {
+      "title": "【Optical Illusion】 Which way is the arrow spinning? 🌀 | Can you switch it? #shorts",
+      "description": "Clockwise or counterclockwise? The shadow has no depth, so your brain picks a direction.\nWatch the hint at 6s, then try to flip it with your mind. Comment which way you saw first 👇\n\n#shorts #opticalillusion #illusion #braintest #brainteaser"
+    },
+    "ja": {
+      "title": "【錯視】 この矢印、どっちに回ってる？🌀 | 脳が決める向き #shorts",
+      "description": "影には奥行きがないので、回る向きは脳が決めます。\n6秒のヒントを見てから、頭の中で向きを変えてみて。最初どっちに見えたかコメントしてね 👇\n\n#shorts #錯視 #脳トレ #認知症予防 #目の錯覚"
+    },
+    "es": {
+      "title": "【Ilusión】 ¿Hacia dónde gira la flecha? 🌀 | ¿Puedes cambiarlo? #shorts",
+      "description": "La sombra no tiene profundidad: tu cerebro elige el sentido.\nMira la pista a los 6 s y cámbialo con la mente. Comenta cómo lo viste primero 👇\n\n#shorts #ilusionoptica #retovisual #juegomental"
+    },
+    "pt-BR": {
+      "title": "【Ilusão】 Para que lado a seta gira? 🌀 | Seu cérebro decide #shorts",
+      "description": "A sombra não tem profundidade: o cérebro escolhe o sentido.\nVeja a dica aos 6 s e troque com a mente. Comente como viu primeiro 👇\n\n#shorts #ilusaodeotica #testedevisao #desafio"
+    },
+    "hi": {
+      "title": "【Optical Illusion】 Only 3% can reverse this arrow 🌀 | Can you switch it? #shorts",
+      "description": "छाया में गहराई नहीं होती, इसलिए दिशा दिमाग तय करता है।\n6 सेकंड का हिंट देखो और मन से दिशा बदलो। पहले कौन सी दिशा दिखी, कमेंट करो 👇\n\n#shorts #opticalillusion #braintest"
+    },
+    "id": {
+      "title": "【Ilusi Optik】 Panah ini berputar ke arah mana? 🌀 | Bisa kamu balik? #shorts",
+      "description": "Bayangan tidak punya kedalaman, jadi otak yang memilih arahnya.\nLihat petunjuk di detik 6, lalu balik arahnya dengan pikiran. Tulis arah pertama yang kamu lihat 👇\n\n#shorts #ilusioptik #tesotak #asahotak"
+    }
+  },
+  "tags": [
+    "착시",
+    "착시현상",
+    "두뇌게임",
+    "치매예방",
+    "눈썰미",
+    "optical illusion",
+    "spinning illusion",
+    "brain test"
+  ],
+  "categoryId": "24",
+  "madeForKids": false,
+  "containsSyntheticMedia": false,
+  "pose": {
+    "period": 2.27
+  },
+  "shape": "arrow",
+  "rounds": [
+    {
+      "kind": "spin"
+    }
+  ],
+  "videoId": "ApaPH1G8hDM",
+  "publishAt": "2026-11-28T03:00:00Z",
+  "uploadedBy": "api"
+}
